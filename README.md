@@ -2,7 +2,7 @@
 
 ## Getting started
 ```sh
-yarn add modjo
+yarn add @modjo/plugins/core
 ```
 
 ## Samples
