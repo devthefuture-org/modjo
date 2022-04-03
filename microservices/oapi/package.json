@@ -12,10 +12,7 @@
     "nctx": "^1.2.0"
   },
   "peerDependencies": {
-    "@modjo-plugins/core": "latest"
-  },
-  "publishConfig": {
-    "access": "public"
+    "@modjo-plugins/core": "*"
   },
   "engines": {
     "node": ">=14"

@@ -17,8 +17,8 @@
     "ws": "^8.5.0"
   },
   "peerDependencies": {
-    "@modjo-plugins/logger": "latest",
-    "@modjo-plugins/config": "latest"
+    "@modjo-plugins/config": "*",
+    "@modjo-plugins/logger": "*"
   },
   "engines": {
     "node": ">=14"

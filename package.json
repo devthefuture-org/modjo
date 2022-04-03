@@ -29,7 +29,8 @@
     "release": "standard-version",
     "retag": "git tag -f $(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1)",
     "push": "git push -f --follow-tags origin master",
-    "delivery": "yarn release && yarn push"
+    "delivery": "yarn release && yarn push",
+    "publish:all": "yarn workspaces run yarn publish"
   },
   "lint-staged": {
     "*.js": [
@@ -43,5 +44,6 @@
   },
   "engines": {
     "node": ">=14"
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }

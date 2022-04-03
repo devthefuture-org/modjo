@@ -13,7 +13,7 @@
     "nctx": "^1.2.0"
   },
   "peerDependencies": {
-    "@modjo-plugins/logger": "latest"
+    "@modjo-plugins/logger": "*"
   },
   "engines": {
     "node": ">=14"

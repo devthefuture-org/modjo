@@ -21,7 +21,7 @@
     "yup": "^0.32.11"
   },
   "peerDependencies": {
-    "@modjo-plugins/core": "latest"
+    "@modjo-plugins/core": "*"
   },
   "scripts": {
     "postinstall": "link-module-alias"

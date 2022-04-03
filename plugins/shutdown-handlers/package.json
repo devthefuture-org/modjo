@@ -12,7 +12,7 @@
     "nctx": "^1.2.0"
   },
   "peerDependencies": {
-    "@modjo-plugins/lightship": "latest"
+    "@modjo-plugins/lightship": "*"
   },
   "engines": {
     "node": ">=14"

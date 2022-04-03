@@ -17,9 +17,9 @@
     "slonik-sql-tag-raw": "^1.1.4"
   },
   "peerDependencies": {
-    "@modjo-plugins/logger": "latest",
-    "@modjo-plugins/config": "latest",
-    "@modjo-plugins/shutdown-handlers": "latest"
+    "@modjo-plugins/config": "*",
+    "@modjo-plugins/logger": "*",
+    "@modjo-plugins/shutdown-handlers": "*"
   },
   "engines": {
     "node": ">=14"

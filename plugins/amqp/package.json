@@ -14,8 +14,8 @@
     "wait-on": "^6.0.1"
   },
   "peerDependencies": {
-    "@modjo-plugins/logger": "latest",
-    "@modjo-plugins/config": "latest"
+    "@modjo-plugins/config": "*",
+    "@modjo-plugins/logger": "*"
   },
   "engines": {
     "node": ">=14"
