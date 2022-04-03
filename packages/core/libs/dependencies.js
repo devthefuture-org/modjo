@@ -147,7 +147,7 @@ const make = async (
 const flatInstancesRegistry = new Map()
 const treeRegistry = new Map()
 const create = async (dep, _parent, _key, branches) => {
-  return nctx.fork(async () => {
+  const depInstance = await nctx.fork(async () => {
     const treeCtx = { branches: {} }
     for (const key of Object.keys(branches)) {
       const instance = await branches[key].trunk
@@ -181,6 +181,10 @@ const create = async (dep, _parent, _key, branches) => {
     treeRegistry.set(dep, treeCtx)
     return instance
   }, [dep.ctx])
+  if (dep.key) {
+    ctx.set(dep.key, depInstance)
+  }
+  return depInstance
 }
 
 const builtRegistry = new Set()
