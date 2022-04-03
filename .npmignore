@@ -1,0 +1,5 @@
+*-debug.log
+*-error.log
+/.nyc_output
+/tmp
+node_modules

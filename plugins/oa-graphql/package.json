@@ -1,0 +1,41 @@
+{
+  "name": "@modjo-plugins/oa-graphql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/devthejo/modjo",
+  "author": "devthejo",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "apollo-server-core": "^3.6.7",
+    "apollo-server-errors": "^3.3.1",
+    "apollo-server-express": "^3.6.7",
+    "express": "^4.17.3",
+    "graphql": "^16.3.0",
+    "http-errors": "^2.0.0",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.capitalize": "^4.2.1",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.defaultsdeep": "^4.6.1",
+    "lodash.get": "^4.4.2",
+    "lodash.omit": "^4.5.0",
+    "lodash.set": "^4.3.2",
+    "nctx": "^1.2.0",
+    "openapi-to-graphql": "^2.6.3",
+    "subscriptions-transport-ws": "^0.11.0"
+  },
+  "peerDependencies": {
+    "@modjo-plugins/oa": "latest",
+    "@modjo-plugins/core": "latest",
+    "@modjo-plugins/config": "latest",
+    "@modjo-plugins/logger": "latest",
+    "@modjo-plugins/http-server": "latest",
+    "@modjo-plugins/graphql-pubsub": "latest",
+    "@modjo-plugins/express": "latest"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

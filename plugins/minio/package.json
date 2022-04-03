@@ -1,0 +1,22 @@
+{
+  "name": "@modjo-plugins/minio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/devthejo/modjo",
+  "author": "devthejo",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "minio": "^7.0.26",
+    "nctx": "^1.2.0",
+    "wait-on": "^6.0.1"
+  },
+  "peerDependencies": {
+    "@modjo-plugins/config": "latest"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

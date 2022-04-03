@@ -1,0 +1,22 @@
+{
+  "name": "@modjo-plugins/logger",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/devthejo/modjo",
+  "author": "devthejo",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "nctx": "^1.2.0",
+    "pino": "^7.9.2",
+    "pino-pretty": "^7.6.0"
+  },
+  "peerDependencies": {
+    "@modjo-plugins/logger": "latest"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

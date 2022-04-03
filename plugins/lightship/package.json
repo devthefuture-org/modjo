@@ -1,0 +1,21 @@
+{
+  "name": "@modjo-plugins/lightship",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/devthejo/modjo",
+  "author": "devthejo",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "lightship": "^7.0.2",
+    "nctx": "^1.2.0"
+  },
+  "peerDependencies": {
+    "@modjo-plugins/logger": "latest"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
