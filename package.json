@@ -30,7 +30,7 @@
     "retag": "git tag -f $(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1)",
     "push": "git push -f --follow-tags origin master",
     "delivery": "yarn release && yarn push",
-    "publish:all": "yarn workspaces run --no-private npm publish"
+    "publish:all": "yarn workspaces foreach --no-private npm publish"
   },
   "lint-staged": {
     "*.js": [
