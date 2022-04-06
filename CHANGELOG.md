@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.5](https://github.com/devthejo/modjo/compare/v1.0.4...v1.0.5) (2022-04-06)
+
+
+### Bug Fixes
+
+* lint ([43e54d8](https://github.com/devthejo/modjo/commit/43e54d89477a3828037b8fbf0a20f2385ba6cd3a))
+* linters ([d9611fb](https://github.com/devthejo/modjo/commit/d9611fb00dfda8ba0b10bc32f5a2912570607323))
+* wip ([1074a83](https://github.com/devthejo/modjo/commit/1074a837b5437ab2a35eb7a5bfe0d9e36b6b79bd))
+
 ### [1.0.4](https://github.com/devthejo/modjo/compare/v1.0.3...v1.0.4) (2022-04-06)
 
 
