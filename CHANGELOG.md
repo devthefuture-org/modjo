@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.6](https://github.com/devthejo/modjo/compare/v1.0.5...v1.0.6) (2022-04-06)
+
+
+### Bug Fixes
+
+* keep rawBody in express ([f610caf](https://github.com/devthejo/modjo/commit/f610caf5305144de397fd71614812e012192350a))
+
 ### [1.0.5](https://github.com/devthejo/modjo/compare/v1.0.4...v1.0.5) (2022-04-06)
 
 
