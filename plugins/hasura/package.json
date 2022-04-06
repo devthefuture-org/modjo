@@ -9,7 +9,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@modjo-plugins/config": "*",
+    "@modjo-plugins/config": "latest",
     "axios": "^0.26.1",
     "jwt-decode": "^3.1.2",
     "lodash.camelcase": "^4.3.0",

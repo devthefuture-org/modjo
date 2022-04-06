@@ -9,7 +9,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@modjo-plugins/logger": "*",
+    "@modjo-plugins/logger": "latest",
     "nctx": "^1.2.0",
     "pino": "^7.9.2",
     "pino-pretty": "^7.6.0"

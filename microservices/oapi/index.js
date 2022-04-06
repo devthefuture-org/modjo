@@ -17,7 +17,7 @@ module.exports.ready = () => {
 
   const { serviceName = "server" } = config.microserviceOapi || {}
 
-  const { host, port } = config.httpServer
+  const { host = "0.0.0.0", port = 3000 } = config.httpServer || {}
 
   logger.info(`🚀 ${serviceName} ready at http://${host}:${port}`)
 }

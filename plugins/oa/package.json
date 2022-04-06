@@ -9,11 +9,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@modjo-plugins/config": "*",
-    "@modjo-plugins/core": "*",
-    "@modjo-plugins/express": "*",
-    "@modjo-plugins/http-server": "*",
-    "@modjo-plugins/logger": "*",
+    "@modjo-plugins/config": "latest",
+    "@modjo-plugins/core": "latest",
+    "@modjo-plugins/express": "latest",
+    "@modjo-plugins/http-server": "latest",
+    "@modjo-plugins/logger": "latest",
     "express": "^4.17.3",
     "express-openapi-validator": "^4.13.7",
     "fs-extra": "^10.0.1",

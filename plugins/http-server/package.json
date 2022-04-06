@@ -9,10 +9,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@modjo-plugins/config": "*",
-    "@modjo-plugins/lightship": "*",
-    "@modjo-plugins/logger": "*",
-    "@modjo-plugins/shutdown-handlers": "*",
+    "@modjo-plugins/config": "latest",
+    "@modjo-plugins/lightship": "latest",
+    "@modjo-plugins/logger": "latest",
+    "@modjo-plugins/shutdown-handlers": "latest",
     "nctx": "^1.2.0"
   },
   "engines": {

@@ -9,7 +9,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@modjo-plugins/config": "*",
+    "@modjo-plugins/config": "latest",
     "nctx": "^1.2.0"
   },
   "engines": {
