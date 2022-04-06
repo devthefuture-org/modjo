@@ -12,19 +12,10 @@ for (const dir of packageDirs) {
         entry.slice(0, 1) !== "." &&
         fs.lstatSync(path.resolve(__dirname, dir, entry)).isDirectory()
     )) {
-    const p = path.resolve(dir, d)
+    const p = path.join(dir, d)
     packageDir.push(p)
   }
 }
-const noExtraneousRule = [
-  "error",
-  {
-    devDependencies: true,
-    optionalDependencies: false,
-    peerDependencies: false,
-    packageDir,
-  },
-]
 
 module.exports = {
   settings: {
@@ -40,10 +31,17 @@ module.exports = {
   ],
   plugins: [],
   rules: {
-    "node/no-extraneous-require": [0],
     "import/no-commonjs": [0],
     "import/no-dynamic-require": [0],
-    "import/no-extraneous-dependencies": noExtraneousRule,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: true,
+        optionalDependencies: false,
+        peerDependencies: false,
+        packageDir,
+      },
+    ],
     "import/order": [
       "error",
       {
