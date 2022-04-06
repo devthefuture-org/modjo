@@ -401,12 +401,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/amqp@workspace:plugins/amqp"
   dependencies:
+    "@modjo-plugins/config": "*"
+    "@modjo-plugins/logger": "*"
     amqplib: ^0.8.0
     nctx: ^1.2.0
     wait-on: ^6.0.1
-  peerDependencies:
-    "@modjo-plugins/config": "*"
-    "@modjo-plugins/logger": "*"
   languageName: unknown
   linkType: soft
 
@@ -415,18 +414,17 @@ __metadata:
   resolution: "@modjo-plugins/apollo-client@workspace:plugins/apollo-client"
   dependencies:
     "@apollo/client": ^3.5.10
+    "@modjo-plugins/config": "*"
+    "@modjo-plugins/logger": "*"
     cross-fetch: ^3.1.5
     graphql: ^16.3.0
     graphql-ws: ^5.6.4
     nctx: ^1.2.0
     ws: ^8.5.0
-  peerDependencies:
-    "@modjo-plugins/config": "*"
-    "@modjo-plugins/logger": "*"
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/config@workspace:plugins/config":
+"@modjo-plugins/config@*, @modjo-plugins/config@workspace:plugins/config":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/config@workspace:plugins/config"
   dependencies:
@@ -435,7 +433,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/core@workspace:packages/core":
+"@modjo-plugins/core@*, @modjo-plugins/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/core@workspace:packages/core"
   dependencies:
@@ -455,12 +453,10 @@ __metadata:
     nctx: ^1.2.0
     pretty-ms: ^7.0.1
     yup: ^0.32.11
-  peerDependencies:
-    "@modjo-plugins/core": "*"
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/express-monitor@workspace:plugins/express-monitor":
+"@modjo-plugins/express-monitor@*, @modjo-plugins/express-monitor@workspace:plugins/express-monitor":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/express-monitor@workspace:plugins/express-monitor"
   dependencies:
@@ -469,23 +465,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/express@workspace:plugins/express":
+"@modjo-plugins/express@*, @modjo-plugins/express@workspace:plugins/express":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/express@workspace:plugins/express"
   dependencies:
-    cookie-parser: ^1.4.6
-    cors: ^2.8.5
-    express: ^5.0.0-beta.1
-    nctx: ^1.2.0
-  peerDependencies:
     "@modjo-plugins/config": "*"
     "@modjo-plugins/http-logger": "*"
     "@modjo-plugins/http-server": "*"
     "@modjo-plugins/logger": "*"
+    cookie-parser: ^1.4.6
+    cors: ^2.8.5
+    express: ^5.0.0-beta.1
+    nctx: ^1.2.0
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/graphql-pubsub@workspace:plugins/graphql-pubsub":
+"@modjo-plugins/graphql-pubsub@*, @modjo-plugins/graphql-pubsub@workspace:plugins/graphql-pubsub":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/graphql-pubsub@workspace:plugins/graphql-pubsub"
   dependencies:
@@ -499,70 +494,73 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/hasura@workspace:plugins/hasura"
   dependencies:
+    "@modjo-plugins/config": "*"
     axios: ^0.26.1
     jwt-decode: ^3.1.2
     lodash.camelcase: ^4.3.0
     lodash.defaultsdeep: ^4.6.1
     nctx: ^1.2.0
     wait-on: ^6.0.1
-  peerDependencies:
-    "@modjo-plugins/config": "*"
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/http-logger@workspace:plugins/http-logger":
+"@modjo-plugins/http-logger@*, @modjo-plugins/http-logger@workspace:plugins/http-logger":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/http-logger@workspace:plugins/http-logger"
   dependencies:
-    nctx: ^1.2.0
-  peerDependencies:
     "@modjo-plugins/config": "*"
+    nctx: ^1.2.0
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/http-server@workspace:plugins/http-server":
+"@modjo-plugins/http-server@*, @modjo-plugins/http-server@workspace:plugins/http-server":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/http-server@workspace:plugins/http-server"
   dependencies:
-    nctx: ^1.2.0
-  peerDependencies:
     "@modjo-plugins/config": "*"
     "@modjo-plugins/lightship": "*"
     "@modjo-plugins/logger": "*"
     "@modjo-plugins/shutdown-handlers": "*"
+    nctx: ^1.2.0
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/lightship@workspace:plugins/lightship":
+"@modjo-plugins/lightship@*, @modjo-plugins/lightship@workspace:plugins/lightship":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/lightship@workspace:plugins/lightship"
   dependencies:
+    "@modjo-plugins/logger": "*"
     lightship: ^7.0.2
     nctx: ^1.2.0
-  peerDependencies:
-    "@modjo-plugins/logger": "*"
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/logger@workspace:plugins/logger":
+"@modjo-plugins/logger@*, @modjo-plugins/logger@workspace:plugins/logger":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/logger@workspace:plugins/logger"
   dependencies:
+    "@modjo-plugins/logger": "*"
     nctx: ^1.2.0
     pino: ^7.9.2
     pino-pretty: ^7.6.0
-  peerDependencies:
-    "@modjo-plugins/logger": "*"
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/microservice-oapi@workspace:microservices/oapi":
+"@modjo-plugins/microservice-oapi@*, @modjo-plugins/microservice-oapi@workspace:microservices/oapi":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/microservice-oapi@workspace:microservices/oapi"
   dependencies:
-    nctx: ^1.2.0
-  peerDependencies:
     "@modjo-plugins/core": "*"
+    "@modjo-plugins/express": "*"
+    "@modjo-plugins/express-monitor": "*"
+    "@modjo-plugins/http-logger": "*"
+    "@modjo-plugins/http-server": "*"
+    "@modjo-plugins/lightship": "*"
+    "@modjo-plugins/logger": "*"
+    "@modjo-plugins/microservice-oapi": "*"
+    "@modjo-plugins/oa": "*"
+    "@modjo-plugins/shutdown-handlers": "*"
+    nctx: ^1.2.0
   languageName: unknown
   linkType: soft
 
@@ -593,11 +591,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/minio@workspace:plugins/minio"
   dependencies:
+    "@modjo-plugins/config": "*"
     minio: ^7.0.26
     nctx: ^1.2.0
     wait-on: ^6.0.1
-  peerDependencies:
-    "@modjo-plugins/config": "*"
   languageName: unknown
   linkType: soft
 
@@ -605,6 +602,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/oa-graphql@workspace:plugins/oa-graphql"
   dependencies:
+    "@modjo-plugins/config": "*"
+    "@modjo-plugins/core": "*"
+    "@modjo-plugins/express": "*"
+    "@modjo-plugins/graphql-pubsub": "*"
+    "@modjo-plugins/http-server": "*"
+    "@modjo-plugins/logger": "*"
+    "@modjo-plugins/oa": "*"
     apollo-server-core: ^3.6.7
     apollo-server-errors: ^3.3.1
     apollo-server-express: ^3.6.7
@@ -621,21 +625,18 @@ __metadata:
     nctx: ^1.2.0
     openapi-to-graphql: ^2.6.3
     subscriptions-transport-ws: ^0.11.0
-  peerDependencies:
-    "@modjo-plugins/config": "*"
-    "@modjo-plugins/core": "*"
-    "@modjo-plugins/express": "*"
-    "@modjo-plugins/graphql-pubsub": "*"
-    "@modjo-plugins/http-server": "*"
-    "@modjo-plugins/logger": "*"
-    "@modjo-plugins/oa": "*"
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/oa@workspace:plugins/oa":
+"@modjo-plugins/oa@*, @modjo-plugins/oa@workspace:plugins/oa":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/oa@workspace:plugins/oa"
   dependencies:
+    "@modjo-plugins/config": "*"
+    "@modjo-plugins/core": "*"
+    "@modjo-plugins/express": "*"
+    "@modjo-plugins/http-server": "*"
+    "@modjo-plugins/logger": "*"
     express: ^4.17.3
     express-openapi-validator: ^4.13.7
     fs-extra: ^10.0.1
@@ -651,12 +652,6 @@ __metadata:
     openapi-schema-validator: ^10.0.0
     swagger-ui-dist: ^4.10.0
     swagger-ui-express: ^4.3.0
-  peerDependencies:
-    "@modjo-plugins/config": "*"
-    "@modjo-plugins/core": "*"
-    "@modjo-plugins/express": "*"
-    "@modjo-plugins/http-server": "*"
-    "@modjo-plugins/logger": "*"
   languageName: unknown
   linkType: soft
 
@@ -666,13 +661,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/shutdown-handlers@workspace:plugins/shutdown-handlers":
+"@modjo-plugins/shutdown-handlers@*, @modjo-plugins/shutdown-handlers@workspace:plugins/shutdown-handlers":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/shutdown-handlers@workspace:plugins/shutdown-handlers"
   dependencies:
-    nctx: ^1.2.0
-  peerDependencies:
     "@modjo-plugins/lightship": "*"
+    nctx: ^1.2.0
   languageName: unknown
   linkType: soft
 
@@ -680,16 +674,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/slonik@workspace:plugins/slonik"
   dependencies:
+    "@modjo-plugins/config": "*"
+    "@modjo-plugins/logger": "*"
+    "@modjo-plugins/shutdown-handlers": "*"
     lodash.defaultsdeep: ^4.6.1
     lodash.snakecase: ^4.1.1
     nctx: ^1.2.0
     pg-format: ^1.0.4
     slonik: ^28.0.0
     slonik-sql-tag-raw: ^1.1.4
-  peerDependencies:
-    "@modjo-plugins/config": "*"
-    "@modjo-plugins/logger": "*"
-    "@modjo-plugins/shutdown-handlers": "*"
   languageName: unknown
   linkType: soft
 
@@ -697,10 +690,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/version@workspace:plugins/version"
   dependencies:
+    "@modjo-plugins/core": "*"
     lodash.defaultsdeep: ^4.6.1
     nctx: ^1.2.0
-  peerDependencies:
-    "@modjo-plugins/core": "*"
   languageName: unknown
   linkType: soft
 

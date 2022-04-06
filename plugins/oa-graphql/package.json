@@ -9,6 +9,13 @@
     "access": "public"
   },
   "dependencies": {
+    "@modjo-plugins/config": "*",
+    "@modjo-plugins/core": "*",
+    "@modjo-plugins/express": "*",
+    "@modjo-plugins/graphql-pubsub": "*",
+    "@modjo-plugins/http-server": "*",
+    "@modjo-plugins/logger": "*",
+    "@modjo-plugins/oa": "*",
     "apollo-server-core": "^3.6.7",
     "apollo-server-errors": "^3.3.1",
     "apollo-server-express": "^3.6.7",
@@ -25,15 +32,6 @@
     "nctx": "^1.2.0",
     "openapi-to-graphql": "^2.6.3",
     "subscriptions-transport-ws": "^0.11.0"
-  },
-  "peerDependencies": {
-    "@modjo-plugins/config": "*",
-    "@modjo-plugins/core": "*",
-    "@modjo-plugins/express": "*",
-    "@modjo-plugins/graphql-pubsub": "*",
-    "@modjo-plugins/http-server": "*",
-    "@modjo-plugins/logger": "*",
-    "@modjo-plugins/oa": "*"
   },
   "engines": {
     "node": ">=14"

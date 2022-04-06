@@ -9,12 +9,10 @@
     "access": "public"
   },
   "dependencies": {
+    "@modjo-plugins/config": "*",
     "minio": "^7.0.26",
     "nctx": "^1.2.0",
     "wait-on": "^6.0.1"
-  },
-  "peerDependencies": {
-    "@modjo-plugins/config": "*"
   },
   "engines": {
     "node": ">=14"

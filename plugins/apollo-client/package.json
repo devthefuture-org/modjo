@@ -10,15 +10,13 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
+    "@modjo-plugins/config": "*",
+    "@modjo-plugins/logger": "*",
     "cross-fetch": "^3.1.5",
     "graphql": "^16.3.0",
     "graphql-ws": "^5.6.4",
     "nctx": "^1.2.0",
     "ws": "^8.5.0"
-  },
-  "peerDependencies": {
-    "@modjo-plugins/config": "*",
-    "@modjo-plugins/logger": "*"
   },
   "engines": {
     "node": ">=14"

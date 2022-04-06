@@ -9,11 +9,9 @@
     "access": "public"
   },
   "dependencies": {
+    "@modjo-plugins/logger": "*",
     "lightship": "^7.0.2",
     "nctx": "^1.2.0"
-  },
-  "peerDependencies": {
-    "@modjo-plugins/logger": "*"
   },
   "engines": {
     "node": ">=14"

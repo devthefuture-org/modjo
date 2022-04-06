@@ -1,6 +1,6 @@
 const { Command } = require("commander")
 
-const tracePerformances = require("~/libs/trace-perfs")
+// const tracePerformances = require("~/libs/trace-perfs")
 const ctx = require("~/ctx")
 
 const dependencies = require("~/libs/dependencies")

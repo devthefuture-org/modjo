@@ -3,7 +3,6 @@ const express = require("express")
 const { reqCtx } = require("@modjo-plugins/express/ctx")
 
 const createOptions = require("@modjo-plugins/core/utils/schema/options")
-const ctx = require("./ctx")
 const createOpenApi = require("./openapi")
 const createSwaggerServer = require("./swagger")
 

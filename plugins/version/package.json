@@ -9,11 +9,9 @@
     "access": "public"
   },
   "dependencies": {
+    "@modjo-plugins/core": "*",
     "lodash.defaultsdeep": "^4.6.1",
     "nctx": "^1.2.0"
-  },
-  "peerDependencies": {
-    "@modjo-plugins/core": "*"
   },
   "engines": {
     "node": ">=14"

@@ -9,13 +9,11 @@
     "access": "public"
   },
   "dependencies": {
-    "nctx": "^1.2.0"
-  },
-  "peerDependencies": {
     "@modjo-plugins/config": "*",
     "@modjo-plugins/lightship": "*",
     "@modjo-plugins/logger": "*",
-    "@modjo-plugins/shutdown-handlers": "*"
+    "@modjo-plugins/shutdown-handlers": "*",
+    "nctx": "^1.2.0"
   },
   "engines": {
     "node": ">=14"

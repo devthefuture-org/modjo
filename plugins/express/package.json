@@ -9,16 +9,14 @@
     "access": "public"
   },
   "dependencies": {
+    "@modjo-plugins/config": "*",
+    "@modjo-plugins/http-logger": "*",
+    "@modjo-plugins/http-server": "*",
+    "@modjo-plugins/logger": "*",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^5.0.0-beta.1",
     "nctx": "^1.2.0"
-  },
-  "peerDependencies": {
-    "@modjo-plugins/config": "*",
-    "@modjo-plugins/http-logger": "*",
-    "@modjo-plugins/http-server": "*",
-    "@modjo-plugins/logger": "*"
   },
   "engines": {
     "node": ">=14"

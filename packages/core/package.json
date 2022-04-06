@@ -20,9 +20,6 @@
     "pretty-ms": "^7.0.1",
     "yup": "^0.32.11"
   },
-  "peerDependencies": {
-    "@modjo-plugins/core": "*"
-  },
   "scripts": {
     "postinstall": "link-module-alias"
   },
