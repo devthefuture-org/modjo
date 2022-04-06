@@ -221,7 +221,7 @@ module.exports = async function createOpenApi(options = {}) {
   const router = express.Router({ strict: true, caseSensitive: true })
   reqCtx.setRouterContext(router)
 
-  const { host, port } = config.httpServer
+  const { host = "0.0.0.0", port = 3000 } = config.httpServer || {}
   const apiSpecBase = await createApiSpec({
     path: path.join(basePath, apiPath, version, oasPath),
     host,
