@@ -1,6 +1,5 @@
-const { createLightship } = require("lightship")
-
 const nctx = require("nctx")
+const { createLightship } = require("lightship")
 
 const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 

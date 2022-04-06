@@ -12,7 +12,8 @@ for (const dir of packageDirs) {
         entry.slice(0, 1) !== "." &&
         fs.lstatSync(path.resolve(__dirname, dir, entry)).isDirectory()
     )) {
-    packageDir.push(path.resolve(__dirname, dir, d))
+    const p = path.resolve(dir, d)
+    packageDir.push(p)
   }
 }
 const noExtraneousRule = [
@@ -26,9 +27,13 @@ const noExtraneousRule = [
 ]
 
 module.exports = {
+  settings: {
+    "import/resolver": {
+      alias: true,
+    },
+  },
   extends: [
     "airbnb-base",
-    "plugin:node/recommended",
     "prettier",
     "plugin:prettier/recommended",
     "plugin:import/recommended",

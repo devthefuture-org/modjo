@@ -1,6 +1,6 @@
-const minio = require("minio")
 const waitOn = require("wait-on")
 const nctx = require("nctx")
+const minio = require("minio")
 
 const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 

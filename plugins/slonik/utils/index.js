@@ -1,9 +1,9 @@
-const { sql } = require("slonik")
 const { raw } = require("slonik-sql-tag-raw")
 
 const format = require("pg-format")
 
 const snakeCase = require("lodash.snakecase")
+const { sql } = require("slonik")
 
 const manyValues = (rows, types) => {
   return raw(

@@ -1,6 +1,6 @@
-const { createPool } = require("slonik")
 const defaultsDeep = require("lodash.defaultsdeep")
 const nctx = require("nctx")
+const { createPool } = require("slonik")
 
 const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 
