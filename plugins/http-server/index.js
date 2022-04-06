@@ -8,9 +8,9 @@ module.exports = async () => {
 
   const {
     host = "0.0.0.0",
-    port = 4000,
+    port = 3000,
     ...httpServerOptions
-  } = config.httpServer
+  } = config.httpServer || {}
 
   const httpServer = http.createServer(httpServerOptions)
 
