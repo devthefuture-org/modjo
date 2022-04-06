@@ -7,6 +7,12 @@ const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 
 const { reqCtx } = require("./ctx")
 
+const rawBodySaver = function (req, _res, buf, encoding) {
+  if (buf && buf.length) {
+    req.rawBody = buf.toString(encoding || "utf8")
+  }
+}
+
 module.exports.create = () => {
   const config = ctx.require("config")
   const logger = ctx.require("logger")
@@ -21,7 +27,8 @@ module.exports.create = () => {
   // express parsers
   app.use(express.urlencoded({ extended: false }))
   app.use(express.text())
-  app.use(express.json())
+
+  app.use(express.json({ verify: rawBodySaver, extended: true }))
   app.use(cookieParser())
 
   // debug incoming
