@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.12](https://github.com/devthejo/modjo/compare/v1.0.11...v1.0.12) (2022-04-07)
+
+
+### Bug Fixes
+
+* remove aliasing ([455608c](https://github.com/devthejo/modjo/commit/455608cbcb454a59c70b15e8fa66a4eedf376787))
+
 ### [1.0.11](https://github.com/devthejo/modjo/compare/v1.0.10...v1.0.11) (2022-04-07)
 
 
