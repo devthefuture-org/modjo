@@ -6,7 +6,6 @@
     "commander": "^9.1.0",
     "fs-extra": "^10.0.1",
     "js-yaml": "^4.1.0",
-    "link-module-alias": "^1.2.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.capitalize": "^4.2.1",
     "lodash.defaultsdeep": "^4.6.1",
@@ -18,13 +17,8 @@
     "lodash.set": "^4.3.2",
     "nctx": "^1.2.0",
     "pretty-ms": "^7.0.1",
-    "yup": "^0.32.11"
-  },
-  "scripts": {
-    "postinstall": "link-module-alias"
-  },
-  "_moduleAliases": {
-    "~": "."
+    "yup": "^0.32.11",
+    "~": "link:."
   },
   "publishConfig": {
     "access": "public"
