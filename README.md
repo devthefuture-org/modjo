@@ -31,5 +31,4 @@ CQRS kesako ? un peu de lecture:
 
 ### Pure and performant native NodeJS
 - no transpiller (no typescript/babel etc...)
-- no bullshits
 - [@vercel/ncc](https://github.com/vercel/ncc) compilable (faster bootup time and less I/O overhead)

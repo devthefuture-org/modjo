@@ -344,7 +344,6 @@ __metadata:
     commander: ^9.1.0
     fs-extra: ^10.0.1
     js-yaml: ^4.1.0
-    link-module-alias: ^1.2.0
     lodash.camelcase: ^4.3.0
     lodash.capitalize: ^4.2.1
     lodash.defaultsdeep: ^4.6.1
@@ -357,6 +356,7 @@ __metadata:
     nctx: ^1.2.0
     pretty-ms: ^7.0.1
     yup: ^0.32.11
+    ~: "link:src"
   languageName: unknown
   linkType: soft
 
@@ -8945,3 +8945,9 @@ __metadata:
   checksum: b7289084bc1fc74a559b7259faa23d3214b14b538a8843d2b001a35e27147833f4107590b1b44bf5bc7f6dfe6f488660d3a3725f268e09b3925b3476153b7821
   languageName: node
   linkType: hard
+
+"~@link:src::locator=%40modjo-plugins%2Fcore%40workspace%3Apackages%2Fcore":
+  version: 0.0.0-use.local
+  resolution: "~@link:src::locator=%40modjo-plugins%2Fcore%40workspace%3Apackages%2Fcore"
+  languageName: node
+  linkType: soft

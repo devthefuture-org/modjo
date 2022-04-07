@@ -54,16 +54,7 @@ module.exports = {
           "sibling",
           "object",
         ],
-        pathGroups: [
-          {
-            group: "internal",
-            pattern: "~/**",
-          },
-          {
-            group: "internal",
-            pattern: "~**",
-          },
-        ],
+        pathGroups: [],
         pathGroupsExcludedImportTypes: [],
       },
     ],

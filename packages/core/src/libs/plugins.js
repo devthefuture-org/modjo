@@ -2,7 +2,7 @@ const path = require("path")
 const fs = require("fs-extra")
 const kebabcase = require("lodash.kebabcase")
 
-const dynamicRequire = require("~/utils/fs/dynamic-require")
+const dynamicRequire = require("../utils/fs/dynamic-require")
 
 const plugins = {}
 
