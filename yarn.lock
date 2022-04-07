@@ -356,7 +356,7 @@ __metadata:
     nctx: ^1.2.0
     pretty-ms: ^7.0.1
     yup: ^0.32.11
-    ~: "link:."
+    ~: "link:./src"
   languageName: unknown
   linkType: soft
 
@@ -8946,8 +8946,8 @@ __metadata:
   languageName: node
   linkType: hard
 
-"~@link:.::locator=%40modjo-plugins%2Fcore%40workspace%3Apackages%2Fcore":
+"~@link:./src::locator=%40modjo-plugins%2Fcore%40workspace%3Apackages%2Fcore":
   version: 0.0.0-use.local
-  resolution: "~@link:.::locator=%40modjo-plugins%2Fcore%40workspace%3Apackages%2Fcore"
+  resolution: "~@link:./src::locator=%40modjo-plugins%2Fcore%40workspace%3Apackages%2Fcore"
   languageName: node
   linkType: soft
