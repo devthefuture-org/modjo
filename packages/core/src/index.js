@@ -1,9 +1,9 @@
 const { Command } = require("commander")
 
-// const tracePerformances = require("~/libs/trace-perfs")
-const ctx = require("~/ctx")
+// const tracePerformances = require("./libs/trace-perfs")
+const ctx = require("./ctx")
 
-const dependencies = require("~/libs/dependencies")
+const dependencies = require("./libs/dependencies")
 
 module.exports = async function entrypoint(dependency) {
   ctx.provide()

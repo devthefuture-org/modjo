@@ -1,7 +1,7 @@
 const fs = require("fs")
 const path = require("path")
 const defaultsDeep = require("lodash.defaultsdeep")
-const stringifyJS = require("~/utils/js/stringify-js")
+const stringifyJS = require("../js/stringify-js")
 
 function getName(filename) {
   return path.basename(filename, path.extname(filename))

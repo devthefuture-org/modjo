@@ -1,10 +1,10 @@
 const nctx = require("nctx")
 const defaultsDeep = require("lodash.defaultsdeep")
-const { getPlugin } = require("~/libs/plugins")
 
-const promiseObject = require("~/utils/async/promise-object")
+const promiseObject = require("../utils/async/promise-object")
 
-const ctx = require("~/ctx")
+const ctx = require("../ctx")
+const { getPlugin } = require("./plugins")
 
 const castDependency = (dependency) => {
   if (typeof dependency === "function") {
