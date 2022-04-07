@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.8](https://github.com/devthejo/modjo/compare/v1.0.7...v1.0.8) (2022-04-07)
+
+
+### Bug Fixes
+
+* aliasing try portal protocol ([0db8f13](https://github.com/devthejo/modjo/commit/0db8f13f2e87fffa9908840aee03f241bb100947))
+
 ### [1.0.7](https://github.com/devthejo/modjo/compare/v1.0.6...v1.0.7) (2022-04-07)
 
 
