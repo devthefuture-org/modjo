@@ -356,7 +356,7 @@ __metadata:
     nctx: ^1.2.0
     pretty-ms: ^7.0.1
     yup: ^0.32.11
-    ~: "link:."
+    ~: "portal:."
   languageName: unknown
   linkType: soft
 
@@ -8946,8 +8946,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"~@link:.::locator=%40modjo-plugins%2Fcore%40workspace%3Apackages%2Fcore":
+"~@link:.::locator=~%40portal%3A.%3A%3Alocator%3D%2540modjo-plugins%252Fcore%2540workspace%253Apackages%252Fcore":
   version: 0.0.0-use.local
-  resolution: "~@link:.::locator=%40modjo-plugins%2Fcore%40workspace%3Apackages%2Fcore"
+  resolution: "~@link:.::locator=~%40portal%3A.%3A%3Alocator%3D%2540modjo-plugins%252Fcore%2540workspace%253Apackages%252Fcore"
+  languageName: node
+  linkType: soft
+
+"~@portal:.::locator=%40modjo-plugins%2Fcore%40workspace%3Apackages%2Fcore":
+  version: 0.0.0-use.local
+  resolution: "~@portal:.::locator=%40modjo-plugins%2Fcore%40workspace%3Apackages%2Fcore"
+  dependencies:
+    commander: ^9.1.0
+    fs-extra: ^10.0.1
+    js-yaml: ^4.1.0
+    lodash.camelcase: ^4.3.0
+    lodash.capitalize: ^4.2.1
+    lodash.defaultsdeep: ^4.6.1
+    lodash.get: ^4.4.2
+    lodash.kebabcase: ^4.1.1
+    lodash.merge: ^4.6.2
+    lodash.mergewith: ^4.6.2
+    lodash.omit: ^4.5.0
+    lodash.set: ^4.3.2
+    nctx: ^1.2.0
+    pretty-ms: ^7.0.1
+    yup: ^0.32.11
+    ~: "link:."
   languageName: node
   linkType: soft
