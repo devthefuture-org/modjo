@@ -19,7 +19,7 @@
     "nctx": "^1.2.0",
     "pretty-ms": "^7.0.1",
     "yup": "^0.32.11",
-    "~": "link:./src"
+    "~": "link:src"
   },
   "publishConfig": {
     "access": "public"
