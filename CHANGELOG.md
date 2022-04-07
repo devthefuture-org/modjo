@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.14](https://github.com/devthejo/modjo/compare/v1.0.6...v1.0.14) (2022-04-07)
+
+
+### Bug Fixes
+
+* rollback to v1.0.6 link-module-alias ([502e2c3](https://github.com/devthejo/modjo/commit/502e2c3f7f346bc829866d0149ca18779059a36e))
+
 ### [1.0.6](https://github.com/devthejo/modjo/compare/v1.0.5...v1.0.6) (2022-04-06)
 
 
