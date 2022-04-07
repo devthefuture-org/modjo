@@ -1,6 +1,6 @@
 {
   "name": "@modjo-plugins/amqp",
-  "version": "1.0.6",
+  "version": "1.0.13",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
   "author": "devthejo",
