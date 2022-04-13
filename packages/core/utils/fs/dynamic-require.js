@@ -20,6 +20,9 @@ const dynamicRequireRegister = (src) => {
   delete require.cache[require.resolve(dynamicFilename)]
 }
 const dynamicRequire = (r) => {
+  if (process.env.MODJO_DISABLE_NCC_REQUIRE) {
+    return require(r)
+  }
   let requirable
   try {
     require.resolve(r)
