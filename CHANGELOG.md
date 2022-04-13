@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.15](https://github.com/devthejo/modjo/compare/v1.0.14...v1.0.15) (2022-04-13)
+
+
+### Bug Fixes
+
+* MODJO_DISABLE_NCC_REQUIRE ([013b2b0](https://github.com/devthejo/modjo/commit/013b2b0c992470e44fcc5d792b125a365351e292))
+
 ### [1.0.14](https://github.com/devthejo/modjo/compare/v1.0.6...v1.0.14) (2022-04-07)
 
 
