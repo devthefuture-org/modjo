@@ -234,15 +234,17 @@ module.exports = async function createOpenApi(options = {}) {
   // load addons handlers
   const addonsHandlers = {}
   for (const addonName of addonNames) {
+    addonsHandlers[addonName] = {}
+  }
+  for (const addonName of addonNames) {
     const addonTree = addonTrees[addonName]
-    const addonHandlers = {}
+    const addonHandlers = addonsHandlers[addonName]
     const addonLoader = (_filename, factory, _dirFiles, keys) => {
       const name = camelCase(keys.join("."))
       const addonHandler = factory(addonsHandlers)
       addonHandlers[name] = addonHandler
     }
     traverse(addonTree, addonLoader)
-    addonsHandlers[addonName] = addonHandlers
   }
 
   const operationsRouter = express.Router({ strict: true, caseSensitive: true })
