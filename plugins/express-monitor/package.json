@@ -1,6 +1,6 @@
 {
   "name": "@modjo-plugins/express-monitor",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
   "author": "devthejo",

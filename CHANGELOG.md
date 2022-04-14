@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.16](https://github.com/devthejo/modjo/compare/v1.0.15...v1.0.16) (2022-04-14)
+
+
+### Bug Fixes
+
+* lazy load factory ([c868446](https://github.com/devthejo/modjo/commit/c8684467740ea0ebb824dd4d8d24f5c36647f7a3))
+
 ### [1.0.15](https://github.com/devthejo/modjo/compare/v1.0.14...v1.0.15) (2022-04-13)
 
 
