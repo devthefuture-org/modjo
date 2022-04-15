@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.18](https://github.com/devthejo/modjo/compare/v1.0.17...v1.0.18) (2022-04-15)
+
+
+### Bug Fixes
+
+* swagger dist + modjo version ([e34144a](https://github.com/devthejo/modjo/commit/e34144a88d7604b02c08877c48a767eff76bf3a8))
+
 ### [1.0.17](https://github.com/devthejo/modjo/compare/v1.0.16...v1.0.17) (2022-04-14)
 
 

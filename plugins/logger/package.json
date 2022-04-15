@@ -1,6 +1,6 @@
 {
   "name": "@modjo-plugins/logger",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
   "author": "devthejo",
