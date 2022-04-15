@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.19](https://github.com/devthejo/modjo/compare/v1.0.18...v1.0.19) (2022-04-15)
+
+
+### Bug Fixes
+
+* swagger dist await typo ([d6a9467](https://github.com/devthejo/modjo/commit/d6a9467149c29f714f0919235114d0ff9d0553b1))
+
 ### [1.0.18](https://github.com/devthejo/modjo/compare/v1.0.17...v1.0.18) (2022-04-15)
 
 
