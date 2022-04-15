@@ -9,16 +9,16 @@
     "access": "public"
   },
   "dependencies": {
-    "@modjo-plugins/core": "latest",
-    "@modjo-plugins/express": "latest",
-    "@modjo-plugins/express-monitor": "latest",
-    "@modjo-plugins/http-logger": "latest",
-    "@modjo-plugins/http-server": "latest",
-    "@modjo-plugins/lightship": "latest",
-    "@modjo-plugins/logger": "latest",
-    "@modjo-plugins/microservice-oapi": "latest",
-    "@modjo-plugins/oa": "latest",
-    "@modjo-plugins/shutdown-handlers": "latest",
+    "@modjo-plugins/core": "*",
+    "@modjo-plugins/express": "*",
+    "@modjo-plugins/express-monitor": "*",
+    "@modjo-plugins/http-logger": "*",
+    "@modjo-plugins/http-server": "*",
+    "@modjo-plugins/lightship": "*",
+    "@modjo-plugins/logger": "*",
+    "@modjo-plugins/microservice-oapi": "*",
+    "@modjo-plugins/oa": "*",
+    "@modjo-plugins/shutdown-handlers": "*",
     "nctx": "^1.2.0"
   },
   "engines": {

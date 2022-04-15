@@ -9,7 +9,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@modjo-plugins/lightship": "latest",
+    "@modjo-plugins/lightship": "*",
     "nctx": "^1.2.0"
   },
   "engines": {

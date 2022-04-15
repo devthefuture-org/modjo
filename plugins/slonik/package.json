@@ -9,9 +9,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@modjo-plugins/config": "latest",
-    "@modjo-plugins/logger": "latest",
-    "@modjo-plugins/shutdown-handlers": "latest",
+    "@modjo-plugins/config": "*",
+    "@modjo-plugins/logger": "*",
+    "@modjo-plugins/shutdown-handlers": "*",
     "lodash.defaultsdeep": "^4.6.1",
     "lodash.snakecase": "^4.1.1",
     "nctx": "^1.2.0",

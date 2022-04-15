@@ -1,8 +1,10 @@
 const path = require("path")
+const fs = require("fs-extra")
 const express = require("express")
 const { reqCtx } = require("@modjo-plugins/express/ctx")
 
 const createOptions = require("@modjo-plugins/core/utils/schema/options")
+const findAsync = require("@modjo-plugins/core/utils/async/find-async")
 const createOpenApi = require("./openapi")
 const createSwaggerServer = require("./swagger")
 
@@ -43,7 +45,9 @@ module.exports = async function createOapiStack(options = {}) {
       url: path.join(basePath, apiPath, version, docsPath),
     },
   })
-  const swaggerUiDistPath = `${process.cwd()}/build/swagger-ui-dist`
+  const swaggerUiDistPath = findAsync(["build", "dist"], async (dir) =>
+    fs.pathExists(`${process.cwd()}/${dir}/swagger-ui-dist`)
+  )
   router.use(
     "/swagger",
     express.static(swaggerUiDistPath, {
