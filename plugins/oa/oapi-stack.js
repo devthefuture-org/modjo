@@ -45,8 +45,9 @@ module.exports = async function createOapiStack(options = {}) {
       url: path.join(basePath, apiPath, version, docsPath),
     },
   })
-  const swaggerUiDistPath = await findAsync(["build", "dist"], async (dir) =>
-    fs.pathExists(`${process.cwd()}/${dir}/swagger-ui-dist`)
+  const swaggerUiDistPath = await findAsync(
+    ["build", "dist"].map((dir) => `${process.cwd()}/${dir}/swagger-ui-dist`),
+    async (p) => fs.pathExists(p)
   )
   router.use(
     "/swagger",
