@@ -423,7 +423,7 @@ module.exports = async function createOpenApi(options = {}) {
       ).map((handler) => {
         return async (req, res, next) => {
           const result = await handler(req, res, next)
-          if (result) {
+          if (result && result !== res) {
             res.json(result)
           }
         }
