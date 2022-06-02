@@ -1,6 +1,6 @@
 {
   "name": "@modjo-plugins/express",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
   "author": "devthejo",
