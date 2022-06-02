@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.22](https://github.com/devthejo/modjo/compare/v1.0.21...v1.0.22) (2022-06-02)
+
+
+### Bug Fixes
+
+* remove default express monitor ([e327f41](https://github.com/devthejo/modjo/commit/e327f416fe3fa9e024a6e97323fa8f2b51d597bc))
+
 ### [1.0.21](https://github.com/devthejo/modjo/compare/v1.0.20...v1.0.21) (2022-04-26)
 
 
