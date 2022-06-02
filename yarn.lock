@@ -350,7 +350,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@modjo-plugins/express-monitor@*, @modjo-plugins/express-monitor@workspace:plugins/express-monitor":
+"@modjo-plugins/express-monitor@workspace:plugins/express-monitor":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/express-monitor@workspace:plugins/express-monitor"
   dependencies:
@@ -446,7 +446,6 @@ __metadata:
   dependencies:
     "@modjo-plugins/core": "*"
     "@modjo-plugins/express": "*"
-    "@modjo-plugins/express-monitor": "*"
     "@modjo-plugins/http-logger": "*"
     "@modjo-plugins/http-server": "*"
     "@modjo-plugins/lightship": "*"
