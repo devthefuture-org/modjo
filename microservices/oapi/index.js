@@ -5,7 +5,6 @@ const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 module.exports.dependencies = [
   "express",
   "oa",
-  "expressMonitor",
   "logger",
   "config",
   "httpServer",

@@ -36,12 +36,6 @@ module.exports = async () => {
   app.use(oapiUrl, oapiStackVersionsRouter)
   // logger.debug(`oapi-url: ${oapiUrl}`)
 
-  // express monitor /status
-  const expressMonitor = ctx.get("expressMonitor")
-  if (expressMonitor) {
-    app.use("/status", expressMonitor)
-  }
-
   // home
   const { version: projectVersion, name: projectName } =
     ctx.get("version") || {}
