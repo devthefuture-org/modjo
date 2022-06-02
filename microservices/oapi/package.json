@@ -11,7 +11,6 @@
   "dependencies": {
     "@modjo-plugins/core": "*",
     "@modjo-plugins/express": "*",
-    "@modjo-plugins/express-monitor": "*",
     "@modjo-plugins/http-logger": "*",
     "@modjo-plugins/http-server": "*",
     "@modjo-plugins/lightship": "*",
