@@ -89,13 +89,13 @@ const make = async (
   }
   dependency.ctx.fallback(ctx)
 
-  dependency.recursiveSync = (callback, desc = false) => {
+  dependency.recursiveSequential = (callback, desc = false) => {
     let trunk
     if (desc) {
       trunk = callback(dependency)
     }
     const branches = Object.values(dependency.dependencies).map((d) =>
-      d.recursiveSync(callback, desc)
+      d.recursiveSequential(callback, desc)
     )
     if (!desc) {
       trunk = callback(dependency)
@@ -203,7 +203,12 @@ const build = async (dep) => {
   await dep.build(...params)
 }
 
+const readyRegistry = new Set()
 const ready = async (dep) => {
+  if (readyRegistry.has(dep.key || dep) || !dep.ready) {
+    return
+  }
+  readyRegistry.add(dep.key || dep)
   const treeCtx = treeRegistry.get(dep)
   nctx.fork(async () => {
     for (const key of Object.keys(treeCtx.branches)) {

@@ -14,7 +14,7 @@ module.exports = async function entrypoint(dependency) {
 
   program.name("modjo").description("modjo framework")
 
-  root.recursiveSync((dep) => {
+  root.recursiveSequential((dep) => {
     dep.ctx.provide()
   })
 
