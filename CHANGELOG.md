@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.24](https://github.com/devthejo/modjo/compare/v1.0.23...v1.0.24) (2022-06-13)
+
+
+### Bug Fixes
+
+* http-logger hideSecrets ([2eaf88a](https://github.com/devthejo/modjo/commit/2eaf88ab9fa57755c2688371448cecb508448cce))
+* ready single call ([f173eb5](https://github.com/devthejo/modjo/commit/f173eb51e38d61bfbfb727bd9843f6274e4000f9))
+
 ### [1.0.23](https://github.com/devthejo/modjo/compare/v1.0.22...v1.0.23) (2022-06-02)
 
 
