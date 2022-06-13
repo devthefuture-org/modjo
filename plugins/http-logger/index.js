@@ -12,7 +12,7 @@ module.exports.create = () => {
     res.send = function (...args) {
       originalSend.apply(res, args)
 
-      let { url } = req
+      let { originalUrl: url } = req
       for (const secret of hideSecrets) {
         url = url.replaceAll(secret, "*".repeat(secret.length))
       }
