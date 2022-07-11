@@ -14,7 +14,7 @@ module.exports.create = () => {
 
   const stream = pretty({
     colorize: true,
-    translateTime: "yyyy-mm-dd HH:mm:ss",
+    translateTime: "yyyy-mm-dd HH:MM:ss",
     ignore: "pid,hostname",
   })
   const logger = pino({ level }, stream)
