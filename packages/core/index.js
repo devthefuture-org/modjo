@@ -50,7 +50,7 @@ module.exports = async function entrypoint(dependency) {
       await build()
     })
 
-  program.parse()
+  await program.parseAsync()
 }
 
 module.exports.ctx = ctx
