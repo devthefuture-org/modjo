@@ -2,7 +2,7 @@ const camelCase = require("lodash.camelcase")
 const { buildDirTree } = require("@modjo-plugins/core/libs/build")
 const createQueueWorker = require("./libs/queue-worker")
 
-const ctx = require("./ctx")
+const { ctx } = require("./ctx")
 
 module.exports = async () => {
   // const config = ctx.require("config")
