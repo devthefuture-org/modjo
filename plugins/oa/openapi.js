@@ -469,6 +469,10 @@ module.exports = async function createOpenApi(options = {}) {
   // errors handling
   function errorMiddleware(err, _, res, _next) {
     const { status, errors, message } = err
+    logger.debug(
+      { status, errors, message },
+      "openapi request_validation error"
+    )
     res.status(status || 500).json({
       error: {
         type: "request_validation",
@@ -501,7 +505,7 @@ module.exports = async function createOpenApi(options = {}) {
     )
   }
 
-  const openaApiMiddleware = OpenApiValidator.middleware(
+  const openApiMiddleware = OpenApiValidator.middleware(
     defaultsDeep({}, openApiValidatorOptions, {
       apiSpec,
       validateApiSpec: false,
@@ -528,7 +532,7 @@ module.exports = async function createOpenApi(options = {}) {
     })
   )
 
-  router.use(openaApiMiddleware)
+  router.use(openApiMiddleware)
 
   router.use(errorMiddleware, operationsRouter)
 
