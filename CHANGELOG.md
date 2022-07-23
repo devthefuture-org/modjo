@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.31](https://github.com/devthejo/modjo/compare/v1.0.30...v1.0.31) (2022-07-23)
+
+
+### Bug Fixes
+
+* oa enable debug request error ([44c27aa](https://github.com/devthejo/modjo/commit/44c27aab5fe97e1ea7f76ab618a2a6fba1d49557))
+
 ### [1.0.30](https://github.com/devthejo/modjo/compare/v1.0.29...v1.0.30) (2022-07-23)
 
 
