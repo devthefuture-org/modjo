@@ -1,6 +1,6 @@
 {
   "name": "@modjo-plugins/lightship",
-  "version": "1.0.27",
+  "version": "1.0.28",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
   "author": "devthejo",

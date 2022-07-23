@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.28](https://github.com/devthejo/modjo/compare/v1.0.27...v1.0.28) (2022-07-23)
+
+
+### Bug Fixes
+
+* apollo-client ([00a7aa9](https://github.com/devthejo/modjo/commit/00a7aa92ae01bc22323d69a7778ca67b9510e272))
+* worker microservice ([080c8cc](https://github.com/devthejo/modjo/commit/080c8cc7ea37916566f516f4f383360eaef1cd5a))
+
 ### [1.0.27](https://github.com/devthejo/modjo/compare/v1.0.26...v1.0.27) (2022-07-23)
 
 
