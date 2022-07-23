@@ -147,44 +147,47 @@ const make = async (
 const flatInstancesRegistry = new Map()
 const treeRegistry = new Map()
 const create = async (dep, _parent, _key, branches) => {
-  const depInstance = await nctx.fork(async () => {
+  return nctx.fork(async () => {
     const treeCtx = { branches: {} }
     for (const key of Object.keys(branches)) {
       const instance = await branches[key].trunk
       dep.ctx.set(key, instance)
       treeCtx.branches[key] = instance
     }
-    if (dep.context) {
-      await dep.context(dep.ctx, ctx)
-    }
-    let params = []
-    if (dep.params) {
-      if (typeof dep.params === "function") {
-        params = await params()
-      }
-      if (!Array.isArray(dep.params)) {
-        params = [params]
-      }
-    }
-    let instance
-    if (dep.key !== undefined) {
-      if (flatInstancesRegistry.has(dep.key)) {
-        instance = flatInstancesRegistry.get(dep.key)
-      } else {
-        instance = await (dep.create ? dep.create(...params) : null)
-        flatInstancesRegistry.set(dep.key, instance)
-      }
+
+    let instancePromise
+    if (dep.key !== undefined && flatInstancesRegistry.has(dep.key)) {
+      instancePromise = flatInstancesRegistry.get(dep.key)
     } else {
-      instance = await (dep.create ? dep.create(...params) : null)
+      if (dep.context) {
+        await dep.context(dep.ctx, ctx)
+      }
+      let params = []
+      if (dep.params) {
+        if (typeof dep.params === "function") {
+          params = await params()
+        }
+        if (!Array.isArray(dep.params)) {
+          params = [params]
+        }
+      }
+      instancePromise = dep.create ? dep.create(...params) : null
+      if (dep.key !== undefined) {
+        flatInstancesRegistry.set(dep.key, instancePromise)
+      }
     }
-    treeCtx.trunk = instance
+
+    const trunk = (async () => {
+      const instance = await instancePromise
+      if (dep.key) {
+        ctx.set(dep.key, instance)
+      }
+      return instance
+    })()
+    treeCtx.trunk = trunk
     treeRegistry.set(dep, treeCtx)
-    return instance
+    return trunk
   }, [dep.ctx])
-  if (dep.key) {
-    ctx.set(dep.key, depInstance)
-  }
-  return depInstance
 }
 
 const builtRegistry = new Set()
@@ -215,7 +218,7 @@ const ready = async (dep) => {
       dep.ctx.set(key, treeCtx.branches[key])
     }
     if (dep.ready) {
-      await dep.ready(treeCtx.trunk)
+      await dep.ready(await treeCtx.trunk)
     }
   }, [dep.ctx])
 }
