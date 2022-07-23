@@ -1,6 +1,6 @@
 {
   "name": "@modjo-plugins/oa-graphql",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
   "author": "devthejo",

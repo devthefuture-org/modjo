@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.29](https://github.com/devthejo/modjo/compare/v1.0.28...v1.0.29) (2022-07-23)
+
+
+### Bug Fixes
+
+* upgrade express-openapi-validator ([abb1d6a](https://github.com/devthejo/modjo/commit/abb1d6af986a82042bcf034f664e9665a5e87709))
+
 ### [1.0.28](https://github.com/devthejo/modjo/compare/v1.0.27...v1.0.28) (2022-07-23)
 
 
