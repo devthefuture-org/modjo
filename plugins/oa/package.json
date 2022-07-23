@@ -15,7 +15,7 @@
     "@modjo-plugins/http-server": "*",
     "@modjo-plugins/logger": "*",
     "express": "^4.17.3",
-    "express-openapi-validator": "^4.13.7",
+    "express-openapi-validator": "^4.13.8",
     "fs-extra": "^10.0.1",
     "http-errors": "^2.0.0",
     "lodash.camelcase": "^4.3.0",
