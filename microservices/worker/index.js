@@ -4,12 +4,11 @@ const createQueueWorker = require("./libs/queue-worker")
 
 const { ctx } = require("./ctx")
 
-module.exports = async () => {
+module.exports.create = async () => {
   // const config = ctx.require("config")
 
   const queueHandlerFactories = require(`${process.cwd()}/build/queues`)
   const queues = Object.keys(queueHandlerFactories).map(camelCase)
-  ctx.set("queues", queues)
 
   // testing dev
   // queues.map(async function (q) {
@@ -22,14 +21,15 @@ module.exports = async () => {
   //   )
   // })
 
-  // await Promise.all(queues.map(createQueueWorker))
   queues.map(createQueueWorker)
+
+  return queues
 }
 
 module.exports.dependencies = [
   "config",
   "logger",
-  "pgPool",
+  "slonik",
   "shutdownHandlers",
   "lightship",
   "amqp",
@@ -44,9 +44,8 @@ module.exports.build = () => {
   ])
 }
 
-module.exports.ready = () => {
+module.exports.ready = (queues) => {
   const logger = ctx.require("logger")
-  const queues = ctx.get("queues")
   logger.info(`🚀 Worker ready for queues ${queues.join(",")}`)
 }
 
