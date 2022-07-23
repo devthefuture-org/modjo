@@ -1,5 +1,10 @@
 const Crypto = require("crypto")
-const { ApolloLink, ApolloClient, HttpLink, split } = require("@apollo/client")
+const {
+  ApolloLink,
+  ApolloClient,
+  HttpLink,
+  split,
+} = require("@apollo/client/core")
 const { getMainDefinition } = require("@apollo/client/utilities")
 const ws = require("ws")
 const fetch = require("cross-fetch")

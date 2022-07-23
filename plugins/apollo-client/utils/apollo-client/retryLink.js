@@ -1,4 +1,4 @@
-const { ApolloLink } = require("@apollo/client")
+const { ApolloLink } = require("@apollo/client/core")
 const { RetryLink } = require("@apollo/client/link/retry")
 const getStatusCode = require("./getStatusCode")
 

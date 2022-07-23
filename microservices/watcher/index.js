@@ -3,7 +3,7 @@ const { buildDirTree } = require("@modjo-plugins/core/libs/build")
 
 const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 
-module.exports = async () => {
+module.exports.create = async () => {
   const watcherFactory = require(`${process.cwd()}/build/watchers`)
 
   // prepare watchers, preflight
@@ -14,14 +14,13 @@ module.exports = async () => {
   watchHandlers.map((handler) => handler())
 
   const watcherKeys = Object.keys(watcherFactory)
-  ctx.set("watcherKeys", watcherKeys)
+  return watcherKeys
 }
 
 module.exports.dependencies = ["logger", "amqp", "apolloClient"]
 
-module.exports.ready = () => {
+module.exports.ready = (watcherKeys) => {
   const logger = ctx.require("logger")
-  const watcherKeys = ctx.require("watcherKeys")
   logger.info(`🚀 Overwatch follow up: ${watcherKeys.join(",")}`)
 }
 
