@@ -1,6 +1,6 @@
 {
   "name": "@modjo-plugins/microservice-oapi",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
   "author": "devthejo",

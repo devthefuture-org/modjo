@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.32](https://github.com/devthejo/modjo/compare/v1.0.31...v1.0.32) (2022-07-23)
+
+
+### Bug Fixes
+
+* slonik ([2a43823](https://github.com/devthejo/modjo/commit/2a4382382aa9147411d49f4b2b3793f3ffffa773))
+
 ### [1.0.31](https://github.com/devthejo/modjo/compare/v1.0.30...v1.0.31) (2022-07-23)
 
 
