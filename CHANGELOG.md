@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.30](https://github.com/devthejo/modjo/compare/v1.0.29...v1.0.30) (2022-07-23)
+
+
+### Bug Fixes
+
+* commander parseAsync ([d6510ef](https://github.com/devthejo/modjo/commit/d6510ef32aabf56469816b26d12616669f876173))
+* core plugins instances resolution ([725a197](https://github.com/devthejo/modjo/commit/725a1972a5e80048611eac95cdba1a83410356bf))
+
 ### [1.0.29](https://github.com/devthejo/modjo/compare/v1.0.28...v1.0.29) (2022-07-23)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@modjo-plugins/microservice-watcher",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
   "author": "devthejo",
