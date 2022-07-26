@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.33](https://github.com/devthejo/modjo/compare/v1.0.32...v1.0.33) (2022-07-26)
+
+
+### Bug Fixes
+
+* add postgres ([0df553a](https://github.com/devthejo/modjo/commit/0df553a8fac4a319b93ffc9c0e66b95875636617))
+* uri to dsn ([905f74e](https://github.com/devthejo/modjo/commit/905f74efad759e0cb09d9019cb4d963c85e297af))
+* uri to dsn ([60372c5](https://github.com/devthejo/modjo/commit/60372c508ea7112315bfb1a6ab61d7607fc279f4))
+
 ### [1.0.32](https://github.com/devthejo/modjo/compare/v1.0.31...v1.0.32) (2022-07-23)
 
 

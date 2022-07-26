@@ -1,6 +1,6 @@
 {
   "name": "@modjo-plugins/microservice-worker",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
   "author": "devthejo",
