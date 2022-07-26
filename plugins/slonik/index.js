@@ -15,7 +15,7 @@ const defaultOptions = {
 module.exports.create = () => {
   const config = ctx.require("config.slonik")
   const options = {
-    pgURL: config.uri,
+    pgURL: config.dsn,
     clientConfiguration: {
       maximumPoolSize: config.maximumPoolSize,
     },

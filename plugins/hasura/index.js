@@ -9,8 +9,8 @@ const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 module.exports.create = async () => {
   const config = ctx.require("config")
 
-  const { uri, adminSecret } = config.hasura
-  const url = new URL(uri)
+  const { dsn, adminSecret } = config.hasura
+  const url = new URL(dsn)
 
   const hasuraApi = async (data) => {
     let res
