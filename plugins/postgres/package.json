@@ -7,5 +7,10 @@
   "license": "MIT",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "lodash.defaultsdeep": "^4.6.1",
+    "nctx": "^1.2.0",
+    "postgres": "^3.2.4"
   }
 }
