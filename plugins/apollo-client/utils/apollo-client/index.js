@@ -12,7 +12,7 @@ const createRetryLink = require("./retryLink")
 const createCache = require("./cache")
 const WebSocketLink = require("./WebSocketLink")
 
-module.exports = async function createApolloClient({ uri, headers }) {
+module.exports = async function createApolloClient({ dsn, headers }) {
   const authLink = new ApolloLink((operation, forward) => {
     const ctxHeaders = operation.getContext().headers || {}
     operation.setContext({
@@ -28,10 +28,10 @@ module.exports = async function createApolloClient({ uri, headers }) {
 
   const httpLink = new HttpLink({
     fetch,
-    uri,
+    uri: dsn,
   })
 
-  const url = new URL(uri)
+  const url = new URL(dsn)
   const wsProto = url.protocol === "https:" ? "wss" : "ws"
   const wsURL = `${wsProto}://${url.host}${url.pathname}`
 
