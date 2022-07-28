@@ -7,6 +7,7 @@ const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 const defaultOptions = {
   max: 10,
   shutdownTimeout: 5,
+  transform: { column: { to: postgres.fromCamel, from: postgres.toCamel } },
 }
 
 module.exports.create = () => {
