@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/devthejo/modjo/compare/v1.1.0...v1.1.1) (2022-07-28)
+
+
+### Bug Fixes
+
+* up nctx ([902b209](https://github.com/devthejo/modjo/commit/902b209b5e538ebd160476566d189885e6c4f5a8))
+
 ## [1.1.0](https://github.com/devthejo/modjo/compare/v1.0.33...v1.1.0) (2022-07-28)
 
 
