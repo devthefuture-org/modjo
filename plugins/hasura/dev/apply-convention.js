@@ -68,7 +68,7 @@ module.exports = async (options = {}) => {
       )
       for (const columnName of columnNames) {
         const ccColumnName = camelCase(columnName)
-        if (columnName != ccColumnName) {
+        if (columnName !== ccColumnName) {
           configuration.custom_column_names[columnName] = ccColumnName
         }
       }
