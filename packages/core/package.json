@@ -1,6 +1,6 @@
 {
   "name": "@modjo-plugins/core",
-  "version": "1.0.33",
+  "version": "1.1.0",
   "license": "MIT",
   "dependencies": {
     "commander": "^9.1.0",

@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/devthejo/modjo/compare/v1.0.33...v1.1.0) (2022-07-28)
+
+
+### Features
+
+* hasura convention enforcer ([7806f77](https://github.com/devthejo/modjo/commit/7806f77d5e466338952231a8c7183f0cf467e9a8))
+
+
+### Bug Fixes
+
+* rely on postgres ([582368a](https://github.com/devthejo/modjo/commit/582368a28a3b3880dcad7021df3c003003be5723))
+* typo ([5888e66](https://github.com/devthejo/modjo/commit/5888e66334fb1dabc39637005239fb57c2c18ac7))
+
 ### [1.0.33](https://github.com/devthejo/modjo/compare/v1.0.32...v1.0.33) (2022-07-26)
 
 
