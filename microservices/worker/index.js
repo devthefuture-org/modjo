@@ -29,7 +29,7 @@ module.exports.create = async () => {
 module.exports.dependencies = [
   "config",
   "logger",
-  "slonik",
+  "postgres",
   "shutdownHandlers",
   "lightship",
   "amqp",
