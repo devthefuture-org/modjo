@@ -35,7 +35,14 @@ const dynamicRequire = (r, key = r) => {
   if (requirable) {
     dynamicRequireRegister(r, key)
   }
-  return require(`${process.cwd()}/build/requires.js`)[key]
+  try {
+    const requireRegistry = require(`${process.cwd()}/build/requires.js`)
+    return requireRegistry[key]
+  } catch (err) {
+    if (err.code !== "MODULE_NOT_FOUND") {
+      throw err
+    }
+  }
 }
 
 module.exports = dynamicRequire
