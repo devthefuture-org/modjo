@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.6](https://github.com/devthejo/modjo/compare/v1.1.5...v1.1.6) (2022-07-30)
+
+
+### Bug Fixes
+
+* dynamic require ([9b4aee0](https://github.com/devthejo/modjo/commit/9b4aee0d4c5463fde502fd14197df446949bb490))
+
 ### [1.1.5](https://github.com/devthejo/modjo/compare/v1.1.4...v1.1.5) (2022-07-30)
 
 
