@@ -10,13 +10,8 @@ const getPluginRegistry = (name) => {
 }
 
 const getPluginLocal = (name) => {
-  const customDir = path.join(process.cwd(), "src", "plugins")
-  const lookup = [
-    `${kebabcase(name)}.js`,
-    `${kebabcase(name)}/index.js`,
-    `${name}.js`,
-    `${name}/index.js`,
-  ]
+  const customDir = "~plugins"
+  const lookup = [name, `${kebabcase(name)}`]
   for (const f of lookup) {
     const custom = path.join(customDir, f)
     const r = dynamicRequire(custom)
