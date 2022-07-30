@@ -1,5 +1,4 @@
 const path = require("path")
-const fs = require("fs-extra")
 const kebabcase = require("lodash.kebabcase")
 
 const dynamicRequire = require("~/utils/fs/dynamic-require")
@@ -20,8 +19,9 @@ const getPluginLocal = (name) => {
   ]
   for (const f of lookup) {
     const custom = path.join(customDir, f)
-    if (fs.pathExistsSync(custom)) {
-      return dynamicRequire(custom)
+    const r = dynamicRequire(custom)
+    if (r) {
+      return r
     }
   }
 }
