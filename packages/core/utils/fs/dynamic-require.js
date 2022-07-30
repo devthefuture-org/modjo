@@ -21,7 +21,15 @@ const dynamicRequireRegister = (src, key) => {
 }
 const dynamicRequire = (r, key = r) => {
   if (process.env.MODJO_DISABLE_NCC_REQUIRE) {
-    return require(r)
+    let req
+    try {
+      req = require(r)
+    } catch (err) {
+      if (err.code !== "MODULE_NOT_FOUND") {
+        throw err
+      }
+    }
+    return req
   }
   let requirable
   try {
