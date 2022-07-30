@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/devthejo/modjo/compare/v1.1.1...v1.1.2) (2022-07-30)
+
+
+### Bug Fixes
+
+* local plugin compilation ([e6c76d9](https://github.com/devthejo/modjo/commit/e6c76d9d831059aa8b94a476c9f5f0831f8f98fa))
+
 ### [1.1.1](https://github.com/devthejo/modjo/compare/v1.1.0...v1.1.1) (2022-07-28)
 
 
