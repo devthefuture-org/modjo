@@ -10,11 +10,11 @@ const getPluginRegistry = (name) => {
 }
 
 const getPluginLocal = (name) => {
-  const customDir = "~plugins"
+  const customDir = path.join(process.cwd(), "src", "plugins")
   const lookup = [name, `${kebabcase(name)}`]
   for (const f of lookup) {
     const custom = path.join(customDir, f)
-    const r = dynamicRequire(custom)
+    const r = dynamicRequire(custom, `~plugins/${f}`)
     if (r) {
       return r
     }

@@ -4,22 +4,22 @@ const fs = require("fs")
 // see https://github.com/vercel/ncc/issues/74#issuecomment-1085719145
 
 const dynamicFilename = `${process.cwd()}/build/requires.js`
-const dynamicRequires = new Set()
-const dynamicRequireRegister = (src) => {
-  if (dynamicRequires.has(src)) {
+const dynamicRequires = {}
+const dynamicRequireRegister = (src, key) => {
+  if (dynamicRequires[key] === src) {
     return
   }
-  dynamicRequires.add(src)
-  const exports = [...dynamicRequires].reduce((acc, req) => {
+  dynamicRequires[key] = src
+  const exports = Object.entries(dynamicRequires).reduce((acc, [k, req]) => {
     const target = !req.startsWith(".") ? req : path.join(process.cwd(), req)
-    acc.push(`${JSON.stringify(req)}: require(${JSON.stringify(target)})`)
+    acc.push(`${JSON.stringify(k)}: require(${JSON.stringify(target)})`)
     return acc
   }, [])
   fs.mkdirSync(path.dirname(dynamicFilename), { recursive: true })
   fs.writeFileSync(dynamicFilename, `module.exports={${exports.join(",")}}`)
   delete require.cache[require.resolve(dynamicFilename)]
 }
-const dynamicRequire = (r) => {
+const dynamicRequire = (r, key = r) => {
   if (process.env.MODJO_DISABLE_NCC_REQUIRE) {
     return require(r)
   }
@@ -33,9 +33,9 @@ const dynamicRequire = (r) => {
     }
   }
   if (requirable) {
-    dynamicRequireRegister(r)
+    dynamicRequireRegister(r, key)
   }
-  return require(`${process.cwd()}/build/requires.js`)[r]
+  return require(`${process.cwd()}/build/requires.js`)[key]
 }
 
 module.exports = dynamicRequire
