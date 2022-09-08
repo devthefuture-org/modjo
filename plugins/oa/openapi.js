@@ -422,9 +422,13 @@ module.exports = async function createOpenApi(options = {}) {
         Array.isArray(handlerStack) ? [...handlerStack] : [handlerStack]
       ).map((handler) => {
         return async (req, res, next) => {
-          const result = await handler(req, res, next)
-          if (result && result !== res) {
-            res.json(result)
+          try {
+            const result = await handler(req, res, next)
+            if (result && result !== res) {
+              res.json(result)
+            }
+          } catch (err) {
+            next(err)
           }
         }
       })
