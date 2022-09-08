@@ -61,7 +61,7 @@ module.exports = async () => {
         .status(err.statusCode)
         .send({ code: err.statusCode, message: err.message })
     } else {
-      res.status(500).send({ code: 500, message: "Une erreur s'est produite." })
+      res.status(500).send({ code: 500, message: "Internal Server Error" })
     }
   }
   app.use(errorsHandler)
