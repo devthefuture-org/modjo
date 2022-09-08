@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.7](https://github.com/devthejo/modjo/compare/v1.1.6...v1.1.7) (2022-09-08)
+
+
+### Bug Fixes
+
+* deps ([46ea6a9](https://github.com/devthejo/modjo/commit/46ea6a941650efa2bd94a7f21cd8befff3cad533))
+* english error 500 message ([8388cdf](https://github.com/devthejo/modjo/commit/8388cdf3b85f3b40c026cea0341388a906b1b113))
+* oapi auto catch error ([92f09b9](https://github.com/devthejo/modjo/commit/92f09b9689789cfd3184774255ca679341c1f748))
+
 ### [1.1.6](https://github.com/devthejo/modjo/compare/v1.1.5...v1.1.6) (2022-07-30)
 
 
