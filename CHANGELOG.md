@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/devthejo/modjo/compare/v1.2.0...v1.2.1) (2023-01-12)
+
+
+### Bug Fixes
+
+* sentry plugin ([39dfb5f](https://github.com/devthejo/modjo/commit/39dfb5f3c2ed989986191f7e1cd11a6fed71c765))
+
 ## [1.2.0](https://github.com/devthejo/modjo/compare/v1.1.7...v1.2.0) (2023-01-12)
 
 
