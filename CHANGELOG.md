@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.5](https://github.com/devthejo/modjo/compare/v1.2.4...v1.2.5) (2023-01-12)
+
+
+### Bug Fixes
+
+* oa sentry integration ([7432db5](https://github.com/devthejo/modjo/commit/7432db5a8ca60894e35c16ca4638cfeabfe2929f))
+
 ### [1.2.4](https://github.com/devthejo/modjo/compare/v1.2.3...v1.2.4) (2023-01-12)
 
 
