@@ -16,6 +16,7 @@ module.exports = async () => {
   const config = ctx.require("config")
   const logger = ctx.require("logger")
   const httpServer = ctx.require("httpServer")
+  const sentry = ctx.get("sentry")
 
   const app = ctx.require("express")
 
@@ -48,6 +49,9 @@ module.exports = async () => {
   })
 
   // request error handler
+  if (sentry) {
+    app.use(sentry.Handlers.errorHandler())
+  }
   function errorsHandler(err, _req, res, next) {
     const isHttp = httpError.isHttpError(err)
     if (!isHttp || err.statusCode >= 500) {
