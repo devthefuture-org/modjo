@@ -17,12 +17,18 @@ module.exports.create = () => {
   const config = ctx.require("config")
   const logger = ctx.require("logger")
   const httpServer = ctx.require("httpServer")
+  const sentry = ctx.get("sentry")
 
   // express
   const app = express()
 
   // express settings https://expressjs.com/en/5x/api.html#app.settings.table
   app.set("env", config.nodeEnv)
+
+  // sentry
+  if (sentry) {
+    app.use(sentry.Handlers.requestHandler())
+  }
 
   // express parsers
   app.use(express.urlencoded({ extended: false }))
@@ -63,13 +69,16 @@ module.exports.create = () => {
   )
 
   // errors
+  if (sentry) {
+    app.use(sentry.Handlers.errorHandler())
+  }
   app.use((err, _, res, next) => {
     if (err) {
       return res.status(err.status || 500).json({
         message: err.message,
         errors: err.errors,
+        ...(res.sentry ? { sentry: res.sentry } : {}),
       })
-      // sentry.captureException(error);
     }
     return next()
   })
