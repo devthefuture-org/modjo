@@ -5,7 +5,8 @@ const Sentry = require("@sentry/node")
 const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 
 module.exports.create = () => {
-  const options = ctx.require("config.sentry")
+  const config = ctx.require("config")
+  const options = config.sentry || {}
 
   const { dsn = process.env.SENTRY_DSN } = options
 
