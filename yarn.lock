@@ -298,7 +298,7 @@ __metadata:
     "@modjo-plugins/config": "*"
     "@modjo-plugins/logger": "*"
     amqplib: ^0.8.0
-    nctx: ^1.3.0
+    nctx: ^1.6.2
     wait-on: ^6.0.1
   languageName: unknown
   linkType: soft
@@ -313,7 +313,7 @@ __metadata:
     cross-fetch: ^3.1.5
     graphql: ^16.3.0
     graphql-ws: ^5.6.4
-    nctx: ^1.3.0
+    nctx: ^1.6.2
     ws: ^8.5.0
   languageName: unknown
   linkType: soft
@@ -323,7 +323,7 @@ __metadata:
   resolution: "@modjo-plugins/config@workspace:plugins/config"
   dependencies:
     lodash.defaultsdeep: ^4.6.1
-    nctx: ^1.3.0
+    nctx: ^1.6.2
   languageName: unknown
   linkType: soft
 
@@ -344,7 +344,7 @@ __metadata:
     lodash.mergewith: ^4.6.2
     lodash.omit: ^4.5.0
     lodash.set: ^4.3.2
-    nctx: ^1.3.0
+    nctx: ^1.6.2
     pretty-ms: ^7.0.1
     yup: ^0.32.11
   languageName: unknown
@@ -355,7 +355,7 @@ __metadata:
   resolution: "@modjo-plugins/express-monitor@workspace:plugins/express-monitor"
   dependencies:
     express-status-monitor: ^1.3.4
-    nctx: ^1.3.0
+    nctx: ^1.6.2
   languageName: unknown
   linkType: soft
 
@@ -370,7 +370,7 @@ __metadata:
     cookie-parser: ^1.4.6
     cors: ^2.8.5
     express: ^5.0.0-beta.1
-    nctx: ^1.3.0
+    nctx: ^1.6.2
   languageName: unknown
   linkType: soft
 
@@ -380,7 +380,7 @@ __metadata:
   dependencies:
     eventemitter2: ^6.4.5
     graphql-subscriptions: ^2.0.0
-    nctx: ^1.3.0
+    nctx: ^1.6.2
   languageName: unknown
   linkType: soft
 
@@ -395,7 +395,7 @@ __metadata:
     jwt-decode: ^3.1.2
     lodash.camelcase: ^4.3.0
     lodash.defaultsdeep: ^4.6.1
-    nctx: ^1.3.0
+    nctx: ^1.6.2
     postgres: ^3.2.4
     wait-on: ^6.0.1
   languageName: unknown
@@ -406,7 +406,7 @@ __metadata:
   resolution: "@modjo-plugins/http-logger@workspace:plugins/http-logger"
   dependencies:
     "@modjo-plugins/config": "*"
-    nctx: ^1.3.0
+    nctx: ^1.6.2
   languageName: unknown
   linkType: soft
 
@@ -418,7 +418,7 @@ __metadata:
     "@modjo-plugins/lightship": "*"
     "@modjo-plugins/logger": "*"
     "@modjo-plugins/shutdown-handlers": "*"
-    nctx: ^1.3.0
+    nctx: ^1.6.2
   languageName: unknown
   linkType: soft
 
@@ -428,7 +428,7 @@ __metadata:
   dependencies:
     "@modjo-plugins/logger": "*"
     lightship: ^7.0.2
-    nctx: ^1.3.0
+    nctx: ^1.6.2
   languageName: unknown
   linkType: soft
 
@@ -437,7 +437,7 @@ __metadata:
   resolution: "@modjo-plugins/logger@workspace:plugins/logger"
   dependencies:
     "@modjo-plugins/logger": "*"
-    nctx: ^1.3.0
+    nctx: ^1.6.2
     pino: ^7.9.2
     pino-abstract-transport: ^1.0.0
     pino-pretty: ^7.6.0
@@ -457,7 +457,7 @@ __metadata:
     "@modjo-plugins/microservice-oapi": "*"
     "@modjo-plugins/oa": "*"
     "@modjo-plugins/shutdown-handlers": "*"
-    nctx: ^1.3.0
+    nctx: ^1.6.2
   languageName: unknown
   linkType: soft
 
@@ -465,7 +465,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/microservice-watcher@workspace:microservices/watcher"
   dependencies:
-    nctx: ^1.3.0
+    nctx: ^1.6.2
   peerDependencies:
     "@modjo-plugins/core": "*"
   languageName: unknown
@@ -477,7 +477,7 @@ __metadata:
   dependencies:
     lodash.camelcase: ^4.3.0
     lodash.kebabcase: ^4.1.1
-    nctx: ^1.3.0
+    nctx: ^1.6.2
     pretty-ms: ^7.0.1
   peerDependencies:
     "@modjo-plugins/core": "*"
@@ -490,7 +490,7 @@ __metadata:
   dependencies:
     "@modjo-plugins/config": "*"
     minio: ^7.0.26
-    nctx: ^1.3.0
+    nctx: ^1.6.2
     wait-on: ^6.0.1
   languageName: unknown
   linkType: soft
@@ -519,7 +519,7 @@ __metadata:
     lodash.get: ^4.4.2
     lodash.omit: ^4.5.0
     lodash.set: ^4.3.2
-    nctx: ^1.3.0
+    nctx: ^1.6.2
     openapi-to-graphql: ^2.6.3
     subscriptions-transport-ws: ^0.11.0
   languageName: unknown
@@ -545,7 +545,7 @@ __metadata:
     lodash.get: ^4.4.2
     lodash.omit: ^4.5.0
     lodash.set: ^4.3.2
-    nctx: ^1.3.0
+    nctx: ^1.6.2
     openapi-schema-validator: ^10.0.0
     swagger-ui-dist: ^4.10.0
     swagger-ui-express: ^4.3.0
@@ -557,7 +557,7 @@ __metadata:
   resolution: "@modjo-plugins/postgres@workspace:plugins/postgres"
   dependencies:
     lodash.defaultsdeep: ^4.6.1
-    nctx: ^1.3.0
+    nctx: ^1.6.2
     postgres: ^3.2.4
   languageName: unknown
   linkType: soft
@@ -576,7 +576,7 @@ __metadata:
   resolution: "@modjo-plugins/shutdown-handlers@workspace:plugins/shutdown-handlers"
   dependencies:
     "@modjo-plugins/lightship": "*"
-    nctx: ^1.3.0
+    nctx: ^1.6.2
   languageName: unknown
   linkType: soft
 
@@ -589,7 +589,7 @@ __metadata:
     "@modjo-plugins/shutdown-handlers": "*"
     lodash.defaultsdeep: ^4.6.1
     lodash.snakecase: ^4.1.1
-    nctx: ^1.3.0
+    nctx: ^1.6.2
     pg-format: ^1.0.4
     slonik: ^28.0.0
     slonik-sql-tag-raw: ^1.1.4
@@ -602,7 +602,7 @@ __metadata:
   dependencies:
     "@modjo-plugins/core": "*"
     lodash.defaultsdeep: ^4.6.1
-    nctx: ^1.3.0
+    nctx: ^1.6.2
   languageName: unknown
   linkType: soft
 
@@ -5747,18 +5747,6 @@ __metadata:
   version: 1.4.0
   resolution: "natural-compare@npm:1.4.0"
   checksum: 23ad088b08f898fc9b53011d7bb78ec48e79de7627e01ab5518e806033861bef68d5b0cd0e2205c2f36690ac9571ff6bcb05eb777ced2eeda8d4ac5b44592c3d
-  languageName: node
-  linkType: hard
-
-"nctx@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "nctx@npm:1.3.0"
-  dependencies:
-    lodash.defaultsdeep: ^4.6.1
-    lodash.get: ^4.4.2
-    lodash.merge: ^4.6.2
-    lodash.set: ^4.3.2
-  checksum: 6105d23740c8b873b17899153977f27d1d95b6432213588e748387d010c8acce265ff3de2afa5137dca357777e8f7a7a8e351772d303475910b9a9d2b55ffcd8
   languageName: node
   linkType: hard
 
