@@ -562,6 +562,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@modjo-plugins/sentry@workspace:plugins/sentry":
+  version: 0.0.0-use.local
+  resolution: "@modjo-plugins/sentry@workspace:plugins/sentry"
+  dependencies:
+    "@sentry/node": ^7.30.0
+    nctx: ^1.6.2
+  languageName: unknown
+  linkType: soft
+
 "@modjo-plugins/shutdown-handlers@*, @modjo-plugins/shutdown-handlers@workspace:plugins/shutdown-handlers":
   version: 0.0.0-use.local
   resolution: "@modjo-plugins/shutdown-handlers@workspace:plugins/shutdown-handlers"
@@ -703,6 +712,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry/core@npm:7.30.0":
+  version: 7.30.0
+  resolution: "@sentry/core@npm:7.30.0"
+  dependencies:
+    "@sentry/types": 7.30.0
+    "@sentry/utils": 7.30.0
+    tslib: ^1.9.3
+  checksum: 661a068bbe1afc66668f1808667fec09320b549e8bf06c0a4263398d7bac023a533535073fe469c656ea925d625a5e3fb93dd6535f3226893854b33e7813ab8c
+  languageName: node
+  linkType: hard
+
 "@sentry/hub@npm:6.19.3":
   version: 6.19.3
   resolution: "@sentry/hub@npm:6.19.3"
@@ -741,10 +761,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry/node@npm:^7.30.0":
+  version: 7.30.0
+  resolution: "@sentry/node@npm:7.30.0"
+  dependencies:
+    "@sentry/core": 7.30.0
+    "@sentry/types": 7.30.0
+    "@sentry/utils": 7.30.0
+    cookie: ^0.4.1
+    https-proxy-agent: ^5.0.0
+    lru_map: ^0.3.3
+    tslib: ^1.9.3
+  checksum: baa94c4fe7ce01d810847f0fa3ac2c31367b321c25e0c8a706e21f295c7cbe6d0f651b01e2ffce6e6ec6e83696e508f54e270141c784498a34f29678b21f06dc
+  languageName: node
+  linkType: hard
+
 "@sentry/types@npm:6.19.3":
   version: 6.19.3
   resolution: "@sentry/types@npm:6.19.3"
   checksum: 8a2705eed16fb7fa660c36417a41ca4106829821024be534f74b40a00b6c96b27a84343b101c7478e0b4458f71c280d4fa508d10928a3eccdb30baff49f5827e
+  languageName: node
+  linkType: hard
+
+"@sentry/types@npm:7.30.0":
+  version: 7.30.0
+  resolution: "@sentry/types@npm:7.30.0"
+  checksum: be228ae65f8750513371b6692821aa0d92d15354aa9fd7f1f1b497c2a53d20769fd56f89a1516d80e416ab73596609e805a6fae2b51510018338eedf5a0dd260
   languageName: node
   linkType: hard
 
@@ -755,6 +797,16 @@ __metadata:
     "@sentry/types": 6.19.3
     tslib: ^1.9.3
   checksum: 6c0dd60a24554e9dbe11d5acd18d808f5a0f4c648c45b74818fbf009c9404c6e0d943cfbe62dea6a94c70fec9e1a0aedbd5579b8981f85fcfe0103527c9c5c5a
+  languageName: node
+  linkType: hard
+
+"@sentry/utils@npm:7.30.0":
+  version: 7.30.0
+  resolution: "@sentry/utils@npm:7.30.0"
+  dependencies:
+    "@sentry/types": 7.30.0
+    tslib: ^1.9.3
+  checksum: df99b77706dc38a206ba4a27da2226c73c5a465a39591dde66455a8ca52b070830ad3fa3cbc803d4e45bd0e4e4fad74552f3d92d681a8dd4c95c4733cc9ff4cc
   languageName: node
   linkType: hard
 
@@ -5707,6 +5759,18 @@ __metadata:
     lodash.merge: ^4.6.2
     lodash.set: ^4.3.2
   checksum: 6105d23740c8b873b17899153977f27d1d95b6432213588e748387d010c8acce265ff3de2afa5137dca357777e8f7a7a8e351772d303475910b9a9d2b55ffcd8
+  languageName: node
+  linkType: hard
+
+"nctx@npm:^1.6.2":
+  version: 1.6.2
+  resolution: "nctx@npm:1.6.2"
+  dependencies:
+    lodash.defaultsdeep: ^4.6.1
+    lodash.get: ^4.4.2
+    lodash.merge: ^4.6.2
+    lodash.set: ^4.3.2
+  checksum: b77130cc853467f27ad5a55f00c9e8719f95cab37eee6f4c91550717239e79e2681030c4a2b8cdbeff8f85259958d5c3039273473ca564057a3076aa076c1965
   languageName: node
   linkType: hard
 

@@ -1,0 +1,15 @@
+{
+  "name": "@modjo-plugins/sentry",
+  "version": "1.1.7",
+  "main": "index.js",
+  "repository": "https://github.com/devthejo/modjo",
+  "author": "devthejo",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@sentry/node": "^7.30.0",
+    "nctx": "^1.6.2"
+  }
+}
