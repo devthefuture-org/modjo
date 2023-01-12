@@ -9,7 +9,7 @@ module.exports.create = () => {
 
   const { dsn = process.env.SENTRY_DSN } = options
 
-  if (dsn) {
+  if (!dsn) {
     return
   }
 
