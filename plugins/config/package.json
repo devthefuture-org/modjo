@@ -1,5 +1,5 @@
 {
-  "name": "@modjo-plugins/config",
+  "name": "@modjo/config",
   "version": "1.2.5",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",

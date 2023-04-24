@@ -12,7 +12,7 @@ module.exports.create = () => {
   )
 }
 
-const { addFile } = require("@modjo-plugins/core/libs/build")
+const { addFile } = require("@modjo/core/libs/build")
 
 module.exports.build = () => {
   addFile("version.json")

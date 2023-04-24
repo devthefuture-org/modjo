@@ -1,5 +1,5 @@
 {
-  "name": "@modjo-plugins/slonik",
+  "name": "@modjo/slonik",
   "version": "1.2.5",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
@@ -9,9 +9,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@modjo-plugins/config": "*",
-    "@modjo-plugins/logger": "*",
-    "@modjo-plugins/shutdown-handlers": "*",
+    "@modjo/config": "*",
+    "@modjo/logger": "*",
+    "@modjo/shutdown-handlers": "*",
     "lodash.defaultsdeep": "^4.6.1",
     "lodash.snakecase": "^4.1.1",
     "nctx": "^1.6.2",

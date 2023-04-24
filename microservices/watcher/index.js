@@ -1,5 +1,5 @@
 const nctx = require("nctx")
-const { buildDirTree } = require("@modjo-plugins/core/libs/build")
+const { buildDirTree } = require("@modjo/core/libs/build")
 
 const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 

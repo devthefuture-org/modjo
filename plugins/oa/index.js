@@ -7,7 +7,7 @@ const {
   compileDirList,
   buildDir,
   buildDirTree,
-} = require("@modjo-plugins/core/libs/build")
+} = require("@modjo/core/libs/build")
 const ctx = require("./ctx")
 
 const createOapiStackVersions = require("./oapi-stack-versions")

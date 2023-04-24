@@ -1,5 +1,5 @@
 {
-  "name": "@modjo-plugins/microservice-oapi",
+  "name": "@modjo/microservice-oapi",
   "version": "1.2.5",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
@@ -9,15 +9,15 @@
     "access": "public"
   },
   "dependencies": {
-    "@modjo-plugins/core": "*",
-    "@modjo-plugins/express": "*",
-    "@modjo-plugins/http-logger": "*",
-    "@modjo-plugins/http-server": "*",
-    "@modjo-plugins/lightship": "*",
-    "@modjo-plugins/logger": "*",
-    "@modjo-plugins/microservice-oapi": "*",
-    "@modjo-plugins/oa": "*",
-    "@modjo-plugins/shutdown-handlers": "*",
+    "@modjo/core": "*",
+    "@modjo/express": "*",
+    "@modjo/http-logger": "*",
+    "@modjo/http-server": "*",
+    "@modjo/lightship": "*",
+    "@modjo/logger": "*",
+    "@modjo/microservice-oapi": "*",
+    "@modjo/oa": "*",
+    "@modjo/shutdown-handlers": "*",
     "nctx": "^1.6.2"
   },
   "engines": {

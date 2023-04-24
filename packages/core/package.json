@@ -1,5 +1,5 @@
 {
-  "name": "@modjo-plugins/core",
+  "name": "@modjo/core",
   "version": "1.2.5",
   "license": "MIT",
   "dependencies": {

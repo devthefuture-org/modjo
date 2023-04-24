@@ -1,5 +1,5 @@
 const camelCase = require("lodash.camelcase")
-const { buildDirTree } = require("@modjo-plugins/core/libs/build")
+const { buildDirTree } = require("@modjo/core/libs/build")
 const createQueueWorker = require("./libs/queue-worker")
 
 const { ctx } = require("./ctx")

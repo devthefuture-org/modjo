@@ -1,8 +1,8 @@
 const path = require("path")
 const express = require("express")
 
-const { reqCtx } = require("@modjo-plugins/express/ctx")
-const createOptions = require("@modjo-plugins/core/utils/schema/options")
+const { reqCtx } = require("@modjo/express/ctx")
+const createOptions = require("@modjo/core/utils/schema/options")
 const createOapiStack = require("./oapi-stack")
 
 const optionsSchema = createOptions({

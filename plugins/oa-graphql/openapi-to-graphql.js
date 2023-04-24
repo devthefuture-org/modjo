@@ -10,8 +10,8 @@ const {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageGraphQLPlayground,
 } = require("apollo-server-core")
-const { reqCtx } = require("@modjo-plugins/express/ctx")
-const restHttpMethodsList = require("@modjo-plugins/oa/utils/rest-methods-list")
+const { reqCtx } = require("@modjo/express/ctx")
+const restHttpMethodsList = require("@modjo/oa/utils/rest-methods-list")
 const ctx = require("./ctx")
 
 module.exports = async function createOpenApiToGraphqlServer({

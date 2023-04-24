@@ -1,10 +1,10 @@
 const path = require("path")
 const fs = require("fs-extra")
 const express = require("express")
-const { reqCtx } = require("@modjo-plugins/express/ctx")
+const { reqCtx } = require("@modjo/express/ctx")
 
-const createOptions = require("@modjo-plugins/core/utils/schema/options")
-const findAsync = require("@modjo-plugins/core/utils/async/find-async")
+const createOptions = require("@modjo/core/utils/schema/options")
+const findAsync = require("@modjo/core/utils/async/find-async")
 const createOpenApi = require("./openapi")
 const createSwaggerServer = require("./swagger")
 

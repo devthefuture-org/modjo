@@ -23,7 +23,7 @@ const getPluginLocal = (name) => {
 
 const getPluginOfficial = (name) => {
   try {
-    const req = `@modjo-plugins/${kebabcase(name)}`
+    const req = `@modjo/${kebabcase(name)}`
     return dynamicRequire(req)
   } catch (err) {
     console.log(err)

@@ -1,5 +1,5 @@
 {
-  "name": "@modjo-plugins/hasura",
+  "name": "@modjo/hasura",
   "version": "1.2.5",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
@@ -9,7 +9,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@modjo-plugins/config": "*",
+    "@modjo/config": "*",
     "axios": "^0.26.1",
     "fs-extra": "^10.1.0",
     "js-yaml": "^4.1.0",

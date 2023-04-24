@@ -1,5 +1,5 @@
 {
-  "name": "@modjo-plugins/microservice-watcher",
+  "name": "@modjo/microservice-watcher",
   "version": "1.2.5",
   "main": "index.js",
   "repository": "https://github.com/devthejo/modjo",
@@ -12,7 +12,7 @@
     "nctx": "^1.6.2"
   },
   "peerDependencies": {
-    "@modjo-plugins/core": "*"
+    "@modjo/core": "*"
   },
   "engines": {
     "node": ">=14"
