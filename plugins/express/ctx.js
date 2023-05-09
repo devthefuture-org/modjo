@@ -5,13 +5,14 @@ const reqCtx = nctx.create(Symbol("express.req"))
 
 reqCtx.createAppMiddleware = () => {
   return (req, res, next) => {
-    reqCtx.provide()
-    reqCtx.share(req)
-    res.on("finish", () => {
-      reqCtx.endShare(req)
+    reqCtx.provide(async () => {
+      reqCtx.share(req)
+      res.on("finish", () => {
+        reqCtx.endShare(req)
+      })
+      reqCtx.set("req", req)
+      next()
     })
-    reqCtx.set("req", req)
-    next()
   }
 }
 

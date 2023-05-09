@@ -11,7 +11,7 @@
   "dependencies": {
     "@modjo/config": "*",
     "minio": "^7.0.26",
-    "nctx": "^1.6.2",
+    "nctx": "^2.2.0",
     "wait-on": "^6.0.1"
   },
   "engines": {

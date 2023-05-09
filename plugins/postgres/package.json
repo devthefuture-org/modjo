@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "lodash.defaultsdeep": "^4.6.1",
-    "nctx": "^1.6.2",
+    "nctx": "^2.2.0",
     "postgres": "^3.2.4"
   }
 }

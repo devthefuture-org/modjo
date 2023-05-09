@@ -10,6 +10,6 @@
   },
   "dependencies": {
     "@sentry/node": "^7.30.0",
-    "nctx": "^1.6.2"
+    "nctx": "^2.2.0"
   }
 }

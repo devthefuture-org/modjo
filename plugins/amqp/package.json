@@ -12,7 +12,7 @@
     "@modjo/config": "*",
     "@modjo/logger": "*",
     "amqplib": "^0.8.0",
-    "nctx": "^1.6.2",
+    "nctx": "^2.2.0",
     "wait-on": "^6.0.1"
   },
   "engines": {

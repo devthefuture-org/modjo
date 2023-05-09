@@ -14,7 +14,7 @@
     "@modjo/shutdown-handlers": "*",
     "lodash.defaultsdeep": "^4.6.1",
     "lodash.snakecase": "^4.1.1",
-    "nctx": "^1.6.2",
+    "nctx": "^2.2.0",
     "pg-format": "^1.0.4",
     "slonik": "^28.0.0",
     "slonik-sql-tag-raw": "^1.1.4"

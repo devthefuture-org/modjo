@@ -13,7 +13,7 @@
     "@modjo/lightship": "*",
     "@modjo/logger": "*",
     "@modjo/shutdown-handlers": "*",
-    "nctx": "^1.6.2"
+    "nctx": "^2.2.0"
   },
   "engines": {
     "node": ">=14"

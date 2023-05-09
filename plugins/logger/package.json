@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@modjo/logger": "*",
-    "nctx": "^1.6.2",
+    "nctx": "^2.2.0",
     "pino": "^7.9.2",
     "pino-abstract-transport": "^1.0.0",
     "pino-pretty": "^7.6.0"

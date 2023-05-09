@@ -11,7 +11,7 @@
   "dependencies": {
     "@modjo/core": "*",
     "lodash.defaultsdeep": "^4.6.1",
-    "nctx": "^1.6.2"
+    "nctx": "^2.2.0"
   },
   "engines": {
     "node": ">=14"

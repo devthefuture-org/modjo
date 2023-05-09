@@ -9,7 +9,7 @@
     "access": "public"
   },
   "dependencies": {
-    "nctx": "^1.6.2"
+    "nctx": "^2.2.0"
   },
   "peerDependencies": {
     "@modjo/core": "*"

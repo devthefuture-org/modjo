@@ -19,21 +19,21 @@ module.exports = async function createQueueWorker(q) {
       return
     }
 
-    taskCtx.provide()
+    await taskCtx.provide(async () => {
+      const json = msg.content.toString()
+      const taskDefinition = JSON.parse(json)
 
-    const json = msg.content.toString()
-    const taskDefinition = JSON.parse(json)
+      const taskLogger = logger.child({ queueName: q, taskDefinition })
+      taskCtx.set("logger", taskLogger)
 
-    const taskLogger = logger.child({ queueName: q, taskDefinition })
-    taskCtx.set("logger", taskLogger)
+      const elapsedTaskRunner = timeLogger({ logger: taskLogger })
 
-    const elapsedTaskRunner = timeLogger({ logger: taskLogger })
+      await taskRunner(taskDefinition)
 
-    await taskRunner(taskDefinition)
+      elapsedTaskRunner.end()
 
-    elapsedTaskRunner.end()
-
-    taskLogger.trace("acknowledge task")
-    ch.ack(msg)
+      taskLogger.trace("acknowledge task")
+      ch.ack(msg)
+    })
   })
 }
