@@ -79,6 +79,6 @@ module.exports = async (options = {}) => {
   }
 
   console.log(
-    "don't forget to run: docker-compose restart hasura hasura_console"
+    "don't forget to run: docker compose restart hasura hasura_console"
   )
 }
