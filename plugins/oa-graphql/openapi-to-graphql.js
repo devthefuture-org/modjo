@@ -4,9 +4,16 @@ const { createGraphQLSchema } = require("openapi-to-graphql")
 const { execute, subscribe } = require("graphql")
 // const { printSchema } = require("graphql")
 const { SubscriptionServer } = require("subscriptions-transport-ws")
+
 const { ApolloServer } = require("@apollo/server")
-const ApolloServerPluginDrainHttpServer = require("@apollo/server/plugin/drainHttpServer")
-const ApolloServerPluginLandingPageGraphQLPlayground = require("@apollo/server-plugin-landing-page-graphql-playground")
+const {
+  ApolloServerPluginDrainHttpServer,
+} = require("@apollo/server/plugin/drainHttpServer")
+const {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+} = require("@apollo/server-plugin-landing-page-graphql-playground")
+const { expressMiddleware } = require("@apollo/server/express4")
+
 const { GraphQLError } = require("graphql")
 const { reqCtx } = require("@modjo/express/ctx")
 const restHttpMethodsList = require("@modjo/oa/utils/rest-methods-list")
@@ -118,10 +125,7 @@ module.exports = async function createOpenApiToGraphqlServer({
     }
   )
 
-  const router = gqlServer.getMiddleware({
-    path: "/",
-    bodyParserConfig: false,
-  })
+  const router = expressMiddleware(gqlServer)
 
   return {
     router,

@@ -662,7 +662,9 @@ __metadata:
   resolution: "@modjo/microservice-worker@workspace:microservices/worker"
   dependencies:
     "@modjo/amqp": "*"
+    "@modjo/config": "*"
     "@modjo/core": "*"
+    "@modjo/logger": "*"
     lodash.camelcase: ^4.3.0
     lodash.kebabcase: ^4.1.1
     nctx: ^2.2.0
