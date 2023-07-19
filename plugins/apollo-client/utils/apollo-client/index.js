@@ -12,7 +12,12 @@ const createRetryLink = require("./retryLink")
 const createCache = require("./cache")
 const WebSocketLink = require("./WebSocketLink")
 
-module.exports = async function createApolloClient({ dsn, headers }) {
+module.exports = async function createApolloClient({
+  dsn,
+  headers,
+  cache = createCache(),
+  ...apolloClientOptions
+}) {
   const authLink = new ApolloLink((operation, forward) => {
     const ctxHeaders = operation.getContext().headers || {}
     operation.setContext({
@@ -67,8 +72,6 @@ module.exports = async function createApolloClient({ dsn, headers }) {
 
   const link = ApolloLink.from([retryLink, authLink, splitLink])
 
-  const cache = createCache()
-
   const apolloClient = new ApolloClient({
     // connectToDevTools: true,
     link,
@@ -85,6 +88,7 @@ module.exports = async function createApolloClient({ dsn, headers }) {
         errorPolicy: "all",
       },
     },
+    ...apolloClientOptions,
   })
   return apolloClient
 }
