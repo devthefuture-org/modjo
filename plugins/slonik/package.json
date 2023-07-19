@@ -20,6 +20,6 @@
     "slonik-sql-tag-raw": "^1.1.4"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   }
 }

@@ -169,6 +169,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@foundernetes/dbug@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@foundernetes/dbug@npm:1.0.0"
+  checksum: 134d34dfc7c1bf36b6ea843f2426ea083cd4b497e9426370fd6b4a8d4588b0292e715546c2f90c2cb1698262f79c5a9e759e650241bcba0012b9387845df7e34
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -331,6 +338,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modjo/core@workspace:packages/core"
   dependencies:
+    "@foundernetes/dbug": ^1.0.0
     commander: ^9.1.0
     fs-extra: ^11.1.1
     js-yaml: ^4.1.0
@@ -6633,9 +6641,9 @@ __metadata:
   linkType: hard
 
 "postgres@npm:^3.2.4":
-  version: 3.2.4
-  resolution: "postgres@npm:3.2.4"
-  checksum: 613d09d66927bd436e286685881fa40297bac97ca3fc34359abf347f1e9cf00fb3c6fea328b004c632c507129e279883354b4e411d9c0c7478f88d670df78503
+  version: 3.3.5
+  resolution: "postgres@npm:3.3.5"
+  checksum: 6c7f0503b5756b72d7024daf2fa583caedddc5b8dc3523418782db5353a2c164f80b05de4adf732d17a50992b27df0f9aecfaa97eea6dccd9300c22447d84c4f
   languageName: node
   linkType: hard
 

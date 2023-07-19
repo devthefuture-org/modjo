@@ -31,6 +31,6 @@
     "swagger-ui-express": "^4.3.0"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   }
 }

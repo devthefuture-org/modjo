@@ -16,6 +16,6 @@
     "pino-pretty": "^7.6.0"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   }
 }
