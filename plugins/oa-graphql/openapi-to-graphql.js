@@ -4,12 +4,10 @@ const { createGraphQLSchema } = require("openapi-to-graphql")
 const { execute, subscribe } = require("graphql")
 // const { printSchema } = require("graphql")
 const { SubscriptionServer } = require("subscriptions-transport-ws")
-const { ApolloServer } = require("apollo-server-express")
-const { ApolloError } = require("apollo-server-errors")
-const {
-  ApolloServerPluginDrainHttpServer,
-  ApolloServerPluginLandingPageGraphQLPlayground,
-} = require("apollo-server-core")
+const { ApolloServer } = require("@apollo/server")
+const ApolloServerPluginDrainHttpServer = require("@apollo/server/plugin/drainHttpServer")
+const ApolloServerPluginLandingPageGraphQLPlayground = require("@apollo/server-plugin-landing-page-graphql-playground")
+const { GraphQLError } = require("graphql")
 const { reqCtx } = require("@modjo/express/ctx")
 const restHttpMethodsList = require("@modjo/oa/utils/rest-methods-list")
 const ctx = require("./ctx")
@@ -82,7 +80,7 @@ module.exports = async function createOpenApiToGraphqlServer({
       const { statusCode } = extensions
       switch (statusCode) {
         case 401: {
-          return new ApolloError("Unauthorized", 401, { http: 401 })
+          return new GraphQLError("Unauthorized", 401, { http: 401 })
         }
         default: {
           const error = cloneDeep(err)

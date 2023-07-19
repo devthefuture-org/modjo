@@ -9,6 +9,8 @@
     "access": "public"
   },
   "dependencies": {
+    "@apollo/server": "^4.7.5",
+    "@apollo/server-plugin-landing-page-graphql-playground": "^4.0.1",
     "@modjo/config": "*",
     "@modjo/core": "*",
     "@modjo/express": "*",
@@ -16,11 +18,8 @@
     "@modjo/http-server": "*",
     "@modjo/logger": "*",
     "@modjo/oa": "*",
-    "apollo-server-core": "^3.6.7",
-    "apollo-server-errors": "^3.3.1",
-    "apollo-server-express": "^3.6.7",
     "express": "^5.0.0-beta.1",
-    "graphql": "^16.3.0",
+    "graphql": "^16.7.1",
     "http-errors": "^2.0.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.capitalize": "^4.2.1",
@@ -30,7 +29,7 @@
     "lodash.omit": "^4.5.0",
     "lodash.set": "^4.3.2",
     "nctx": "^2.2.0",
-    "openapi-to-graphql": "^2.6.3",
+    "openapi-to-graphql": "^3.0.5",
     "subscriptions-transport-ws": "^0.11.0"
   },
   "engines": {
