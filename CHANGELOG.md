@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/devthejo/modjo/compare/v1.2.6...v1.3.0) (2023-07-19)
+
+
+### Features
+
+* add dbug helper ([20a92a0](https://github.com/devthejo/modjo/commit/20a92a021ec7c78922d1b6b4af1ac0a75090ef87))
+
+
+### Bug Fixes
+
+* apollo client add extraOptions ([98a29db](https://github.com/devthejo/modjo/commit/98a29db4e2b948b07eb6efa84c2cced1a20913f1))
+* up yarn version ([489a1e2](https://github.com/devthejo/modjo/commit/489a1e2097c7af173b7b4ce02c2de42f8beafc01))
+
 ### [1.2.6](https://github.com/devthejo/modjo/compare/v1.2.5...v1.2.6) (2023-05-09)
 
 
