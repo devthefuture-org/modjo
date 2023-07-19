@@ -6,13 +6,12 @@
   "author": "devthejo",
   "license": "MIT",
   "dependencies": {
+    "@modjo/amqp": "*",
+    "@modjo/core": "*",
     "lodash.camelcase": "^4.3.0",
     "lodash.kebabcase": "^4.1.1",
     "nctx": "^2.2.0",
     "pretty-ms": "^7.0.1"
-  },
-  "peerDependencies": {
-    "@modjo/core": "*"
   },
   "publishConfig": {
     "access": "public"

@@ -474,7 +474,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@modjo/amqp@workspace:plugins/amqp":
+"@modjo/amqp@*, @modjo/amqp@workspace:plugins/amqp":
   version: 0.0.0-use.local
   resolution: "@modjo/amqp@workspace:plugins/amqp"
   dependencies:
@@ -486,7 +486,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@modjo/apollo-client@workspace:plugins/apollo-client":
+"@modjo/apollo-client@*, @modjo/apollo-client@workspace:plugins/apollo-client":
   version: 0.0.0-use.local
   resolution: "@modjo/apollo-client@workspace:plugins/apollo-client"
   dependencies:
@@ -650,9 +650,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modjo/microservice-watcher@workspace:microservices/watcher"
   dependencies:
-    nctx: ^2.2.0
-  peerDependencies:
+    "@modjo/amqp": "*"
+    "@modjo/apollo-client": "*"
     "@modjo/core": "*"
+    nctx: ^2.2.0
   languageName: unknown
   linkType: soft
 
@@ -660,12 +661,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modjo/microservice-worker@workspace:microservices/worker"
   dependencies:
+    "@modjo/amqp": "*"
+    "@modjo/core": "*"
     lodash.camelcase: ^4.3.0
     lodash.kebabcase: ^4.1.1
     nctx: ^2.2.0
     pretty-ms: ^7.0.1
-  peerDependencies:
-    "@modjo/core": "*"
   languageName: unknown
   linkType: soft
 

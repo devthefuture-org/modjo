@@ -9,10 +9,10 @@
     "access": "public"
   },
   "dependencies": {
+    "@modjo/amqp": "*",
+    "@modjo/apollo-client": "*",
+    "@modjo/core": "*",
     "nctx": "^2.2.0"
-  },
-  "peerDependencies": {
-    "@modjo/core": "*"
   },
   "engines": {
     "node": ">=18"
