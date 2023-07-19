@@ -2,9 +2,14 @@ const { Command } = require("commander")
 const nctx = require("nctx")
 
 // const tracePerformances = require("~/libs/trace-perfs")
+const dbug = require("@foundernetes/dbug")
 const ctx = require("~/ctx")
 
 const dependencies = require("~/libs/dependencies")
+
+if (!process.env.DISABLE_DBUG_REGISTER) {
+  dbug.registerGlobal()
+}
 
 module.exports = async function entrypoint(dependency) {
   await ctx.provide(async () => {
