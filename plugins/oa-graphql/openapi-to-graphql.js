@@ -12,11 +12,11 @@ const {
 const {
   ApolloServerPluginLandingPageGraphQLPlayground,
 } = require("@apollo/server-plugin-landing-page-graphql-playground")
-const { expressMiddleware } = require("@apollo/server/express4")
 
 const { GraphQLError } = require("graphql")
 const { reqCtx } = require("@modjo/express/ctx")
 const restHttpMethodsList = require("@modjo/oa/utils/rest-methods-list")
+const expressMiddleware = require("./express-middleware")
 const ctx = require("./ctx")
 
 module.exports = async function createOpenApiToGraphqlServer({
@@ -83,6 +83,7 @@ module.exports = async function createOpenApiToGraphqlServer({
       }),
     ],
     formatError: (err) => {
+      console.log("err: ", err)
       const { extensions } = err
       const { statusCode } = extensions
       switch (statusCode) {
@@ -91,7 +92,12 @@ module.exports = async function createOpenApiToGraphqlServer({
         }
         default: {
           const error = cloneDeep(err)
-          delete error.extensions.exception.stacktrace
+          if (error.extensions?.exception?.stacktrace) {
+            delete error.extensions.exception.stacktrace
+          }
+          if (error.extensions?.stacktrace) {
+            delete error.extensions.stacktrace
+          }
           if (!config.isDev) {
             if (error.message.startsWith("Database Error: ")) {
               return new Error("Internal server error")

@@ -65,6 +65,7 @@ module.exports.create = () => {
     cors({
       credentials: true,
       origin: true,
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     })
   )
 
