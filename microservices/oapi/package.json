@@ -2,7 +2,7 @@
   "name": "@modjo/microservice-oapi",
   "version": "1.3.0",
   "main": "index.js",
-  "repository": "https://github.com/devthejo/modjo",
+  "repository": "https://codeberg.org/devthefuture/modjo",
   "author": "devthejo",
   "license": "MIT",
   "publishConfig": {
