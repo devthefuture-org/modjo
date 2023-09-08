@@ -1,9 +1,11 @@
 const nctx = require("nctx")
-const { createLightship } = require("lightship")
+// const { createLightship } = require("lightship")
 
 const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 
 module.exports.create = async () => {
+  const { createLightship } = await import("lightship")
+  
   const lightship = await createLightship()
 
   const logger = ctx.require("logger")

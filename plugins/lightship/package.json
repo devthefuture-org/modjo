@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@modjo/logger": "*",
-    "lightship": "^7.0.2",
+    "lightship": "^9.0.3",
     "nctx": "^2.2.0"
   },
   "engines": {
