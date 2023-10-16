@@ -527,10 +527,10 @@ module.exports = async function createOpenApi(options = {}) {
         // https://github.com/expressjs/multer
         limits: {
           // https://github.com/expressjs/multer#limits
-          fileSize: 5 * 1024 * 1024, // (=5M) For multipart forms, the max file size(in bytes) 	Infinity
-          fields: 20, // Max number of non- file fields 	Infinity
-          files: 5, // For multipart forms, the max number of file fields 	Infinity
-          parts: 25, // For multipart forms, the max number of parts(fields + files) 	Infinity
+          fileSize: 5 * 1024 * 1024, // (=5M) For multipart forms, the max file size(in bytes)  Infinity
+          fields: 20, // Max number of non- file fields   Infinity
+          files: 5, // For multipart forms, the max number of file fields   Infinity
+          parts: 25, // For multipart forms, the max number of parts(fields + files)  Infinity
         },
       },
     })
