@@ -45,8 +45,10 @@ module.exports = async (options = {}) => {
         select: genRootFieldName("select", "many"),
         select_aggregate: genRootFieldName("select", "agg"),
         select_by_pk: genRootFieldName("select", "one"),
+        select_stream: genRootFieldName("select", "stream"),
         update: genRootFieldName("update", "many"),
         update_by_pk: genRootFieldName("update", "one"),
+        update_many: genRootFieldName("update", "batch"),
       })
 
       // custom column names
