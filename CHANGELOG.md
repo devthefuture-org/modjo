@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/devthefuture-org/modjo/compare/v1.3.0...v1.3.1) (2023-12-01)
+
+
+### Bug Fixes
+
+* default fileUploader limits ([5b3f70d](https://github.com/devthefuture-org/modjo/commit/5b3f70d1515287a361aa59f4fd69485b5faef2de))
+* graphql express-5 ([03c7d8b](https://github.com/devthefuture-org/modjo/commit/03c7d8bb9bde397427ae73f9f2b65f3307fe1268))
+* up ([1ff9749](https://github.com/devthefuture-org/modjo/commit/1ff9749912dc6822ba0a2ae68ffe2aed6f72c2c0))
+* up hasura convention ([2f232a7](https://github.com/devthefuture-org/modjo/commit/2f232a704b6330d19bdcdd7dc61b1db6977215a4))
+
 ## [1.3.0](https://github.com/devthejo/modjo/compare/v1.2.6...v1.3.0) (2023-07-19)
 
 
