@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/devthefuture-org/modjo/compare/v1.4.0...v1.4.1) (2023-12-15)
+
+
+### Bug Fixes
+
+* ignore hidden folders from oa ([27a4151](https://github.com/devthefuture-org/modjo/commit/27a41510533ae8d37bfd9f738e8a29c707de9877))
+
 ## [1.4.0](https://github.com/devthefuture-org/modjo/compare/v1.3.1...v1.4.0) (2023-12-15)
 
 
