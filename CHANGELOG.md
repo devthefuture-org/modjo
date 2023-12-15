@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/devthefuture-org/modjo/compare/v1.3.1...v1.4.0) (2023-12-15)
+
+
+### Features
+
+* allow async factories ([6e1fdaa](https://github.com/devthefuture-org/modjo/commit/6e1fdaab5284e748013cedf3803af92ead3170cc))
+
 ### [1.3.1](https://github.com/devthefuture-org/modjo/compare/v1.3.0...v1.3.1) (2023-12-01)
 
 
