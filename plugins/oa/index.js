@@ -86,20 +86,25 @@ module.exports.build = (options = {}) => {
 
   compileDirList(apiPath)
 
-  buildDirTree([
+  buildDirTree(
+    [
+      {
+        dir: apiPath,
+        pattern:
+          /^\/v\d+\/(formats|operations|security|spec|validators|services)\/(.*)\.(js|yaml|yml)$/,
+        dirName: "api",
+      },
+      {
+        dir: sharedApiPath,
+        pattern:
+          /^\/(formats|operations|security|spec|validators|services)\/(.*)\.(js|yaml|yml)$/,
+        dirName: "sharedApi",
+      },
+    ],
     {
-      dir: apiPath,
-      pattern:
-        /^\/v\d+\/(formats|operations|security|spec|validators|services)\/(.*)\.(js|yaml|yml)$/,
-      dirName: "api",
-    },
-    {
-      dir: sharedApiPath,
-      pattern:
-        /^\/(formats|operations|security|spec|validators|services)\/(.*)\.(js|yaml|yml)$/,
-      dirName: "sharedApi",
-    },
-  ])
+      filter: (p) => !/(^|\/)\.[^/]+/.test(p),
+    }
+  )
 
   fs.copySync(
     path.dirname(require.resolve("swagger-ui-dist")),

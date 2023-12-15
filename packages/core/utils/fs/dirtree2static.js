@@ -28,19 +28,22 @@ module.exports = function dirtree2static(
     defaultsDeep(options, defaultOptions)
     rootDir = filename
   }
-  const { pattern, loader } = options
+  const { pattern, loader, filter = () => true } = options
   const stats = fs.lstatSync(filename)
   if (stats.isDirectory()) {
-    const files = fs.readdirSync(filename).filter((file) => {
-      const absPath = `${filename}/${file}`
-      const relPath = absPath.slice(rootDir.length)
-      return (
-        (typeof pattern === "function"
-          ? pattern(relPath)
-          : relPath.match(pattern)) ||
-        fs.lstatSync(`${filename}/${file}`).isDirectory()
-      )
-    })
+    const files = fs
+      .readdirSync(filename)
+      .filter(filter)
+      .filter((file) => {
+        const absPath = `${filename}/${file}`
+        const relPath = absPath.slice(rootDir.length)
+        return (
+          (typeof pattern === "function"
+            ? pattern(relPath)
+            : relPath.match(pattern)) ||
+          fs.lstatSync(`${filename}/${file}`).isDirectory()
+        )
+      })
 
     const results = {}
     for (const file of files) {

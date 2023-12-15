@@ -39,11 +39,11 @@ function treeFileLoader(filename) {
   return `require("${src}")`
 }
 
-function buildDirTree(treeDirs) {
+function buildDirTree(treeDirs, { filter } = {}) {
   for (const { dir, pattern, dirName } of treeDirs) {
     const dirPath = path.resolve(srcDir, dir)
     const content = fs.existsSync(dirPath)
-      ? dirtree2static(dirPath, { pattern, loader: treeFileLoader })
+      ? dirtree2static(dirPath, { pattern, loader: treeFileLoader, filter })
       : JSON.stringify({})
     const dest = path.join(buildDir, `${dirName || dir}.js`)
     ensureFileHasDir(dest)
