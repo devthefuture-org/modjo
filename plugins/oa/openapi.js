@@ -8,7 +8,7 @@ const camelCase = require("lodash.camelcase")
 const OpenApiValidator = require("express-openapi-validator")
 const { default: OpenAPISchemaValidator } = require("openapi-schema-validator")
 const { reqCtx } = require("@modjo/express/ctx")
-const traverse = require("@modjo/core/utils/object/traverse")
+const traverseAsync = require("@modjo/core/utils/object/traverse-async")
 const createOptions = require("@modjo/core/utils/schema/options")
 const deepMapKeys = require("@modjo/core/utils/object/deep-map-keys")
 const ctx = require("./ctx")
@@ -244,7 +244,7 @@ module.exports = async function createOpenApi(options = {}) {
       const addonHandler = factory(addonsHandlers)
       addonHandlers[name] = addonHandler
     }
-    traverse(addonTree, addonLoader)
+    await traverseAsync(addonTree, addonLoader)
   }
 
   const operationsRouter = express.Router({ strict: true, caseSensitive: true })
@@ -296,10 +296,10 @@ module.exports = async function createOpenApi(options = {}) {
       })
     }
   }
-  traverse(operationsTree, operationMethodLoader)
+  await traverseAsync(operationsTree, operationMethodLoader)
 
   // load operations
-  function operationLoader(filename, factory, _dirFiles, keys) {
+  async function operationLoader(filename, factory, _dirFiles, keys) {
     if (typeof factory !== "function") {
       return
     }
@@ -418,9 +418,11 @@ module.exports = async function createOpenApi(options = {}) {
           return `:${param}`
         }
       )
-      const handlers = (
-        Array.isArray(handlerStack) ? [...handlerStack] : [handlerStack]
-      ).map((handler) => {
+      let handlers = await handlerStack
+      handlers = await Promise.all(
+        Array.isArray(handlers) ? [...handlers] : [handlers]
+      )
+      handlers = handlers.map((handler) => {
         return async (req, res, next) => {
           try {
             const result = await handler(req, res, next)
@@ -439,7 +441,7 @@ module.exports = async function createOpenApi(options = {}) {
       operationsRouter[method](expressFormatedOperationPath, ...handlers)
     }
   }
-  traverse(operationsTree, operationLoader)
+  await traverseAsync(operationsTree, operationLoader)
 
   // load formats
   const formats = []
@@ -450,7 +452,7 @@ module.exports = async function createOpenApi(options = {}) {
     }
     formats.push(format)
   }
-  traverse(formatsTree, formatsLoader)
+  await traverseAsync(formatsTree, formatsLoader)
 
   // load security handlers
   const securityHandlers = {}
@@ -468,7 +470,7 @@ module.exports = async function createOpenApi(options = {}) {
       return false
     }
   }
-  traverse(securityTree, securityLoader)
+  await traverseAsync(securityTree, securityLoader)
 
   // errors handling
   function errorMiddleware(err, _, res, _next) {
