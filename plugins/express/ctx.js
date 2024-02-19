@@ -18,10 +18,11 @@ reqCtx.createAppMiddleware = () => {
 
 reqCtx.createRouterMiddleware = () => {
   return function (req, _res, next) {
-    reqCtx.share(req)
-    if (next) {
-      next()
-    }
+    reqCtx.provide(() => {
+      if (next) {
+        next()
+      }
+    }, req)
   }
 }
 
