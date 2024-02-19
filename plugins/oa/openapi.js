@@ -460,14 +460,15 @@ module.exports = async function createOpenApi(options = {}) {
     const securityHandler = factory(addonsHandlers)
     const name = camelCase(keys.join("."))
     securityHandlers[name] = async (req, ...args) => {
-      reqCtx.share(req)
-      try {
-        const authenticated = await securityHandler(req, ...args)
-        return authenticated
-      } catch (err) {
-        logger.error(err)
-      }
-      return false
+      return reqCtx.provide(async () => {
+        try {
+          const authenticated = await securityHandler(req, ...args)
+          return authenticated
+        } catch (err) {
+          logger.error(err)
+        }
+        return false
+      }, req)
     }
   }
   await traverseAsync(securityTree, securityLoader)
