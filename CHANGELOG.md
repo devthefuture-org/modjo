@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/devthefuture-org/modjo/compare/v1.4.1...v1.4.2) (2024-03-18)
+
+
+### Bug Fixes
+
+* default factory for worker catch errors ([4bf6df3](https://github.com/devthefuture-org/modjo/commit/4bf6df3b5dce00c205854c5f1aa68e765ee0d64d))
+* reqCtx ([bf4983f](https://github.com/devthefuture-org/modjo/commit/bf4983fef026b8d2ff06c03992687d41bdb4b8c8))
+* reqCtx ([d6167d4](https://github.com/devthefuture-org/modjo/commit/d6167d47317ce3ee3b4c7e7dcd6667b44425b349))
+
 ### [1.4.1](https://github.com/devthefuture-org/modjo/compare/v1.4.0...v1.4.1) (2023-12-15)
 
 
