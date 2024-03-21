@@ -6,24 +6,26 @@ const promiseObject = require("~/utils/async/promise-object")
 
 const ctx = require("~/ctx")
 
-const castDependency = (dependency) => {
+const castDependency = (dependency, key) => {
   if (typeof dependency === "function") {
     dependency = { create: dependency, ...dependency }
   } else if (Array.isArray(dependency)) {
-    const [key, val] = dependency
+    const [dkey, val] = dependency
     if (typeof val === "string") {
       dependency = { pluginName: val }
     } else {
-      dependency = { pluginName: key, ...val }
+      dependency = { pluginName: dkey, ...val }
     }
   } else if (typeof dependency === "string") {
     dependency = { pluginName: dependency }
   }
 
+  if (dependency.key === undefined && key) {
+    dependency.key = key
+  }
   if (dependency.key === undefined && dependency.pluginName) {
     dependency.key = dependency.pluginName
   }
-
   return dependency
 }
 
@@ -61,10 +63,10 @@ const mergePluginToDependency = (dependency, plugin = {}) => {
 const make = async (
   dependency,
   scope = ["root"],
-  branchPlugins = new Map()
+  branchPlugins = new Map(),
+  key = null
 ) => {
-  dependency = castDependency(dependency)
-
+  dependency = castDependency(dependency, key)
   if (
     dependency.key &&
     !dependency.create &&
@@ -94,9 +96,9 @@ const make = async (
     if (desc) {
       trunk = callback(dependency)
     }
-    const branches = Object.values(dependency.dependencies).map((d) =>
-      d.recursiveSequential(callback, desc)
-    )
+    const branches = Object.values(dependency.dependencies).map((d) => {
+      return d.recursiveSequential(callback, desc)
+    })
     if (!desc) {
       trunk = callback(dependency)
     }
@@ -136,7 +138,8 @@ const make = async (
       dependency.dependencies[k] = await make(
         dependency.dependencies[k],
         childScope,
-        newBranchPlugins
+        newBranchPlugins,
+        k
       )
     })
   )
