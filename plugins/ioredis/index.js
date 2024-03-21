@@ -5,15 +5,12 @@ const Redis = require("ioredis")
 const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
 
 module.exports = async () => {
-  const config = ctx.require("config")
+  const globalConfig = ctx.require("config")
+  const config = globalConfig.ioredis || globalConfig.redis
 
-  const {
-    host,
-    port,
-    username,
-    password,
-    db = 0,
-  } = config.ioredis || config.redis
+  const { host, port, username, password, db = 0 } = config
+
+  // console.log("config", config)
 
   await waitOn({
     resources: [`tcp:${host}:${port}`],
