@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/devthefuture-org/modjo/compare/v1.4.2...v1.5.0) (2024-03-21)
+
+
+### Features
+
+* ioredis ([ce84f1e](https://github.com/devthefuture-org/modjo/commit/ce84f1e92cc5da4236bb0ac0701bf416ee53e311))
+
 ### [1.4.2](https://github.com/devthefuture-org/modjo/compare/v1.4.1...v1.4.2) (2024-03-18)
 
 
