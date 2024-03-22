@@ -48,7 +48,11 @@ async function recurseDedup(queueName, data, handler, options, hash) {
 
   const res = await handler(data)
 
-  redis.pipeline().set(keyOK, getTimestamp(), "EX", okTTL).delete(keyGo).exec()
+  await redis
+    .pipeline()
+    .set(keyOK, getTimestamp(), "EX", okTTL)
+    .del(keyGo)
+    .exec()
 
   return res
 }
