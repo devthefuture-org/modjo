@@ -3,7 +3,6 @@ const deepmerge = require("@modjo/core/utils/object/deepmerge")
 const { ctx } = require("../ctx")
 
 const errorWrapperFactory = require("./factory-plugins/error-wrapper")
-const redisQueueDedupFactory = require("./factory-plugins/redis-queue-dedup")
 
 module.exports = async function createTaskRunner(q) {
   const queueHandlerFactories = require(`${process.cwd()}/build/queues`)
@@ -13,11 +12,6 @@ module.exports = async function createTaskRunner(q) {
     errorWrapper: {
       enabled: true,
       factory: errorWrapperFactory,
-      options: {},
-    },
-    redisQueueDedup: {
-      enabled: !!ctx.get("redisQueueDedup"),
-      factory: redisQueueDedupFactory,
       options: {},
     },
   }
@@ -45,7 +39,7 @@ module.exports = async function createTaskRunner(q) {
       factory = [factory, {}]
     }
     const [factoryFn, factoryOptions] = factory
-    handler = await factoryFn(handler, q, factoryOptions);
+    handler = await factoryFn(handler, q, factoryOptions)
   }
 
   return async function taskRunner(taskDefinition) {

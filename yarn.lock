@@ -711,7 +711,6 @@ __metadata:
     "@modjo/logger": "*"
     lodash.camelcase: ^4.3.0
     lodash.kebabcase: ^4.1.1
-    murmurhash: ^2.0.1
     nctx: ^2.2.0
     pretty-ms: ^7.0.1
   languageName: unknown
@@ -5942,13 +5941,6 @@ __metadata:
   version: 0.0.2
   resolution: "multi-fork@npm:0.0.2"
   checksum: bb12ec1c21dd50241e0f565579541222de96e4890140a77794567b266c348f34728ef370053c05a7afd3023357e31e2be7636fdbad31f6aae0fc6f255b81ee81
-  languageName: node
-  linkType: hard
-
-"murmurhash@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "murmurhash@npm:2.0.1"
-  checksum: 8bb90f43b1c41b1d046efe662a02dcc3cdbda4b42fbbadf7488046772d9eecf2b37ffb6cb73d0d96f2ff489d9f4a8252c674bbae588a6179f60854fe0bfe3325
   languageName: node
   linkType: hard
 
