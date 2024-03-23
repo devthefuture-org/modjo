@@ -62,7 +62,7 @@ async function runWithDedup(queueName, data, handler, options = {}) {
   return recurseDedup(queueName, data, handler, options, hash)
 }
 
-module.exports = async function redisQueueDedupFactory(handler, q, options) {
+module.exports = function redisQueueDedupFactory(handler, q, options) {
   return async (data) => {
     return runWithDedup(q, data, handler, options)
   }
