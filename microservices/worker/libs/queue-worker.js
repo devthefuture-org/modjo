@@ -28,12 +28,13 @@ module.exports = async function createQueueWorker(q) {
 
       const elapsedTaskRunner = timeLogger({ logger: taskLogger })
 
-      await taskRunner(taskDefinition)
+      const res = await taskRunner(taskDefinition)
 
-      elapsedTaskRunner.end()
-
-      taskLogger.trace("acknowledge task")
-      ch.ack(msg)
+      if (res !== false) {
+        elapsedTaskRunner.end()
+        taskLogger.trace("acknowledge task")
+        ch.ack(msg)
+      }
     })
   })
 }

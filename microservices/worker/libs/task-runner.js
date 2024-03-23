@@ -43,6 +43,7 @@ module.exports = async function createTaskRunner(q) {
   }
 
   return async function taskRunner(taskDefinition) {
-    await handler(taskDefinition)
+    const res = await handler(taskDefinition)
+    return res
   }
 }
