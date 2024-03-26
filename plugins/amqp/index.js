@@ -1,14 +1,16 @@
+const yaRetry = require("ya-retry")
 const amqplib = require("amqplib")
 const waitOn = require("wait-on")
 const nctx = require("nctx")
 
 const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
+const ReconnectableProxy = require("./reconnectable-proxy")
 
 module.exports = async () => {
   const config = ctx.require("config")
   const logger = ctx.require("logger")
 
-  const { url: amqpURL } = config.amqp
+  const { url: amqpURL, autoReconnect = {} } = config.amqp
 
   const url = new URL(`${amqpURL}`)
   await waitOn({
@@ -17,14 +19,48 @@ module.exports = async () => {
   })
 
   try {
-    const conn = await amqplib.connect(amqpURL)
-    conn.addTask = async function addTask(q, data) {
-      // const logger = ctx.require("logger")
-      const ch = await conn.createChannel()
-      await ch.assertQueue(q)
-      await ch.sendToQueue(q, Buffer.from(JSON.stringify(data)))
+    // autoReconnect, see https://github.com/amqp-node/amqplib/issues/25
+    const proxyManager = new ReconnectableProxy()
+    let reconnecting = false
+    const createConnection = async () => {
+      const onConnectionError = async () => {
+        if (reconnecting) {
+          return
+        }
+        reconnecting = true
+        await yaRetry(
+          async (_bail) => {
+            logger.debug("rabbitmq disconnected, trying to reconnect")
+            const conn = await createConnection()
+            await proxyManager.reconnect(conn)
+            logger.debug("reconnected")
+          },
+          {
+            retries: 10,
+            minTimeout: 1000,
+            maxTimeout: 30000,
+            ...(autoReconnect.retryOptions || {}),
+          }
+        )
+        reconnecting = false
+      }
+      const conn = await amqplib.connect(amqpURL)
+      conn.once("close", onConnectionError)
+      conn.once("error", onConnectionError)
+      conn.addTask = async function addTask(q, data) {
+        // const logger = ctx.require("logger")
+        const ch = await conn.createChannel()
+        await ch.assertQueue(q)
+        await ch.sendToQueue(q, Buffer.from(JSON.stringify(data)))
+      }
+      return conn
     }
-    return conn
+
+    const conn = await createConnection()
+    proxyManager.setTarget(conn)
+    const proxy = proxyManager.getProxy()
+
+    return proxy
   } catch (e) {
     logger.error("Unable to connect to amqp server")
     throw e

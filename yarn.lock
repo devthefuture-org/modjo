@@ -515,6 +515,7 @@ __metadata:
     amqplib: ^0.8.0
     nctx: ^2.2.0
     wait-on: ^6.0.1
+    ya-retry: ^1.2.0
   languageName: unknown
   linkType: soft
 
@@ -9121,6 +9122,13 @@ __metadata:
   version: 5.0.8
   resolution: "y18n@npm:5.0.8"
   checksum: 54f0fb95621ee60898a38c572c515659e51cc9d9f787fb109cef6fde4befbe1c4602dc999d30110feee37456ad0f1660fa2edcfde6a9a740f86a290999550d30
+  languageName: node
+  linkType: hard
+
+"ya-retry@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "ya-retry@npm:1.2.0"
+  checksum: c3f9a5191d80d0a420cc566071d8484d93897f10d5674c9c36a5fd784091c8d02806c669b7ef8454441c1b6117c6a884db7e79a92ae6d426119705c81f8c92a5
   languageName: node
   linkType: hard
 
