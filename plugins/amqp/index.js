@@ -33,7 +33,7 @@ module.exports = async () => {
             logger.debug("rabbitmq disconnected, trying to reconnect")
             const conn = await createConnection()
             await proxyManager.reconnect(conn)
-            logger.debug("reconnected")
+            logger.debug("rabbitmq reconnected")
           },
           {
             retries: 10,
