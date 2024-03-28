@@ -5,14 +5,19 @@ const createTaskRunner = require("./task-runner")
 
 module.exports = async function createQueueWorker(q) {
   const logger = ctx.require("logger")
-
   const conn = ctx.require("amqp")
+  const { microserviceWorker: config = {} } = ctx.require("config")
+
+  const taskRunner = await createTaskRunner(q)
 
   const ch = await conn.createChannel()
 
-  await ch.assertQueue(q)
+  const { prefetchSize = 100 } = config
+  ch.prefetch(prefetchSize, true)
 
-  const taskRunner = await createTaskRunner(q)
+  await ch.assertQueue(q, {
+    durable: true,
+  })
 
   ch.consume(q, async function runTask(msg) {
     if (msg === null) {
@@ -34,7 +39,19 @@ module.exports = async function createQueueWorker(q) {
         elapsedTaskRunner.end()
         taskLogger.trace("acknowledge task")
         ch.ack(msg)
+      } else {
+        ch.nack(msg)
       }
     })
+  })
+
+  ch.on("error", (err) => {
+    logger.info("channel error:", err.message)
+    createQueueWorker() // Attempt to restart the consumer on channel error
+  })
+
+  ch.on("close", () => {
+    logger.info("channel closed, attempting to restart...")
+    createQueueWorker() // Attempt to restart the consumer on channel close
   })
 }

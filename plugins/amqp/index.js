@@ -23,7 +23,10 @@ module.exports = async () => {
     const proxyManager = new ReconnectableProxy()
     let reconnecting = false
     const createConnection = async () => {
-      const onConnectionError = async () => {
+      const conn = await amqplib.connect(amqpURL)
+      conn.on("close", async (err) => {
+        logger.debug("onConnectionClose")
+        logger.debug(err)
         if (reconnecting) {
           return
         }
@@ -31,8 +34,8 @@ module.exports = async () => {
         await yaRetry(
           async (_bail) => {
             logger.debug("rabbitmq disconnected, trying to reconnect")
-            const conn = await createConnection()
-            await proxyManager.reconnect(conn)
+            const newConn = await createConnection()
+            await proxyManager.reconnect(newConn)
             logger.debug("rabbitmq reconnected")
           },
           {
@@ -43,15 +46,14 @@ module.exports = async () => {
           }
         )
         reconnecting = false
-      }
-      const conn = await amqplib.connect(amqpURL)
-      conn.once("close", onConnectionError)
-      conn.once("error", onConnectionError)
+      })
       conn.addTask = async function addTask(q, data) {
         // const logger = ctx.require("logger")
         const ch = await conn.createChannel()
         await ch.assertQueue(q)
-        await ch.sendToQueue(q, Buffer.from(JSON.stringify(data)))
+        await ch.sendToQueue(q, Buffer.from(JSON.stringify(data)), {
+          persistent: true,
+        })
       }
       return conn
     }
