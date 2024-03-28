@@ -19,31 +19,35 @@ module.exports = async function createQueueWorker(q) {
     durable: true,
   })
 
-  ch.consume(q, async function runTask(msg) {
-    if (msg === null) {
-      return
-    }
-
-    await taskCtx.provide(async () => {
-      const json = msg.content.toString()
-      const taskDefinition = JSON.parse(json)
-
-      const taskLogger = logger.child({ queueName: q, taskDefinition })
-      taskCtx.set("logger", taskLogger)
-
-      const elapsedTaskRunner = timeLogger({ logger: taskLogger })
-
-      const res = await taskRunner(taskDefinition)
-
-      if (res !== false) {
-        elapsedTaskRunner.end()
-        taskLogger.trace("acknowledge task")
-        ch.ack(msg)
-      } else {
-        ch.nack(msg)
+  ch.consume(
+    q,
+    async function runTask(msg) {
+      if (msg === null) {
+        return
       }
-    })
-  })
+
+      await taskCtx.provide(async () => {
+        const json = msg.content.toString()
+        const taskDefinition = JSON.parse(json)
+
+        const taskLogger = logger.child({ queueName: q, taskDefinition })
+        taskCtx.set("logger", taskLogger)
+
+        const elapsedTaskRunner = timeLogger({ logger: taskLogger })
+
+        const res = await taskRunner(taskDefinition)
+
+        if (res !== false) {
+          elapsedTaskRunner.end()
+          taskLogger.trace("acknowledge task")
+          ch.ack(msg)
+        } else {
+          ch.nack(msg)
+        }
+      })
+    },
+    { noAck: false }
+  )
 
   ch.on("error", (err) => {
     logger.info("channel error:", err.message)
