@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/devthefuture-org/modjo/compare/v1.5.0...v1.6.0) (2024-04-19)
+
+
+### Features
+
+* autoReconnect ([dad81b2](https://github.com/devthefuture-org/modjo/commit/dad81b2aea3fe4df1824beb29c186f2008aadb5b))
+
+
+### Bug Fixes
+
+* core dependency key ([54b53fb](https://github.com/devthefuture-org/modjo/commit/54b53fb0cdd6e105d36b62280e66018df311faa4))
+
 ## [1.5.0](https://github.com/devthefuture-org/modjo/compare/v1.4.2...v1.5.0) (2024-03-21)
 
 
