@@ -51,6 +51,7 @@ module.exports = async function createQueueWorker(q) {
 
   ch.on("error", (err) => {
     logger.info("channel error:", err.message)
+    ch.close()
     createQueueWorker() // Attempt to restart the consumer on channel error
   })
 
