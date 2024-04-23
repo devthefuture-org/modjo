@@ -54,6 +54,7 @@ module.exports = async () => {
         await ch.sendToQueue(q, Buffer.from(JSON.stringify(data)), {
           persistent: true,
         })
+        await ch.close()
       }
       return conn
     }
