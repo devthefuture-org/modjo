@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/devthefuture-org/modjo/compare/v1.6.0...v1.6.1) (2024-06-30)
+
+
+### Bug Fixes
+
+* pino prod + pino upgrade + fix config ([3f1f7d9](https://github.com/devthefuture-org/modjo/commit/3f1f7d9b8e951734ae5b2f9e57dc9431ad742b94))
+* try to fix no channel left to allocate ([e24ddd8](https://github.com/devthefuture-org/modjo/commit/e24ddd8623ddfc478949605fe7d8f9e02909ff86))
+* try to fix no channel left to allocate ([5898cd4](https://github.com/devthefuture-org/modjo/commit/5898cd46022d6e74743ca1c5111eb553f6e7e629))
+
 ## [1.6.0](https://github.com/devthefuture-org/modjo/compare/v1.5.0...v1.6.0) (2024-04-19)
 
 

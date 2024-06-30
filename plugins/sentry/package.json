@@ -1,6 +1,6 @@
 {
   "name": "@modjo/sentry",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "main": "index.js",
   "repository": "https://codeberg.org/devthefuture/modjo",
   "author": "devthejo",
