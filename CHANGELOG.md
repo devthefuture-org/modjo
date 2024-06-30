@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/devthefuture-org/modjo/compare/v1.6.1...v1.6.2) (2024-06-30)
+
+
+### Bug Fixes
+
+* wip ([075d7e5](https://github.com/devthefuture-org/modjo/commit/075d7e54d343c1e533e7b4fb51198105bab35b73))
+
 ### [1.6.1](https://github.com/devthefuture-org/modjo/compare/v1.6.0...v1.6.1) (2024-06-30)
 
 
