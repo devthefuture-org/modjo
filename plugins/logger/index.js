@@ -15,7 +15,6 @@ module.exports.create = () => {
     pretty: enablePretty = isDev,
     timestamp = isDev,
     base = {},
-    useLevelLabels = true,
     extraPinoConfig = {},
   } = config.logger || {}
 
@@ -29,7 +28,6 @@ module.exports.create = () => {
       level,
       timestamp,
       base,
-      useLevelLabels,
       ...extraPinoConfig,
       formatters: {
         level: (label) => {
