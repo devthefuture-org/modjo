@@ -8,7 +8,10 @@ module.exports.create = () => {
   const config = ctx.require("config")
   const options = config.sentry || {}
 
-  const { dsn = process.env.SENTRY_DSN } = options
+  const {
+    dsn = process.env.SENTRY_DSN,
+    environment = process.env.SENTRY_ENVIRONMENT,
+  } = options
 
   if (!dsn) {
     return
@@ -16,6 +19,7 @@ module.exports.create = () => {
 
   Sentry.init({
     dsn,
+    environment,
     ...options,
   })
 
