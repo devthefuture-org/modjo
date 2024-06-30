@@ -9,15 +9,37 @@ module.exports.create = () => {
 
   const { isDev } = config
 
-  const { level = isDev ? "debug" : "info", enableGlobal = true } =
-    config.logger || {}
+  const {
+    level = isDev ? "debug" : "info",
+    enableGlobal = true,
+    pretty: enablePretty = isDev,
+    timestamp = isDev,
+    base = {},
+    useLevelLabels = true,
+    extraPinoConfig = {},
+  } = config.logger || {}
 
   const stream = pretty({
     colorize: true,
     translateTime: "yyyy-mm-dd HH:MM:ss",
     ignore: "pid,hostname",
   })
-  const logger = pino({ level }, stream)
+  const logger = pino(
+    {
+      level,
+      timestamp,
+      base,
+      useLevelLabels,
+      ...extraPinoConfig,
+      formatters: {
+        level: (label) => {
+          return { level: label.toUpperCase() }
+        },
+        ...(extraPinoConfig.formatters || {}),
+      },
+    },
+    enablePretty ? stream : null
+  )
 
   if (enableGlobal) {
     const log = (...args) => {

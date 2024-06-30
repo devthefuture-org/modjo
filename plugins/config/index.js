@@ -26,9 +26,9 @@ const createDefaultConfig = () => {
   return defaultConfig
 }
 
-module.exports.create = () => {
+module.exports.create = async () => {
   const createConfig = ctx.get("customConfig") || (() => ({}))
-  const config = createConfig()
+  const config = await createConfig()
 
   const defaultConfig = createDefaultConfig(config)
 
