@@ -790,7 +790,7 @@ __metadata:
   dependencies:
     lodash.defaultsdeep: ^4.6.1
     nctx: ^2.2.0
-    postgres: ^3.2.4
+    postgres: ^3.4.4
   languageName: unknown
   linkType: soft
 
@@ -6910,6 +6910,13 @@ __metadata:
   version: 3.3.5
   resolution: "postgres@npm:3.3.5"
   checksum: 6c7f0503b5756b72d7024daf2fa583caedddc5b8dc3523418782db5353a2c164f80b05de4adf732d17a50992b27df0f9aecfaa97eea6dccd9300c22447d84c4f
+  languageName: node
+  linkType: hard
+
+"postgres@npm:^3.4.4":
+  version: 3.4.4
+  resolution: "postgres@npm:3.4.4"
+  checksum: d7d4f94d4a0b115ac30e9ab9dcc93525952104e837795155f616ec425d05e874b7de6e5c706acd44ded334b0d4bc04c40825c81e9132592a3ccc6f44fa5bc54e
   languageName: node
   linkType: hard
 

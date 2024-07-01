@@ -11,6 +11,6 @@
   "dependencies": {
     "lodash.defaultsdeep": "^4.6.1",
     "nctx": "^2.2.0",
-    "postgres": "^3.2.4"
+    "postgres": "^3.4.4"
   }
 }
