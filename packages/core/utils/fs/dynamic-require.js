@@ -48,7 +48,11 @@ const dynamicRequire = (r, key = r) => {
     return requireRegistry[key]
   } catch (err) {
     if (
-      !(err.code === "MODULE_NOT_FOUND" && err.message.includes(`"${key}"`))
+      !(
+        err.code === "MODULE_NOT_FOUND" &&
+        (err.message.includes(`"${key}"`) ||
+          err.message.includes("/build/requires.js"))
+      )
     ) {
       throw err
     }
