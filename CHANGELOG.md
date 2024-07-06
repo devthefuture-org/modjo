@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/devthefuture-org/modjo/compare/v1.6.2...v1.7.0) (2024-07-06)
+
+
+### Features
+
+* fix core pluginName + fix sentry instrumentation + postgres telemetry ([3f99744](https://github.com/devthefuture-org/modjo/commit/3f9974422fbdf75ad7174460eefc0c5d151a74ac))
+
+
+### Bug Fixes
+
+* improve debug ([41315d3](https://github.com/devthefuture-org/modjo/commit/41315d3a93990b28efaef12da6e815b0d0c41238))
+* up postgres ([1f863af](https://github.com/devthefuture-org/modjo/commit/1f863afc1703effb28d97ba05f3c2610a036eff0))
+
 ### [1.6.2](https://github.com/devthefuture-org/modjo/compare/v1.6.1...v1.6.2) (2024-06-30)
 
 
