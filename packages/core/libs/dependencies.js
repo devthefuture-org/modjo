@@ -26,6 +26,9 @@ const castDependency = (dependency, key) => {
   if (dependency.key === undefined && dependency.pluginName) {
     dependency.key = dependency.pluginName
   }
+  if (!dependency.pluginName && dependency.key) {
+    dependency.pluginName = dependency.key
+  }
   return dependency
 }
 

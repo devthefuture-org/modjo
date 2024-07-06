@@ -15,7 +15,7 @@
     "@modjo/logger": "*",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "express": "^5.0.0-beta.1",
+    "express": "^5.0.0-beta.3",
     "nctx": "^2.2.0"
   },
   "engines": {

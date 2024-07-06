@@ -49,10 +49,12 @@ module.exports = async () => {
   })
 
   // request error handler
-  if (sentry) {
-    app.use(sentry.Handlers.errorHandler())
+  if (sentry && config.oa?.sentryEnabled !== false) {
+    // sentry.setupExpressErrorHandler(app)
+    app.use(sentry.expressErrorHandler())
   }
-  function errorsHandler(err, _req, res, next) {
+
+  app.use(function errorsHandler(err, _req, res, next) {
     const isHttp = httpError.isHttpError(err)
     if (!isHttp || err.statusCode >= 500) {
       logger.error(err.message)
@@ -71,8 +73,7 @@ module.exports = async () => {
         ...(res.sentry ? { sentry: res.sentry } : {}),
       })
     }
-  }
-  app.use(errorsHandler)
+  })
 
   httpServer.start()
 

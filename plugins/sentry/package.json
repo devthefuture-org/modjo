@@ -9,7 +9,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@sentry/node": "^7.30.0",
+    "@sentry/node": "^8.15.0",
+    "@sentry/profiling-node": "^8.15.0",
     "nctx": "^2.2.0"
   }
 }

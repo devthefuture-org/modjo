@@ -45,5 +45,8 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "yarn@3.6.1",
+  "resolutions": {
+    "postgres@^3.4.4": "patch:postgres@npm%3A3.4.4#./.yarn/patches/postgres-npm-3.4.4-90e4c53e1e.patch"
+  }
 }
