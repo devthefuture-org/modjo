@@ -29,7 +29,7 @@ module.exports = function tracingQueryHandler(tracer, serverName) {
         kind: SpanKind.CLIENT,
         attributes: {
           [SEMATTRS_NET_PEER_NAME]: serverName,
-          [SEMATTRS_DB_STATEMENT]: q.strings.join(";\n"),
+          [SEMATTRS_DB_STATEMENT]: q.strings.join("?"),
           "db.postgresjs.queued_time_ms": queuedTimeMs,
         },
       }
