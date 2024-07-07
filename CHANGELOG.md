@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.2](https://github.com/devthefuture-org/modjo/compare/v1.7.1...v1.7.2) (2024-07-07)
+
+
+### Bug Fixes
+
+* postgres otel ([005bd2b](https://github.com/devthefuture-org/modjo/commit/005bd2b3579e69b3e9a26228c2a0e3a3caf2814d))
+
 ### [1.7.1](https://github.com/devthefuture-org/modjo/compare/v1.7.0...v1.7.1) (2024-07-07)
 
 
