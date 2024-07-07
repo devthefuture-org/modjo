@@ -1,6 +1,6 @@
 {
   "name": "@modjo/microservice-watcher",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "main": "index.js",
   "repository": "https://codeberg.org/devthefuture/modjo",
   "author": "devthejo",
