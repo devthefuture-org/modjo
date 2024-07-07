@@ -17,7 +17,7 @@ const { options = {} } = modjoSentryConfig
 
 const pkg = modjoSentryConfig.package
 
-const release = pkg ? `${pkg.name}@${pkg.version}` : undefined
+const release = process.env.SENTRY_RELEASE || (pkg ? pkg.version : undefined)
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
