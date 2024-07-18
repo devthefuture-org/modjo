@@ -26,22 +26,26 @@ module.exports = async () => {
     db,
   })
 
-  redis.on("connect", () => {
-    logger.debug({ host, port, db }, "connected to redis successfully")
-  })
-  redis.on("error", (err) => {
-    logger.error(
-      {
-        error: err.message,
-        host,
-        port,
-        db,
-      },
-      "failed to connect to redis"
-    )
-  })
-  redis.on("ready", () => {
-    logger.debug({ host, port, db }, "redis client is ready")
+  await new Promise((resolve, reject) => {
+    redis.on("connect", () => {
+      logger.debug({ host, port, db }, "connected to redis successfully")
+    })
+    redis.on("error", (err) => {
+      logger.error(
+        {
+          error: err.message,
+          host,
+          port,
+          db,
+        },
+        "failed to connect to redis"
+      )
+      reject(err)
+    })
+    redis.on("ready", () => {
+      logger.debug({ host, port, db }, "redis client is ready")
+      resolve(true)
+    })
   })
 
   return redis
