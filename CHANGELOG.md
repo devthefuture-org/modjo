@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.5](https://github.com/devthefuture-org/modjo/compare/v1.7.4...v1.7.5) (2024-07-18)
+
+
+### Bug Fixes
+
+* exit on dependency rejection ([b17f3f7](https://github.com/devthefuture-org/modjo/commit/b17f3f79bda1f5ea838b8087da68fdf2465009d8))
+
 ### [1.7.4](https://github.com/devthefuture-org/modjo/compare/v1.7.3...v1.7.4) (2024-07-18)
 
 

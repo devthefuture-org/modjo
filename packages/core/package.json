@@ -1,6 +1,6 @@
 {
   "name": "@modjo/core",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "license": "MIT",
   "dependencies": {
     "@foundernetes/dbug": "^1.0.0",
