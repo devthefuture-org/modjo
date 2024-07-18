@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.4](https://github.com/devthefuture-org/modjo/compare/v1.7.3...v1.7.4) (2024-07-18)
+
+
+### Bug Fixes
+
+* add redis connect logs ([46209fa](https://github.com/devthefuture-org/modjo/commit/46209fad31e42fae676e619b686fa445d5c093df))
+* redis client ready ([906084f](https://github.com/devthefuture-org/modjo/commit/906084f00f52f553dda34cf3d512b6dfdbbb8f35))
+
 ### [1.7.3](https://github.com/devthefuture-org/modjo/compare/v1.7.2...v1.7.3) (2024-07-07)
 
 
