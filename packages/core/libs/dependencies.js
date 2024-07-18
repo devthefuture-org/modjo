@@ -184,11 +184,17 @@ const create = async (dep, _parent, _key, branches) => {
     }
 
     const trunk = (async () => {
-      const instance = await instancePromise
-      if (dep.key) {
-        ctx.set(dep.key, instance)
+      try {
+        const instance = await instancePromise
+        if (dep.key) {
+          ctx.set(dep.key, instance)
+        }
+        return instance
+      } catch (err) {
+        process.stderr.write("modjo error dependency rejection")
+        console.error(err)
+        process.exit(1)
       }
-      return instance
     })()
     treeCtx.trunk = trunk
     treeRegistry.set(dep, treeCtx)
