@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.6](https://github.com/devthefuture-org/modjo/compare/v1.7.5...v1.7.6) (2024-07-27)
+
+
+### Bug Fixes
+
+* add sentry in openapi-to-graphql plugin ([75a6198](https://github.com/devthefuture-org/modjo/commit/75a6198ecd5f31a1e49aa0909a29654de13a8313))
+
 ### [1.7.5](https://github.com/devthefuture-org/modjo/compare/v1.7.4...v1.7.5) (2024-07-18)
 
 
