@@ -91,6 +91,19 @@ module.exports = async function createOpenApiToGraphqlServer({
           return new GraphQLError("Unauthorized", 401, { http: 401 })
         }
         default: {
+          const sentry = ctx.get("sentry")
+          if (
+            sentry &&
+            config.openapiToGraphql?.sentryEnabled !== false &&
+            config.oa?.sentryEnabled !== false
+          ) {
+            sentry.captureException(err, {
+              tags: {
+                modjoPlugin: "openapi-to-graphql",
+              },
+            })
+          }
+
           const error = cloneDeep(err)
           if (error.extensions?.exception?.stacktrace) {
             delete error.extensions.exception.stacktrace
