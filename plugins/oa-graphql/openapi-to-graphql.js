@@ -50,9 +50,11 @@ module.exports = async function createOpenApiToGraphqlServer({
 
   // let OpenAPI-to-GraphQL create the schema
   const omitHeaders = ["content-type"]
+  const { host = "0.0.0.0", port = 3000 } = config.httpServer || {}
   const { schema } = await createGraphQLSchema(apiSpec, {
     // https://github.com/IBM/openapi-to-graphql/blob/master/packages/openapi-to-graphql/README.md
     createSubscriptionsFromCallbacks: true,
+    baseUrl: `http://${host}:${port}/api/v1/oas`,
     strict: true,
     operationIdFieldNames: true,
     fillEmptyResponses: true,
