@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.7](https://github.com/devthefuture-org/modjo/compare/v1.7.6...v1.7.7) (2024-07-28)
+
+
+### Bug Fixes
+
+* openapi-to-graphql baseUrl to local ([188f479](https://github.com/devthefuture-org/modjo/commit/188f479ddfd31e91b499c8ec88343962ecc9d9e5))
+
 ### [1.7.6](https://github.com/devthefuture-org/modjo/compare/v1.7.5...v1.7.6) (2024-07-27)
 
 
