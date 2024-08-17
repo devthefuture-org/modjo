@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.9](https://github.com/devthefuture-org/modjo/compare/v1.7.8...v1.7.9) (2024-08-17)
+
+
+### Bug Fixes
+
+* reschedule typo ([123f674](https://github.com/devthefuture-org/modjo/commit/123f67443d22afdeb94b0787a4001cfbf8f1b0e6))
+
 ### [1.7.8](https://github.com/devthefuture-org/modjo/compare/v1.7.7...v1.7.8) (2024-08-17)
 
 
