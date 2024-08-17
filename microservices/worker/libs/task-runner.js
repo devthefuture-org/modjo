@@ -7,6 +7,7 @@ const errorWrapperFactory = require("./factory-plugins/error-wrapper")
 module.exports = async function createTaskRunner(q) {
   const queueHandlerFactories = require(`${process.cwd()}/build/queues`)
   const { microserviceWorker: config = {} } = ctx.require("config")
+  const logger = ctx.require("logger")
 
   const defaultFactoryPlugins = {
     errorWrapper: {
@@ -32,6 +33,11 @@ module.exports = async function createTaskRunner(q) {
 
   const queueFilename = kebabCase(q)
   const userFactory = queueHandlerFactories[queueFilename]
+  if (!userFactory) {
+    const errorMsg = `queue function not found in files auto factory: ${queueFilename}`
+    logger.error({ queueFilename, q }, errorMsg)
+    throw new Error(errorMsg)
+  }
   let handler = await userFactory()
 
   for (let factory of factories) {
