@@ -1,0 +1,40 @@
+# ai-digest
+.aidigestignore
+
+# versioning
+CHANGELOG.md
+.versionrc.js
+
+# lint
+.commitlintrc.json
+.eslintrc.js
+.editorconfig
+.husky
+
+# node
+.yarnrc.yml
+.yarn
+.npmignore
+
+# git
+.gitignore
+
+# md
+README.md
+
+# ci/cd
+.forgejo
+.github
+
+# binaries
+*.png
+*.svg
+*.jpg
+*.jpeg
+
+# generic
+*.bak
+*.tmp
+*.log
+
+# project
