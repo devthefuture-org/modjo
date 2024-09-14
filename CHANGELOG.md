@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.10](https://github.com/devthefuture-org/modjo/compare/v1.7.9...v1.7.10) (2024-09-14)
+
+
+### Bug Fixes
+
+* up axios ([29355a8](https://github.com/devthefuture-org/modjo/commit/29355a83b9121f48c7149b9dbaed42259eb95136))
+
 ### [1.7.9](https://github.com/devthefuture-org/modjo/compare/v1.7.8...v1.7.9) (2024-08-17)
 
 
