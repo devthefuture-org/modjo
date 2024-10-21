@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/devthefuture-org/modjo/compare/v1.7.10...v1.8.0) (2024-10-21)
+
+
+### Features
+
+* asyncapi init ([ca81c71](https://github.com/devthefuture-org/modjo/commit/ca81c71631e042c6bcd51c1d0476f685e4b11f4c))
+
+
+### Bug Fixes
+
+* up express-openapi-validator ([c30f839](https://github.com/devthefuture-org/modjo/commit/c30f83907c1d78cdd5d4588c6e06115b6d5419ff))
+
 ### [1.7.10](https://github.com/devthefuture-org/modjo/compare/v1.7.9...v1.7.10) (2024-09-14)
 
 
