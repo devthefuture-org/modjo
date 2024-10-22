@@ -444,13 +444,13 @@ module.exports = async function createOpenApi(options = {}) {
   await traverseAsync(operationsTree, operationLoader)
 
   // load formats
-  const formats = []
+  const formats = {}
   function formatsLoader(_filename, factory, _dirFiles, keys) {
     const format = factory(addonsHandlers)
     if (!format.name) {
       format.name = camelCase(keys.join("."))
     }
-    formats.push(format)
+    formats[format.name] = format
   }
   await traverseAsync(formatsTree, formatsLoader)
 
@@ -523,7 +523,7 @@ module.exports = async function createOpenApi(options = {}) {
       validateSecurity: {
         handlers: securityHandlers,
       },
-      validateFormats: "full",
+      validateFormats: true,
       formats,
       fileUploader: {
         // https://github.com/cdimascio/express-openapi-validator#%EF%B8%8F-fileuploader-optional
