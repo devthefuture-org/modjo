@@ -1,11 +1,8 @@
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
-const nctx = require("nctx")
 const express = require("express")
 
-const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
-
-const { reqCtx } = require("./ctx")
+const { ctx, reqCtx } = require("./ctx")
 
 const rawBodySaver = function (req, _res, buf, encoding) {
   if (buf && buf.length) {
@@ -23,6 +20,12 @@ module.exports.create = () => {
 
   // express settings https://expressjs.com/en/5x/api.html#app.settings.table
   app.set("env", config.nodeEnv)
+
+  // express arbitrary config
+  const appSets = ctx.get("express.appSets") || {}
+  for (const [key, value] of Object.entries(appSets)) {
+    app.set(key, value)
+  }
 
   // express parsers
   app.use(express.urlencoded({ extended: false }))

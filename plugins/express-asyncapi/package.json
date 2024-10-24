@@ -12,6 +12,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@asyncapi/openapi-schema-parser": "^3.0.24",
     "@asyncapi/parser": "^3.3.0",
     "@modjo/config": "*",
     "@modjo/core": "*",
@@ -19,6 +20,7 @@
     "@modjo/http-server": "*",
     "@modjo/logger": "*",
     "@wll8/express-ws": "^1.0.5",
+    "asyncapi-validator": "^5.0.1",
     "express": "^5.0.0-beta.3",
     "nctx": "^2.2.0"
   }

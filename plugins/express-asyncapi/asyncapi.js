@@ -3,137 +3,18 @@ const express = require("express")
 const get = require("lodash.get")
 const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
-const capitalize = require("lodash.capitalize")
 const camelCase = require("lodash.camelcase")
-const OpenApiValidator = require("express-openapi-validator")
-const { default: OpenAPISchemaValidator } = require("openapi-schema-validator")
+const AsyncApiValidator = require("asyncapi-validator")
+const { Parser } = require("@asyncapi/parser")
+const { OpenAPISchemaParser } = require("@asyncapi/openapi-schema-parser")
 const { reqCtx } = require("@modjo/express/ctx")
 const traverseAsync = require("@modjo/core/utils/object/traverse-async")
 const createOptions = require("@modjo/core/utils/schema/options")
 const deepMapKeys = require("@modjo/core/utils/object/deep-map-keys")
 const ctx = require("./ctx")
-const restHttpMethodsList = require("./utils/rest-methods-list")
-
-// https://swagger.io/docs/specification/paths-and-operations/
-
-const httpMethodToOperationIdPrefixConvention = {
-  get: "get",
-  post: "add",
-  put: "set",
-  delete: "del",
-  patch: "do",
-}
+const createAsyncApiValidatorMiddleware = require("./middlewares/asyncapi-validator")
 
 const pathParamRegex = /\{(.+?)\}/g
-
-function defaultOperationIdConvention(operationPath, method) {
-  const keys = operationPath.split("/")
-  keys.shift()
-
-  if (method !== "patch") {
-    const perPrefix =
-      operationPath[operationPath.length - 1] === "/" ? "many" : "one"
-    keys.unshift(perPrefix)
-  }
-
-  const methodPrefix = httpMethodToOperationIdPrefixConvention[method]
-  keys.unshift(methodPrefix)
-
-  const parts = []
-  const pathParams = []
-  for (const key of keys) {
-    if (key.match(pathParamRegex)) {
-      pathParams.push(
-        key.replace(pathParamRegex, function (_, param) {
-          return `by${capitalize(camelCase(param))}`
-        })
-      )
-    } else {
-      parts.push(key)
-    }
-  }
-
-  parts.push(pathParams.join("-and-"))
-
-  const operationId = camelCase(parts.join("-"))
-  return operationId
-}
-
-function defaultOperationPathParameters(operationPath, spec) {
-  const params = []
-  const paramVars = operationPath.matchAll(pathParamRegex)
-  for (const [_, name] of paramVars) {
-    if (spec.parameters.some((param) => param.name === name)) {
-      continue
-    }
-    params.push({
-      name,
-      in: "path",
-      required: true,
-      schema: {
-        type: "string",
-      },
-    })
-  }
-  return params
-}
-
-function defaultPathDescription(operationPath, _spec) {
-  return `${operationPath}`
-}
-function defaultMethodDescription(method, _operationPath, spec) {
-  const { operationId } = spec[method]
-  switch (method) {
-    case "get":
-      return `Default description: Query: ${operationId}`
-    case "post":
-      return `Default description: Insert mutation: ${operationId}`
-    case "put":
-      return `Default description: Update mutation: ${operationId}`
-    case "patch":
-      return `Default description: Custom mutation with side effects: ${operationId}`
-    case "delete":
-      return `Default description: Delete mutation: ${operationId}`
-    default:
-      throw new Error(
-        `Unexpected http method: ${method}, for operationId ${operationId}`
-      )
-  }
-}
-function defaultMethodSummary(method, _operationPath, spec) {
-  const { operationId } = spec[method]
-  switch (method) {
-    case "get":
-      return `${operationId}`
-    case "post":
-      return `${operationId}`
-    case "put":
-      return `${operationId}`
-    case "patch":
-      return `${operationId}`
-    case "delete":
-      return `${operationId}`
-    default:
-      throw new Error(
-        `Unexpected http method: ${method}, for operationId ${operationId}`
-      )
-  }
-}
-function defaultResponseDescription(
-  responseKey,
-  _responseDef,
-  method,
-  _operationPath,
-  spec
-) {
-  const { operationId } = spec[method]
-  switch (responseKey) {
-    case "200":
-      return `Default description: Success results ${operationId}`
-    default:
-      return `Default description: HTTP ${responseKey} for ${operationId}`
-  }
-}
 
 function compileSecuritySets(securitySets, methodSpec) {
   const xSecurity = methodSpec["x-security"]
@@ -159,21 +40,33 @@ function compileSecuritySets(securitySets, methodSpec) {
   }
 }
 
+// function filterOpenApiSpec(schema) {
+//   const openApiFields = ["openapi", "paths", "servers", "tags"]
+//   openApiFields.forEach((field) => {
+//     if (Object.keys(schema).includes(field)) {
+//       delete schema[field]
+//     }
+//   })
+//   return schema
+// }
+
 const optionsSchema = createOptions(
   {
     defaults: {
       basePath: "/",
       apiPath: "/api",
-      oasPath: "/oas",
+      aasPath: "/aas",
       version: "1",
-      operationIdConvention: defaultOperationIdConvention,
     },
     required: ["version"],
   },
-  "createOpenApi"
+  "createAsyncApi"
 )
 
-module.exports = async function createOpenApi(options = {}) {
+const parser = new Parser()
+parser.registerSchemaParser(OpenAPISchemaParser())
+
+module.exports = async function createAsyncApi(options = {}) {
   optionsSchema(options)
 
   const logger = ctx.require("logger")
@@ -183,10 +76,10 @@ module.exports = async function createOpenApi(options = {}) {
   const { version } = options
 
   // # API TREE
-  const apiTree = require(`${process.cwd()}/build/api`)
+  const apiTree = require(`${process.cwd()}/build/asyncapi`)
 
   // # SHARED API TREE MERGE AS DEFAULT
-  const sharedApiTree = require(`${process.cwd()}/build/sharedApi`)
+  const sharedApiTree = require(`${process.cwd()}/build/sharedAsyncapi`)
   for (const key of Object.keys(sharedApiTree)) {
     if (apiTree[version][key] === undefined) {
       apiTree[version][key] = {}
@@ -198,9 +91,8 @@ module.exports = async function createOpenApi(options = {}) {
   const operationsTree = apiTree[version].operations
 
   // ## Spec
-  const apiSpecTree = apiTree[version]["spec-openapi"]
+  const apiSpecTree = apiTree[version]["spec-asyncapi"]
   const createApiSpec = apiSpecTree.index
-
   delete apiSpecTree.index
 
   // ## Formats
@@ -217,14 +109,14 @@ module.exports = async function createOpenApi(options = {}) {
     return acc
   }, {})
 
-  const { basePath, apiPath, oasPath } = options
+  const { basePath, apiPath, aasPath } = options
 
   const router = express.Router({ strict: true, caseSensitive: true })
   reqCtx.setRouterContext(router)
 
   const { host = "0.0.0.0", port = 3000 } = config.httpServer || {}
   const apiSpecBase = await createApiSpec({
-    path: path.join(basePath, apiPath, version, oasPath),
+    path: path.join(basePath, apiPath, version, aasPath),
     host,
     port,
     version,
@@ -258,9 +150,7 @@ module.exports = async function createOpenApi(options = {}) {
       return
     }
     const filenameParts = filename.split(".")
-    if (
-      !restHttpMethodsList.includes(filenameParts[filenameParts.length - 1])
-    ) {
+    if (!filenameParts[filenameParts.length - 1] !== "sub") {
       return
     }
     const apiMethod = factory(addonsHandlers)
@@ -361,13 +251,13 @@ module.exports = async function createOpenApi(options = {}) {
     if (!spec.parameters) {
       spec.parameters = []
     }
-    // default path parameters
-    spec.parameters.push(...defaultOperationPathParameters(operationPath, spec))
+    // // default path parameters
+    // spec.parameters.push(...defaultOperationPathParameters(operationPath, spec))
 
-    // default desciptions
-    if (!spec.description) {
-      spec.description = defaultPathDescription(operationPath, spec)
-    }
+    // // default desciptions
+    // if (!spec.description) {
+    //   spec.description = defaultPathDescription(operationPath, spec)
+    // }
 
     for (const [method] of Object.entries(methods)) {
       const methodSpec = spec[method]
@@ -375,34 +265,34 @@ module.exports = async function createOpenApi(options = {}) {
         continue
       }
 
-      // default method desciptions
-      if (!methodSpec.description) {
-        methodSpec.description = defaultMethodDescription(
-          method,
-          operationPath,
-          spec
-        )
-      }
+      // // default method desciptions
+      // if (!methodSpec.description) {
+      //   methodSpec.description = defaultMethodDescription(
+      //     method,
+      //     operationPath,
+      //     spec
+      //   )
+      // }
 
-      // default method summary
-      if (!methodSpec.summary) {
-        methodSpec.summary = defaultMethodSummary(method, operationPath, spec)
-      }
+      // // default method summary
+      // if (!methodSpec.summary) {
+      //   methodSpec.summary = defaultMethodSummary(method, operationPath, spec)
+      // }
 
-      // default response description
-      for (const [responseKey, responseDef] of Object.entries(
-        methodSpec.responses
-      )) {
-        if (!responseDef.description) {
-          responseDef.description = defaultResponseDescription(
-            responseKey,
-            responseDef,
-            method,
-            operationPath,
-            spec
-          )
-        }
-      }
+      // // default response description
+      // for (const [responseKey, responseDef] of Object.entries(
+      //   methodSpec.responses
+      // )) {
+      //   if (!responseDef.description) {
+      //     responseDef.description = defaultResponseDescription(
+      //       responseKey,
+      //       responseDef,
+      //       method,
+      //       operationPath,
+      //       spec
+      //     )
+      //   }
+      // }
 
       // security suggar syntax
       compileSecuritySets(apiSpec["x-security-sets"], methodSpec)
@@ -410,7 +300,7 @@ module.exports = async function createOpenApi(options = {}) {
 
     // register apiSpec
     apiSpec.paths[operationPath] = spec
-
+    console.log("methods", methods)
     // register routes
     for (const [method, handlerStack] of Object.entries(methods)) {
       const expressFormatedOperationPath = operationPath.replace(
@@ -439,6 +329,7 @@ module.exports = async function createOpenApi(options = {}) {
         reqCtx.share(req)
         next()
       })
+      console.log("method", method)
       operationsRouter[method](expressFormatedOperationPath, ...handlers)
     }
   }
@@ -502,46 +393,33 @@ module.exports = async function createOpenApi(options = {}) {
       }
     : false
 
-  // final validator middleware config
-  const openApiValidatorOptions = ctx.get("openApiValidatorOptions") || {}
+  const { document, diagnostics } = await parser.parse(apiSpec)
 
-  const validator = new OpenAPISchemaValidator({ version: 3 })
-
-  const validated = validator.validate(apiSpec)
-  if (validated.errors.length > 0) {
-    throw new Error(
-      `OpenAPI Schema Error: ${JSON.stringify(validated.errors, null, 2)}`
-    )
+  if (document === undefined) {
+    const errorMessage = `invalid asyncapi schema: contains ${diagnostics.length} errors`
+    logger.error(`${errorMessage}. Schema: ${JSON.stringify(apiSpec, null, 2)}`)
+    for (const diagnostic of diagnostics) {
+      logger.error(diagnostic, "asyncapi schema diagnostic")
+    }
+    throw new Error(errorMessage)
   }
 
-  const openApiMiddleware = OpenApiValidator.middleware(
-    defaultsDeep({}, openApiValidatorOptions, {
-      apiSpec,
-      validateApiSpec: false,
-      validateRequests: {
-        allowUnknownQueryParameters: false,
-      },
-      validateResponses,
-      validateSecurity: {
-        handlers: securityHandlers,
-      },
-      validateFormats: true,
-      formats,
-      fileUploader: {
-        // https://github.com/cdimascio/express-openapi-validator#%EF%B8%8F-fileuploader-optional
-        // https://github.com/expressjs/multer
-        limits: {
-          // https://github.com/expressjs/multer#limits
-          fileSize: 5 * 1024 * 1024, // (=5M) For multipart forms, the max file size(in bytes)  Infinity
-          fields: 20, // Max number of non- file fields   Infinity
-          files: 5, // For multipart forms, the max number of file fields   Infinity
-          parts: 25, // For multipart forms, the max number of parts(fields + files)  Infinity
-        },
-      },
-    })
+  // final validator middleware config
+  const asyncApiValidatorOptions = defaultsDeep(
+    {},
+    ctx.get("asyncApiValidatorOptions") || {},
+    {}
   )
+  const validator = await AsyncApiValidator.fromSource(apiSpec, {
+    msgIdentifier: "name",
+    ignoreArray: true,
+    ...asyncApiValidatorOptions,
+  })
 
-  router.use(openApiMiddleware)
+  const validatorMiddleware = createAsyncApiValidatorMiddleware(validator)
+  router.use(validatorMiddleware)
+
+  // TODO register sub operations to the router
 
   router.use(errorMiddleware, operationsRouter)
 

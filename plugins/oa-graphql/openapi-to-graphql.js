@@ -97,7 +97,7 @@ module.exports = async function createOpenApiToGraphqlServer({
           if (
             sentry &&
             config.openapiToGraphql?.sentryEnabled !== false &&
-            config.oa?.sentryEnabled !== false
+            config.express?.sentryEnabled !== false
           ) {
             sentry.captureException(err, {
               tags: {

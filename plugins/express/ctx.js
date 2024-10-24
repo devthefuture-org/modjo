@@ -37,4 +37,6 @@ reqCtx.setRouterContext = (router) => {
   router.use(reqCtx.createRouterMiddleware())
 }
 
-module.exports = { reqCtx }
+const ctx = nctx.create(Symbol(__dirname.split("/").pop()))
+
+module.exports = { ctx, reqCtx }
