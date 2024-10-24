@@ -5,6 +5,8 @@ const { getPlugin } = require("~/libs/plugins")
 const promiseObject = require("~/utils/async/promise-object")
 
 const ctx = require("~/ctx")
+const promisePublic = require("~/utils/async/promise-public")
+const isPromise = require("~/utils/async/is-promise")
 
 const castDependency = (dependency, key) => {
   if (typeof dependency === "function") {
@@ -152,6 +154,27 @@ const make = async (
 
 const flatInstancesRegistry = new Map()
 const treeRegistry = new Map()
+
+const registerSyncFlatInstanceRegistry = (dep) => {
+  let instancePromise
+  let registerPromise
+  if (dep.key !== undefined && flatInstancesRegistry.has(dep.key)) {
+    instancePromise = flatInstancesRegistry.get(dep.key)
+  } else {
+    const publicPromise = promisePublic()
+    instancePromise = publicPromise.promise
+    if (dep.key !== undefined) {
+      flatInstancesRegistry.set(dep.key, instancePromise)
+    }
+    registerPromise = (factoryPromise) => {
+      factoryPromise
+        .then(publicPromise.resolve.bind(factoryPromise))
+        .catch(publicPromise.reject.bind(factoryPromise))
+    }
+  }
+  return { instancePromise, registerPromise }
+}
+
 const create = async (dep, _parent, _key, branches) => {
   return nctx.fork([dep.ctx], async () => {
     const treeCtx = { branches: {} }
@@ -161,10 +184,10 @@ const create = async (dep, _parent, _key, branches) => {
       treeCtx.branches[key] = instance
     }
 
-    let instancePromise
-    if (dep.key !== undefined && flatInstancesRegistry.has(dep.key)) {
-      instancePromise = flatInstancesRegistry.get(dep.key)
-    } else {
+    const { instancePromise, registerPromise } =
+      registerSyncFlatInstanceRegistry(dep)
+
+    if (registerPromise) {
       if (dep.context) {
         await dep.context(dep.ctx, ctx)
       }
@@ -177,10 +200,13 @@ const create = async (dep, _parent, _key, branches) => {
           params = [params]
         }
       }
-      instancePromise = dep.create ? dep.create(...params) : null
-      if (dep.key !== undefined) {
-        flatInstancesRegistry.set(dep.key, instancePromise)
-      }
+      const factoryResult = dep.create ? dep.create(...params) : null
+
+      const factoryPromise = isPromise(factoryResult)
+        ? factoryResult
+        : Promise.resolve(factoryResult)
+
+      registerPromise(factoryPromise)
     }
 
     const trunk = (async () => {

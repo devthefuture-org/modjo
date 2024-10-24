@@ -43,7 +43,9 @@ const getPluginContrib = (name) => {
 }
 
 const getPluginFail = (name) => {
-  throw new Error(`required plugin not found: "${name}"`)
+  throw new Error(
+    `required plugin not found (or missing required file during plugin load): "${name}"`
+  )
 }
 
 const getPluginMethods = [
