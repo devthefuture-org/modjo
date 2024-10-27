@@ -302,7 +302,9 @@ module.exports = async function createAsyncApi(options = {}) {
 
     const messageSpecs = apiSpec.channels[channelId].messages
     for (const messageKey of Object.keys(messageSpecs)) {
-      messageSpecs[messageKey].name = messageKey
+      if (!messageSpecs[messageKey].name) {
+        messageSpecs[messageKey].name = messageKey
+      }
     }
 
     for (const [method] of Object.entries(methods)) {
