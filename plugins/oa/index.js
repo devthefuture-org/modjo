@@ -14,10 +14,10 @@ const ctx = require("./ctx")
 const createOapiStackVersions = require("./oapi-stack-versions")
 
 module.exports = async () => {
-  const config = ctx.require("config")
-  const logger = ctx.require("logger")
+  // const config = ctx.require("config")
+  // const logger = ctx.require("logger")
   const httpServer = ctx.require("httpServer")
-  const sentry = ctx.get("sentry")
+  // const sentry = ctx.get("sentry")
 
   const app = ctx.require("express")
 
@@ -35,14 +35,11 @@ module.exports = async () => {
       },
     })
   const oapiUrl = path.join(basePath, apiPath)
-  app.use(oapiUrl, oapiStackVersionsRouter)
-  // console.log("openapi registered")
-  // logger.debug(`oapi-url: ${oapiUrl}`)
+  app.useHTTP(oapiUrl, oapiStackVersionsRouter)
 
   await postwrapExpress(app, "@modjo/oa")
 
   await httpServer.isReady
-
   return { versions }
 }
 
@@ -56,19 +53,30 @@ module.exports.build = (options = {}) => {
       {
         dir: apiPath,
         pattern:
-          /^\/v\d+\/(formats|operations|security|spec-openapi|validators|services)\/(.*?)(?!\.sub)\.(js|yaml|yml)$/,
+          /^\/v\d+\/(formats|operations|security|spec-openapi|validators|services)\/(.*)\.(js|yaml|yml)$/,
         dirName: "api",
       },
       {
         dir: sharedApiPath,
         pattern:
-          /^\/(formats|operations|security|spec-openapi|validators|services)\/(.*?)(?!\.sub)\.(js|yaml|yml)$/,
+          /^\/(formats|operations|security|spec-openapi|validators|services)\/(.*)\.(js|yaml|yml)$/,
         dirName: "sharedApi",
       },
     ],
-
     {
-      filter: (p) => !/(^|\/)\.[^/]+/.test(p),
+      filter: (p) => {
+        if (
+          p.includes(".chan.") ||
+          p.includes(".sub.") ||
+          p.includes(".pub.")
+        ) {
+          return false
+        }
+        if (!/(^|\/)\.[^/]+/.test(p)) {
+          return true
+        }
+        return false
+      },
     }
   )
 

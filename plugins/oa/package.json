@@ -14,7 +14,7 @@
     "@modjo/express": "*",
     "@modjo/http-server": "*",
     "@modjo/logger": "*",
-    "express": "^5.0.0-beta.3",
+    "express": "^5.0.1",
     "express-openapi-validator": "^5.3.7",
     "fs-extra": "^11.1.1",
     "http-errors": "^2.0.0",

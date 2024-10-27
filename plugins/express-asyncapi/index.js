@@ -1,16 +1,8 @@
 const path = require("path")
-const createOptions = require("@modjo/core/utils/schema/options")
-const httpError = require("http-errors")
-
-const expressWs = require(`@wll8/express-ws`)
 
 const postwrapExpress = require("@modjo/express/postwrap")
 
-const {
-  compileDirList,
-  buildDir,
-  buildDirTree,
-} = require("@modjo/core/libs/build")
+const { compileDirList, buildDirTree } = require("@modjo/core/libs/build")
 
 const ctx = require("./ctx")
 
@@ -22,8 +14,6 @@ module.exports.create = async () => {
   // const sentry = ctx.get("sentry")
   const httpServer = ctx.require("httpServer")
   const app = ctx.require("express")
-
-  expressWs(app, httpServer)
 
   // oapiStack
   ctx.set("asyncApiValidatorOptions", {})
@@ -57,17 +47,16 @@ module.exports.build = (options = {}) => {
       {
         dir: apiPath,
         pattern:
-          /^\/v\d+\/(formats|operations|security|spec-asyncapi|validators|services)\/(.*)(?<=operations\/.*)\.sub|(?<!operations\/.*)\.(js|yaml|yml)$/,
+          /^\/v\d+\/(formats|operations|security|spec-asyncapi|validators|services)\/(.*)(?<=operations\/.*)(\.sub|\.pub|\.chan)|(?<!operations\/.*)\.(js|yaml|yml)$/,
         dirName: "asyncapi",
       },
       {
         dir: sharedApiPath,
         pattern:
-          /^\/(formats|operations|security|spec-asyncapi|validators|services)\/(.*)(?<=operations\/.*)\.sub|(?<!operations\/.*)\.(js|yaml|yml)$/,
+          /^\/(formats|operations|security|spec-asyncapi|validators|services)\/(.*)(?<=operations\/.*)(\.sub|\.pub|\.chan)|(?<!operations\/.*)\.(js|yaml|yml)$/,
         dirName: "sharedAsyncapi",
       },
     ],
-
     {
       filter: (p) => !/(^|\/)\.[^/]+/.test(p),
     }

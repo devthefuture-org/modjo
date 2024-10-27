@@ -19,9 +19,8 @@
     "@modjo/express": "*",
     "@modjo/http-server": "*",
     "@modjo/logger": "*",
-    "@wll8/express-ws": "^1.0.5",
     "asyncapi-validator": "^5.0.1",
-    "express": "^5.0.0-beta.3",
+    "express": "^5.0.1",
     "nctx": "^2.2.0"
   }
 }

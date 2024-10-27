@@ -2,7 +2,7 @@ const { ctx } = require("./ctx")
 
 const errorHandlerFactory = require("./middlewares/error-handler")
 
-const { isRouteRegistered } = require("./utils")
+// const { isRouteRegistered } = require("./utils")
 
 const readyDependencies = []
 
@@ -25,17 +25,17 @@ module.exports = async (app, dependencyName) => {
   const httpServer = ctx.require("httpServer")
   const sentry = ctx.get("sentry")
 
-  if (!isRouteRegistered(app, "/", "get")) {
-    const { version: projectVersion, name: projectName } =
-      ctx.get("version") || {}
-    app.get("/", (_, res) => {
-      res.json({
-        nodeEnv: config.nodeEnv,
-        projectVersion,
-        projectName,
-      })
+  // if (!isRouteRegistered(app, "/", "get")) {
+  const { version: projectVersion, name: projectName } =
+    ctx.get("version") || {}
+  app.get("/", (_, res) => {
+    res.json({
+      nodeEnv: config.nodeEnv,
+      projectVersion,
+      projectName,
     })
-  }
+  })
+  // }
 
   // request error handler
   if (sentry && config.express.sentryEnabled !== false) {

@@ -23,13 +23,13 @@ module.exports = async function createAapiStack(options = {}) {
   const router = express.Router({ strict: true, caseSensitive: true })
   reqCtx.setRouterContext(router)
 
-  const { router: openapiRouter, apiSpec } = await createAsyncapi({
+  const { router: asyncapiRouter, apiSpec } = await createAsyncapi({
     basePath,
     apiPath,
     aasPath,
     version,
   })
-  router.use(aasPath, openapiRouter)
+  router.use(aasPath, asyncapiRouter)
   router.get(docsPath, (_, res) => {
     return res.json(apiSpec)
   })

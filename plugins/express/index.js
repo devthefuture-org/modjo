@@ -1,6 +1,7 @@
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const express = require("express")
+const { WebSocketExpress } = require("websocket-express")
 
 const { ctx, reqCtx } = require("./ctx")
 
@@ -16,7 +17,8 @@ module.exports.create = () => {
   const httpServer = ctx.require("httpServer")
 
   // express
-  const app = express()
+  // const app = express()
+  const app = new WebSocketExpress()
 
   // express settings https://expressjs.com/en/5x/api.html#app.settings.table
   app.set("env", config.nodeEnv)
@@ -28,11 +30,11 @@ module.exports.create = () => {
   }
 
   // express parsers
-  app.use(express.urlencoded({ extended: false }))
-  app.use(express.text())
+  app.useHTTP(express.urlencoded({ extended: false }))
+  app.useHTTP(express.text())
 
-  app.use(express.json({ verify: rawBodySaver, extended: true }))
-  app.use(cookieParser())
+  app.useHTTP(express.json({ verify: rawBodySaver, extended: true }))
+  app.useHTTP(cookieParser())
 
   // debug incoming
   // app.use((req, _res, next) => {
@@ -58,7 +60,7 @@ module.exports.create = () => {
   }
 
   // cors
-  app.use(
+  app.useHTTP(
     cors({
       credentials: true,
       origin: true,
@@ -67,7 +69,7 @@ module.exports.create = () => {
   )
 
   if (config.express?.enableDefaultErrorHandler) {
-    app.use((err, _, res, next) => {
+    app.useHTTP((err, _, res, next) => {
       if (err) {
         return res.status(err.status || 500).json({
           message: err.message,
@@ -92,7 +94,8 @@ module.exports.create = () => {
   // })
 
   // httpServer
-  httpServer.on("request", app)
+  // httpServer.on("request", app)
+  app.attach(httpServer)
 
   return app
 }

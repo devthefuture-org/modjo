@@ -7,7 +7,7 @@ module.exports = () => {
     const isHttp = httpError.isHttpError(err)
     if (!isHttp || err.statusCode >= 500) {
       logger.error(err.message)
-      logger.debug(err.stack)
+      logger.error(err.stack)
     }
     if (res.headersSent) {
       next(err)

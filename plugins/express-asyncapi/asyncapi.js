@@ -1,5 +1,5 @@
 const path = require("path")
-const express = require("express")
+// const express = require("express")
 const get = require("lodash.get")
 const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
@@ -11,44 +11,29 @@ const { reqCtx } = require("@modjo/express/ctx")
 const traverseAsync = require("@modjo/core/utils/object/traverse-async")
 const createOptions = require("@modjo/core/utils/schema/options")
 const deepMapKeys = require("@modjo/core/utils/object/deep-map-keys")
+
+const { Router } = require("websocket-express")
+
+const { ctx: coreCtx } = require("@modjo/core")
+
 const ctx = require("./ctx")
-const createAsyncApiValidatorMiddleware = require("./middlewares/asyncapi-validator")
+const createValidator = require("./validator")
+
+const {
+  defaultOperationIdConvention,
+  defaultPathDescription,
+  defaultMethodDescription,
+  defaultMethodSummary,
+  // defaultChannelPathParameters,
+} = require("./defaults")
 
 const pathParamRegex = /\{(.+?)\}/g
 
-function compileSecuritySets(securitySets, methodSpec) {
-  const xSecurity = methodSpec["x-security"]
-  if (!securitySets || !xSecurity) {
-    return
-  }
-  if (!methodSpec.security) {
-    methodSpec.security = []
-  }
-  const { security } = methodSpec
-  for (const securityDef of xSecurity) {
-    const [key] = Object.keys(securityDef)
-    const securitySet = securitySets[key]
-    if (!securitySet) {
-      throw new Error(`missing x-security: ${key}`)
-    }
-    const scopes = securityDef[key]
-    security.push(
-      ...securitySet.map((name) => {
-        return { [name]: scopes }
-      })
-    )
-  }
+const asyncMethods = ["pub", "sub"]
+const actionByMethod = {
+  sub: "send",
+  pub: "receive",
 }
-
-// function filterOpenApiSpec(schema) {
-//   const openApiFields = ["openapi", "paths", "servers", "tags"]
-//   openApiFields.forEach((field) => {
-//     if (Object.keys(schema).includes(field)) {
-//       delete schema[field]
-//     }
-//   })
-//   return schema
-// }
 
 const optionsSchema = createOptions(
   {
@@ -57,6 +42,7 @@ const optionsSchema = createOptions(
       apiPath: "/api",
       aasPath: "/aas",
       version: "1",
+      operationIdConvention: defaultOperationIdConvention,
     },
     required: ["version"],
   },
@@ -68,6 +54,7 @@ parser.registerSchemaParser(OpenAPISchemaParser())
 
 module.exports = async function createAsyncApi(options = {}) {
   optionsSchema(options)
+  coreCtx.share(ctx.pluginSymbol)
 
   const logger = ctx.require("logger")
 
@@ -111,7 +98,10 @@ module.exports = async function createAsyncApi(options = {}) {
 
   const { basePath, apiPath, aasPath } = options
 
-  const router = express.Router({ strict: true, caseSensitive: true })
+  const httpServer = ctx.require("httpServer")
+
+  const router = new Router({ strict: true, caseSensitive: true })
+
   reqCtx.setRouterContext(router)
 
   const { host = "0.0.0.0", port = 3000 } = config.httpServer || {}
@@ -140,17 +130,75 @@ module.exports = async function createAsyncApi(options = {}) {
     await traverseAsync(addonTree, addonLoader)
   }
 
-  const operationsRouter = express.Router({ strict: true, caseSensitive: true })
+  // load formats
+  const formats = {}
+  function formatsLoader(_filename, factory, _dirFiles, keys) {
+    const format = factory(addonsHandlers)
+    if (!format.name) {
+      format.name = camelCase(keys.join("."))
+    }
+    formats[format.name] = format
+  }
+  await traverseAsync(formatsTree, formatsLoader)
+
+  // load security handlers
+  const securityHandlers = {}
+  function securityLoader(_filename, factory, _dirFiles, keys) {
+    const securityHandler = factory(addonsHandlers)
+    const name = camelCase(keys.join("."))
+    securityHandlers[name] = async (req, ...args) => {
+      return reqCtx.provide(async () => {
+        try {
+          const authenticated = await securityHandler(req, ...args)
+          return authenticated
+        } catch (err) {
+          logger.error(err)
+        }
+        return false
+      }, req)
+    }
+  }
+  await traverseAsync(securityTree, securityLoader)
+
+  // const operationsRouter = express.Router({ strict: true, caseSensitive: true })
+  const operationsRouter = new Router({ strict: true, caseSensitive: true })
   reqCtx.setRouterContext(operationsRouter)
 
-  // load methods
+  // load spec
   const apiMethods = {}
   function operationMethodLoader(filename, factory, _dirFiles, keys) {
+    if (filename.endsWith(".chan.spec")) {
+      const basename = filename.substring(
+        0,
+        filename.length - ".chan.spec".length
+      )
+      const channelKeys = [...keys.slice(0, -1), basename]
+      if (channelKeys[channelKeys.length - 1] === "index") {
+        channelKeys.pop()
+        channelKeys.push("")
+      }
+      const channelId = channelKeys.join(".")
+      const channelPath = `/${channelKeys.join("/")}`
+      if (!apiSpec.channels[channelId]) {
+        apiSpec.channels[channelId] = { address: channelPath, messages: {} }
+      }
+      const spec = apiSpec.channels[channelId]
+      Object.assign(spec, factory)
+
+      if (!spec.parameters) {
+        spec.parameters = {}
+      }
+
+      if (!spec.description) {
+        spec.description = defaultPathDescription(channelPath, spec)
+      }
+      return
+    }
     if (typeof factory !== "function") {
       return
     }
     const filenameParts = filename.split(".")
-    if (!filenameParts[filenameParts.length - 1] !== "sub") {
+    if (!asyncMethods.includes(filenameParts[filenameParts.length - 1])) {
       return
     }
     const apiMethod = factory(addonsHandlers)
@@ -189,6 +237,7 @@ module.exports = async function createAsyncApi(options = {}) {
   }
   await traverseAsync(operationsTree, operationMethodLoader)
 
+  const deferredOperationsRegister = []
   // load operations
   async function operationLoader(filename, factory, _dirFiles, keys) {
     if (typeof factory !== "function") {
@@ -223,15 +272,15 @@ module.exports = async function createAsyncApi(options = {}) {
       keys.pop()
       keys.push("")
     }
-    const operationPath = `/${keys.join("/")}`
+
+    const channelPath = `/${keys.join("/")}`
+    const channelId = keys.join(".")
 
     // operationId
     const { operationIdConvention } = options
     for (const [method, methodDef] of Object.entries(methods)) {
       if (spec[method] === undefined && methodDef.spec === undefined) {
-        throw new Error(
-          `missing spec for method "${method}" in path ${operationPath}"`
-        )
+        methodDef.spec = {}
       }
       if (methodDef.spec !== undefined) {
         spec[method] = defaultsDeep(methodDef.spec, spec[method] || {})
@@ -239,7 +288,7 @@ module.exports = async function createAsyncApi(options = {}) {
       const specMethod = spec[method]
       if (specMethod.operationId === undefined) {
         specMethod.operationId = operationIdConvention(
-          operationPath,
+          channelPath,
           method,
           spec,
           apiSpec
@@ -247,17 +296,14 @@ module.exports = async function createAsyncApi(options = {}) {
       }
     }
 
-    // operation path parameters
-    if (!spec.parameters) {
-      spec.parameters = []
+    if (!apiSpec.channels[channelId]) {
+      apiSpec.channels[channelId] = { address: channelPath, messages: {} }
     }
-    // // default path parameters
-    // spec.parameters.push(...defaultOperationPathParameters(operationPath, spec))
 
-    // // default desciptions
-    // if (!spec.description) {
-    //   spec.description = defaultPathDescription(operationPath, spec)
-    // }
+    const messageSpecs = apiSpec.channels[channelId].messages
+    for (const messageKey of Object.keys(messageSpecs)) {
+      messageSpecs[messageKey].name = messageKey
+    }
 
     for (const [method] of Object.entries(methods)) {
       const methodSpec = spec[method]
@@ -265,45 +311,38 @@ module.exports = async function createAsyncApi(options = {}) {
         continue
       }
 
-      // // default method desciptions
-      // if (!methodSpec.description) {
-      //   methodSpec.description = defaultMethodDescription(
-      //     method,
-      //     operationPath,
-      //     spec
-      //   )
-      // }
+      // default method desciptions
+      if (!methodSpec.description) {
+        methodSpec.description = defaultMethodDescription(
+          method,
+          channelPath,
+          spec
+        )
+      }
 
-      // // default method summary
-      // if (!methodSpec.summary) {
-      //   methodSpec.summary = defaultMethodSummary(method, operationPath, spec)
-      // }
+      // default method summary
+      if (!methodSpec.summary) {
+        methodSpec.summary = defaultMethodSummary(method, channelPath, spec)
+      }
 
-      // // default response description
-      // for (const [responseKey, responseDef] of Object.entries(
-      //   methodSpec.responses
-      // )) {
-      //   if (!responseDef.description) {
-      //     responseDef.description = defaultResponseDescription(
-      //       responseKey,
-      //       responseDef,
-      //       method,
-      //       operationPath,
-      //       spec
-      //     )
-      //   }
-      // }
+      if (!apiSpec.operations) {
+        apiSpec.operations = {}
+      }
+      const operation = {
+        action: actionByMethod[method],
+        channel: { $ref: `#/channels/${channelId}` },
+        description: methodSpec.description,
+        summary: methodSpec.summary,
+        title: methodSpec.title || "",
+        messages: methodSpec.messages || [],
+      }
 
-      // security suggar syntax
-      compileSecuritySets(apiSpec["x-security-sets"], methodSpec)
+      apiSpec.operations[methodSpec.operationId] = operation
     }
 
-    // register apiSpec
-    apiSpec.paths[operationPath] = spec
-    console.log("methods", methods)
     // register routes
     for (const [method, handlerStack] of Object.entries(methods)) {
-      const expressFormatedOperationPath = operationPath.replace(
+      const expressFormatedChannelPath = channelPath.replace(
         pathParamRegex,
         function (_, param) {
           return `:${param}`
@@ -318,70 +357,42 @@ module.exports = async function createAsyncApi(options = {}) {
           try {
             const result = await handler(req, res, next)
             if (result && result !== res) {
-              res.json(result)
+              const { ws } = res
+              if (ws) {
+                ws.send(JSON.stringify(result))
+                ws.close()
+              }
             }
+            next()
           } catch (err) {
             next(err)
           }
         }
       })
-      handlers.unshift((req, _res, next) => {
-        reqCtx.share(req)
+      const specMiddleware = (req, _res, next) => {
+        req.asyncapi = {
+          channelId,
+          channelSpec: apiSpec.channels[channelId],
+          operationsSpec: spec,
+        }
         next()
+      }
+      const contextMiddleware = (req, _res, next) => {
+        reqCtx.share(req)
+        coreCtx.provide(async () => {
+          coreCtx.share(ctx.pluginSymbol)
+          next()
+        })
+      }
+      deferredOperationsRegister.push((validatorMiddleware) => {
+        handlers.unshift(specMiddleware, contextMiddleware, validatorMiddleware)
+        operationsRouter.ws(expressFormatedChannelPath, ...handlers)
       })
-      console.log("method", method)
-      operationsRouter[method](expressFormatedOperationPath, ...handlers)
     }
   }
   await traverseAsync(operationsTree, operationLoader)
 
-  // load formats
-  const formats = {}
-  function formatsLoader(_filename, factory, _dirFiles, keys) {
-    const format = factory(addonsHandlers)
-    if (!format.name) {
-      format.name = camelCase(keys.join("."))
-    }
-    formats[format.name] = format
-  }
-  await traverseAsync(formatsTree, formatsLoader)
-
-  // load security handlers
-  const securityHandlers = {}
-  function securityLoader(_filename, factory, _dirFiles, keys) {
-    const securityHandler = factory(addonsHandlers)
-    const name = camelCase(keys.join("."))
-    securityHandlers[name] = async (req, ...args) => {
-      return reqCtx.provide(async () => {
-        try {
-          const authenticated = await securityHandler(req, ...args)
-          return authenticated
-        } catch (err) {
-          logger.error(err)
-        }
-        return false
-      }, req)
-    }
-  }
-  await traverseAsync(securityTree, securityLoader)
-
-  // errors handling
-  function errorMiddleware(err, _, res, _next) {
-    const { status, errors, message } = err
-    logger.debug(
-      { status, errors, message },
-      "openapi request_validation error"
-    )
-    res.status(status || 500).json({
-      error: {
-        type: "request_validation",
-        message,
-        errors,
-      },
-    })
-  }
-
-  // validate responses config
+  // validation middleware
   const validateResponses = config.isDev
     ? {
         onError: (error, body, req) => {
@@ -392,6 +403,32 @@ module.exports = async function createAsyncApi(options = {}) {
         },
       }
     : false
+
+  const asyncApiValidatorOptions = defaultsDeep(
+    {},
+    ctx.get("asyncApiValidatorOptions") || {},
+    {}
+  )
+
+  const msgIdentifier = "name"
+  const validator = await AsyncApiValidator.fromSource(apiSpec, {
+    msgIdentifier,
+    ignoreArray: true,
+    ...asyncApiValidatorOptions,
+  })
+  const validatorMiddleware = createValidator({
+    apiSpec,
+    validator,
+    validateResponses,
+    securityHandlers,
+    formats,
+    msgIdentifier,
+  })
+
+  // register defered operation
+  for (const deferred of deferredOperationsRegister) {
+    deferred(validatorMiddleware)
+  }
 
   const { document, diagnostics } = await parser.parse(apiSpec)
 
@@ -404,24 +441,7 @@ module.exports = async function createAsyncApi(options = {}) {
     throw new Error(errorMessage)
   }
 
-  // final validator middleware config
-  const asyncApiValidatorOptions = defaultsDeep(
-    {},
-    ctx.get("asyncApiValidatorOptions") || {},
-    {}
-  )
-  const validator = await AsyncApiValidator.fromSource(apiSpec, {
-    msgIdentifier: "name",
-    ignoreArray: true,
-    ...asyncApiValidatorOptions,
-  })
-
-  const validatorMiddleware = createAsyncApiValidatorMiddleware(validator)
-  router.use(validatorMiddleware)
-
-  // TODO register sub operations to the router
-
-  router.use(errorMiddleware, operationsRouter)
+  router.use(operationsRouter)
 
   return { router, apiSpec }
 }

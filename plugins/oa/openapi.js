@@ -3,7 +3,6 @@ const express = require("express")
 const get = require("lodash.get")
 const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
-const capitalize = require("lodash.capitalize")
 const camelCase = require("lodash.camelcase")
 const OpenApiValidator = require("express-openapi-validator")
 const { default: OpenAPISchemaValidator } = require("openapi-schema-validator")
@@ -14,150 +13,20 @@ const deepMapKeys = require("@modjo/core/utils/object/deep-map-keys")
 const ctx = require("./ctx")
 const restHttpMethodsList = require("./utils/rest-methods-list")
 
-// https://swagger.io/docs/specification/paths-and-operations/
+const {
+  defaultOperationIdConvention,
+  defaultPathDescription,
+  defaultMethodDescription,
+  defaultMethodSummary,
+  defaultResponseDescription,
+  defaultOperationPathParameters,
+} = require("./defaults")
 
-const httpMethodToOperationIdPrefixConvention = {
-  get: "get",
-  post: "add",
-  put: "set",
-  delete: "del",
-  patch: "do",
-}
+const { compileSecuritySets } = require("./sugar")
 
 const pathParamRegex = /\{(.+?)\}/g
 
-function defaultOperationIdConvention(operationPath, method) {
-  const keys = operationPath.split("/")
-  keys.shift()
-
-  if (method !== "patch") {
-    const perPrefix =
-      operationPath[operationPath.length - 1] === "/" ? "many" : "one"
-    keys.unshift(perPrefix)
-  }
-
-  const methodPrefix = httpMethodToOperationIdPrefixConvention[method]
-  keys.unshift(methodPrefix)
-
-  const parts = []
-  const pathParams = []
-  for (const key of keys) {
-    if (key.match(pathParamRegex)) {
-      pathParams.push(
-        key.replace(pathParamRegex, function (_, param) {
-          return `by${capitalize(camelCase(param))}`
-        })
-      )
-    } else {
-      parts.push(key)
-    }
-  }
-
-  parts.push(pathParams.join("-and-"))
-
-  const operationId = camelCase(parts.join("-"))
-  return operationId
-}
-
-function defaultOperationPathParameters(operationPath, spec) {
-  const params = []
-  const paramVars = operationPath.matchAll(pathParamRegex)
-  for (const [_, name] of paramVars) {
-    if (spec.parameters.some((param) => param.name === name)) {
-      continue
-    }
-    params.push({
-      name,
-      in: "path",
-      required: true,
-      schema: {
-        type: "string",
-      },
-    })
-  }
-  return params
-}
-
-function defaultPathDescription(operationPath, _spec) {
-  return `${operationPath}`
-}
-function defaultMethodDescription(method, _operationPath, spec) {
-  const { operationId } = spec[method]
-  switch (method) {
-    case "get":
-      return `Default description: Query: ${operationId}`
-    case "post":
-      return `Default description: Insert mutation: ${operationId}`
-    case "put":
-      return `Default description: Update mutation: ${operationId}`
-    case "patch":
-      return `Default description: Custom mutation with side effects: ${operationId}`
-    case "delete":
-      return `Default description: Delete mutation: ${operationId}`
-    default:
-      throw new Error(
-        `Unexpected http method: ${method}, for operationId ${operationId}`
-      )
-  }
-}
-function defaultMethodSummary(method, _operationPath, spec) {
-  const { operationId } = spec[method]
-  switch (method) {
-    case "get":
-      return `${operationId}`
-    case "post":
-      return `${operationId}`
-    case "put":
-      return `${operationId}`
-    case "patch":
-      return `${operationId}`
-    case "delete":
-      return `${operationId}`
-    default:
-      throw new Error(
-        `Unexpected http method: ${method}, for operationId ${operationId}`
-      )
-  }
-}
-function defaultResponseDescription(
-  responseKey,
-  _responseDef,
-  method,
-  _operationPath,
-  spec
-) {
-  const { operationId } = spec[method]
-  switch (responseKey) {
-    case "200":
-      return `Default description: Success results ${operationId}`
-    default:
-      return `Default description: HTTP ${responseKey} for ${operationId}`
-  }
-}
-
-function compileSecuritySets(securitySets, methodSpec) {
-  const xSecurity = methodSpec["x-security"]
-  if (!securitySets || !xSecurity) {
-    return
-  }
-  if (!methodSpec.security) {
-    methodSpec.security = []
-  }
-  const { security } = methodSpec
-  for (const securityDef of xSecurity) {
-    const [key] = Object.keys(securityDef)
-    const securitySet = securitySets[key]
-    if (!securitySet) {
-      throw new Error(`missing x-security: ${key}`)
-    }
-    const scopes = securityDef[key]
-    security.push(
-      ...securitySet.map((name) => {
-        return { [name]: scopes }
-      })
-    )
-  }
-}
+// https://swagger.io/docs/specification/paths-and-operations/
 
 const optionsSchema = createOptions(
   {
@@ -298,6 +167,7 @@ module.exports = async function createOpenApi(options = {}) {
     }
   }
   await traverseAsync(operationsTree, operationMethodLoader)
+  // console.log("o", operationsTree)
 
   // load operations
   async function operationLoader(filename, factory, _dirFiles, keys) {

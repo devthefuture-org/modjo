@@ -140,10 +140,11 @@ module.exports = async function createOpenApiToGraphqlServer({
         return { pubsub }
       },
     },
-    {
-      server: httpServer,
-      path: "/subscriptions",
-    }
+    ctx.require("express").wsServer
+    // {
+    //   server: httpServer,
+    //   path: "/subscriptions",
+    // }
   )
 
   const router = expressMiddleware(gqlServer)
