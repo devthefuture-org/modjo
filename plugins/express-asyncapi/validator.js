@@ -9,6 +9,7 @@ module.exports = function createValidator({
   // TODO
   // - validate types of messages
   // - validate formats
+  // - validate headers
   // - security at operation layer
   // - validateResponses
 

@@ -160,7 +160,8 @@ module.exports = async function createOpenApi(options = {}) {
 
     // register default root path of methods
     const keyPath = apiMethodFullPath.split("/")
-    if (!get(operationsTree, keyPath)) {
+    const operationSpec = get(operationsTree, keyPath)
+    if (!operationSpec?.spec) {
       set(operationsTree, keyPath, function ({ methods }) {
         return { spec: {}, methods }
       })
