@@ -90,7 +90,7 @@ module.exports = async function createOpenApiToGraphqlServer({
       const { statusCode } = extensions
       switch (statusCode) {
         case 401: {
-          return new GraphQLError("Unauthorized", 401, { http: 401 })
+          return new GraphQLError("Unauthorized", { http: 401 })
         }
         default: {
           const sentry = ctx.get("sentry")
