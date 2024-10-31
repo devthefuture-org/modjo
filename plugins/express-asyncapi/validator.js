@@ -12,6 +12,7 @@ module.exports = function createValidator({
   // - validate headers
   // - security at operation layer
   // - validateResponses
+  // - log channel open/close
 
   return async (req, res, next) => {
     const { channelId, channelSpec, operationsSpec } = req.asyncapi
