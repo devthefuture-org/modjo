@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/devthefuture-org/modjo/compare/v1.8.0...v1.9.0) (2024-11-01)
+
+
+### Features
+
+* asyncapi + refactor + wip ([4feaf2d](https://github.com/devthefuture-org/modjo/commit/4feaf2d227e5cc3ac416a7a07a0c6c844af0dd72))
+* asyncapi + refactor + wip ([6b9255b](https://github.com/devthefuture-org/modjo/commit/6b9255b9ab97b23d38e260ec11fc61654fb34357))
+* asyncapi + refactor + wip ([0584b84](https://github.com/devthefuture-org/modjo/commit/0584b84011b3ad7dfc1cb400c2ce6a8eea867f62))
+* asyncapi + refactor + wip ([140659d](https://github.com/devthefuture-org/modjo/commit/140659df574c870e36aa247e7d5025d07dc297e1))
+
+
+### Bug Fixes
+
+* core deps instances unicity ([b4acaba](https://github.com/devthefuture-org/modjo/commit/b4acaba38eb4cc58a76f185ed913a0842c5cac5f))
+* GraphQLError ([5ffd7d2](https://github.com/devthefuture-org/modjo/commit/5ffd7d294c80d6d257325ad51baa289e849c54b9))
+* improve debug ([33a1e04](https://github.com/devthefuture-org/modjo/commit/33a1e04fdc1648a58881f9e1b8aadb31024dd802))
+* up ajv formats ([471b8f1](https://github.com/devthefuture-org/modjo/commit/471b8f192b4087a55f3fcc4b061ae6141b44f135))
+
 ## [1.8.0](https://github.com/devthefuture-org/modjo/compare/v1.7.10...v1.8.0) (2024-10-21)
 
 
