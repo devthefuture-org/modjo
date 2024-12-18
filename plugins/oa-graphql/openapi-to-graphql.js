@@ -67,6 +67,7 @@ module.exports = async function createOpenApiToGraphqlServer({
       return {
         ...omit(req.headers, omitHeaders),
         "x-origin": "GraphQL",
+        connection: "close",
       }
     },
   })
