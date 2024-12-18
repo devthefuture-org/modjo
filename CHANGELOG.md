@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://github.com/devthefuture-org/modjo/compare/v1.9.0...v1.9.1) (2024-12-18)
+
+
+### Bug Fixes
+
+* **openapi-to-graphql:** connection close ([cf68c8a](https://github.com/devthefuture-org/modjo/commit/cf68c8a215202b72706996d115c080482ddafcc8))
+
 ## [1.9.0](https://github.com/devthefuture-org/modjo/compare/v1.8.0...v1.9.0) (2024-11-01)
 
 
