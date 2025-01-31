@@ -47,19 +47,42 @@ module.exports = async () => {
         )
         reconnecting = false
       })
-      conn.addTask = async function addTask(q, data) {
-        // const logger = ctx.require("logger")
+
+      conn.addTask = async function addTask(
+        queueName,
+        data,
+        {
+          // Default options
+          durable = true,
+          queueType = "quorum", // default to Quorum queue for HA
+          queueArgs = {}, // additional arguments
+          persistent = true, // persistent messages by default
+        } = {}
+      ) {
         const ch = await conn.createChannel()
-        await ch.assertQueue(q)
-        await ch.sendToQueue(q, Buffer.from(JSON.stringify(data)), {
-          persistent: true,
+
+        const finalQueueArgs = {
+          "x-queue-type": queueType,
+          ...queueArgs,
+        }
+
+        await ch.assertQueue(queueName, {
+          durable,
+          arguments: finalQueueArgs,
         })
+
+        await ch.sendToQueue(queueName, Buffer.from(JSON.stringify(data)), {
+          persistent,
+        })
+
         await ch.close()
       }
+
       return conn
     }
 
     const conn = await createConnection()
+
     proxyManager.setTarget(conn)
     const proxy = proxyManager.getProxy()
 
@@ -71,5 +94,4 @@ module.exports = async () => {
 }
 
 module.exports.dependencies = ["config", "logger"]
-
 module.exports.ctx = ctx
