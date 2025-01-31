@@ -1,6 +1,6 @@
 {
   "name": "@modjo/oa-graphql",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "main": "index.js",
   "repository": "https://codeberg.org/devthefuture/modjo",
   "author": "devthejo",

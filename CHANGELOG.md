@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.3](https://github.com/devthefuture-org/modjo/compare/v1.9.2...v1.9.3) (2025-01-31)
+
+
+### Bug Fixes
+
+* up rabbitmq ([aed5fd0](https://github.com/devthefuture-org/modjo/commit/aed5fd0f18e22087a5caf19d85a516b249982ddd))
+
 ### [1.9.2](https://github.com/devthefuture-org/modjo/compare/v1.9.1...v1.9.2) (2025-01-31)
 
 
