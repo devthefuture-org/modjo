@@ -5,6 +5,17 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@acuminous/bitsyntax@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "@acuminous/bitsyntax@npm:0.1.2"
+  dependencies:
+    buffer-more-ints: ~1.0.0
+    debug: ^4.3.4
+    safe-buffer: ~5.1.2
+  checksum: d2f9f30dfc8ddb10673e4780fa997fbe43fe3b6cd996b9930803d1b3c5db42fd964f9dab225f9e1cc06a2a22832b5a04e37076f2d283365768c7bd9718642db4
+  languageName: node
+  linkType: hard
+
 "@apidevtools/json-schema-ref-parser@npm:^11.7.0":
   version: 11.7.2
   resolution: "@apidevtools/json-schema-ref-parser@npm:11.7.2"
@@ -605,7 +616,7 @@ __metadata:
   dependencies:
     "@modjo/config": "*"
     "@modjo/logger": "*"
-    amqplib: ^0.8.0
+    amqplib: ^0.10.5
     nctx: ^2.2.0
     wait-on: ^6.0.1
     ya-retry: ^1.2.0
@@ -2445,17 +2456,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"amqplib@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "amqplib@npm:0.8.0"
+"amqplib@npm:^0.10.5":
+  version: 0.10.5
+  resolution: "amqplib@npm:0.10.5"
   dependencies:
-    bitsyntax: ~0.1.0
-    bluebird: ^3.7.2
+    "@acuminous/bitsyntax": ^0.1.2
     buffer-more-ints: ~1.0.0
-    readable-stream: 1.x >=1.1.9
-    safe-buffer: ~5.2.1
-    url-parse: ~1.5.1
-  checksum: fc8f227769f0d3a731eeeb9732b862b651810cef763ddf402b97a923bb1818b6739dc6a031cabe8ee0940192b5f3949e2320f76a87ed8f71425a429512c8d4d1
+    url-parse: ~1.5.10
+  checksum: 473e2ab2e33c0d6dcc5b7470858deadc64f777e3005aa7b869f2f7e752e61407434c87058eb67ce137e3e5ddb9960e9e92e26bd67adb3c9873d16101b464c7de
   languageName: node
   linkType: hard
 
@@ -2800,17 +2808,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bitsyntax@npm:~0.1.0":
-  version: 0.1.0
-  resolution: "bitsyntax@npm:0.1.0"
-  dependencies:
-    buffer-more-ints: ~1.0.0
-    debug: ~2.6.9
-    safe-buffer: ~5.1.2
-  checksum: b9f1548eeea950a59021b58bd2caf0bc402de94e2797fa274ed5a57dfc54240a9acbf2115b342e698c7e398949c6a13e87fb9da15388e9d007411080dd195f07
-  languageName: node
-  linkType: hard
-
 "bl@npm:^4.0.3":
   version: 4.1.0
   resolution: "bl@npm:4.1.0"
@@ -2838,7 +2835,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bluebird@npm:^3.7.1, bluebird@npm:^3.7.2":
+"bluebird@npm:^3.7.1":
   version: 3.7.2
   resolution: "bluebird@npm:3.7.2"
   checksum: 869417503c722e7dc54ca46715f70e15f4d9c602a423a02c825570862d12935be59ed9c7ba34a9b31f186c017c23cac6b54e35446f8353059c101da73eac22ef
@@ -3886,7 +3883,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:2.6.9, debug@npm:^2.6.9, debug@npm:~2.6.9":
+"debug@npm:2.6.9, debug@npm:^2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
   dependencies:
@@ -6142,7 +6139,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inherits@npm:2, inherits@npm:2.0.4, inherits@npm:^2.0.1, inherits@npm:^2.0.3, inherits@npm:^2.0.4, inherits@npm:~2.0.1, inherits@npm:~2.0.3":
+"inherits@npm:2, inherits@npm:2.0.4, inherits@npm:^2.0.1, inherits@npm:^2.0.3, inherits@npm:^2.0.4, inherits@npm:~2.0.3":
   version: 2.0.4
   resolution: "inherits@npm:2.0.4"
   checksum: 4a48a733847879d6cf6691860a6b1e3f0f4754176e4d71494c41f3475553768b10f84b5ce1d40fbd0e34e6bfbb864ee35858ad4dd2cf31e02fc4a154b724d7f1
@@ -6549,13 +6546,6 @@ __metadata:
     call-bind: ^1.0.2
     get-intrinsic: ^1.1.1
   checksum: 5d8698d1fa599a0635d7ca85be9c26d547b317ed8fd83fc75f03efbe75d50001b5eececb1e9971de85fcde84f69ae6f8346bc92d20d55d46201d328e4c74a367
-  languageName: node
-  linkType: hard
-
-"isarray@npm:0.0.1":
-  version: 0.0.1
-  resolution: "isarray@npm:0.0.1"
-  checksum: 49191f1425681df4a18c2f0f93db3adb85573bcdd6a4482539d98eac9e705d8961317b01175627e860516a2fc45f8f9302db26e5a380a97a520e272e2a40a8d4
   languageName: node
   linkType: hard
 
@@ -9026,18 +9016,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:1.x >=1.1.9":
-  version: 1.1.14
-  resolution: "readable-stream@npm:1.1.14"
-  dependencies:
-    core-util-is: ~1.0.0
-    inherits: ~2.0.1
-    isarray: 0.0.1
-    string_decoder: ~0.10.x
-  checksum: 17dfeae3e909945a4a1abc5613ea92d03269ef54c49288599507fc98ff4615988a1c39a999dcf9aacba70233d9b7040bc11a5f2bfc947e262dedcc0a8b32b5a0
-  languageName: node
-  linkType: hard
-
 "readable-stream@npm:2 || 3, readable-stream@npm:3, readable-stream@npm:^3.0.0, readable-stream@npm:^3.0.2, readable-stream@npm:^3.4.0, readable-stream@npm:^3.6.0":
   version: 3.6.0
   resolution: "readable-stream@npm:3.6.0"
@@ -9370,7 +9348,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"safe-buffer@npm:5.2.1, safe-buffer@npm:^5.0.1, safe-buffer@npm:^5.1.0, safe-buffer@npm:^5.1.1, safe-buffer@npm:^5.1.2, safe-buffer@npm:^5.2.0, safe-buffer@npm:~5.2.0, safe-buffer@npm:~5.2.1":
+"safe-buffer@npm:5.2.1, safe-buffer@npm:^5.0.1, safe-buffer@npm:^5.1.0, safe-buffer@npm:^5.1.1, safe-buffer@npm:^5.1.2, safe-buffer@npm:^5.2.0, safe-buffer@npm:~5.2.0":
   version: 5.2.1
   resolution: "safe-buffer@npm:5.2.1"
   checksum: b99c4b41fdd67a6aaf280fcd05e9ffb0813654894223afb78a31f14a19ad220bba8aba1cb14eddce1fcfb037155fe6de4e861784eb434f7d11ed58d1e70dd491
@@ -10156,13 +10134,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"string_decoder@npm:~0.10.x":
-  version: 0.10.31
-  resolution: "string_decoder@npm:0.10.31"
-  checksum: fe00f8e303647e5db919948ccb5ce0da7dea209ab54702894dd0c664edd98e5d4df4b80d6fabf7b9e92b237359d21136c95bf068b2f7760b772ca974ba970202
-  languageName: node
-  linkType: hard
-
 "string_decoder@npm:~1.1.1":
   version: 1.1.1
   resolution: "string_decoder@npm:1.1.1"
@@ -10763,7 +10734,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"url-parse@npm:~1.5.1":
+"url-parse@npm:~1.5.10":
   version: 1.5.10
   resolution: "url-parse@npm:1.5.10"
   dependencies:

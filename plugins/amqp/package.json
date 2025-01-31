@@ -11,7 +11,7 @@
   "dependencies": {
     "@modjo/config": "*",
     "@modjo/logger": "*",
-    "amqplib": "^0.8.0",
+    "amqplib": "^0.10.5",
     "nctx": "^2.2.0",
     "wait-on": "^6.0.1",
     "ya-retry": "^1.2.0"
