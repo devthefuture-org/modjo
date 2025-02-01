@@ -1,6 +1,6 @@
 {
   "name": "@modjo/microservice-oapi",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "main": "index.js",
   "repository": "https://codeberg.org/devthefuture/modjo",
   "author": "devthejo",

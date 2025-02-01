@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.4](https://github.com/devthefuture-org/modjo/compare/v1.9.3...v1.9.4) (2025-02-01)
+
+
+### Bug Fixes
+
+* amqp default consistency ([1423d0e](https://github.com/devthefuture-org/modjo/commit/1423d0ee6211d7b6f8a96c2c0422ea8f56782e24))
+
 ### [1.9.3](https://github.com/devthefuture-org/modjo/compare/v1.9.2...v1.9.3) (2025-01-31)
 
 
