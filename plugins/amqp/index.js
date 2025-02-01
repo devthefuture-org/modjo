@@ -56,26 +56,27 @@ module.exports = async () => {
           durable = true,
           queueType = "quorum", // default to Quorum queue for HA
           queueArgs = {}, // additional arguments
-          persistent = true, // persistent messages by default
+          persistent = true, // persistent messages by default,
         } = {}
       ) {
         const ch = await conn.createChannel()
+        try {
+          const finalQueueArgs = {
+            "x-queue-type": queueType,
+            ...queueArgs,
+          }
 
-        const finalQueueArgs = {
-          "x-queue-type": queueType,
-          ...queueArgs,
+          await ch.assertQueue(queueName, {
+            durable,
+            arguments: finalQueueArgs,
+          })
+
+          await ch.sendToQueue(queueName, Buffer.from(JSON.stringify(data)), {
+            persistent,
+          })
+        } finally {
+          await ch.close()
         }
-
-        await ch.assertQueue(queueName, {
-          durable,
-          arguments: finalQueueArgs,
-        })
-
-        await ch.sendToQueue(queueName, Buffer.from(JSON.stringify(data)), {
-          persistent,
-        })
-
-        await ch.close()
       }
 
       return conn

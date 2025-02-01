@@ -3,7 +3,10 @@ const timeLogger = require("./time-logger")
 
 const createTaskRunner = require("./task-runner")
 
-module.exports = async function createQueueWorker(q) {
+module.exports = async function createQueueWorker(
+  q,
+  { durable = true, queueType = "quorum", queueArgs = {} } = {}
+) {
   const logger = ctx.require("logger")
   const conn = ctx.require("amqp")
   const { microserviceWorker: config = {} } = ctx.require("config")
@@ -16,7 +19,11 @@ module.exports = async function createQueueWorker(q) {
   ch.prefetch(prefetchSize, true)
 
   await ch.assertQueue(q, {
-    durable: true,
+    durable,
+    arguments: {
+      "x-queue-type": queueType,
+      ...queueArgs,
+    },
   })
 
   ch.consume(
