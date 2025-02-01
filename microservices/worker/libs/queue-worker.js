@@ -16,7 +16,10 @@ module.exports = async function createQueueWorker(
   const ch = await conn.createChannel()
 
   const { prefetchSize = 100 } = config
-  ch.prefetch(prefetchSize, true)
+
+  // Set prefetch based on queue type
+  // Global QoS for classic queues, per-channel QoS for quorum queues
+  ch.prefetch(prefetchSize, queueType === "classic")
 
   await ch.assertQueue(q, {
     durable,
