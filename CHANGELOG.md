@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.6](https://github.com/devthefuture-org/modjo/compare/v1.9.5...v1.9.6) (2025-02-08)
+
+
+### Bug Fixes
+
+* clean debug ([62e66d0](https://github.com/devthefuture-org/modjo/commit/62e66d03f97c9cb7362c07636f7c8f890adbd44a))
+
 ### [1.9.5](https://github.com/devthefuture-org/modjo/compare/v1.9.4...v1.9.5) (2025-02-01)
 
 
