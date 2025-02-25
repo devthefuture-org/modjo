@@ -47,7 +47,11 @@ const dynamicRequire = (r, key = r) => {
     const requireRegistry = require(`${process.cwd()}/build/requires.js`)
     return requireRegistry[key]
   } catch (err) {
-    // console.log(err) // display error when missing required code file from plugin source
+    if (
+      !(err.code === "MODULE_NOT_FOUND" && err.message.includes(`"${key}"`))
+    ) {
+      console.log(err) // display error when missing required code file from plugin source
+    }
     if (
       !(
         err.code === "MODULE_NOT_FOUND" &&
