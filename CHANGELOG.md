@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/devthefuture-org/modjo/compare/v1.9.6...v1.10.0) (2025-06-30)
+
+
+### Features
+
+* support redis sentinel ([276edf0](https://github.com/devthefuture-org/modjo/commit/276edf028556b005d94374e4fdbf025b4da1cff4))
+
+
+### Bug Fixes
+
+* ctx error (clean) ([763369c](https://github.com/devthefuture-org/modjo/commit/763369ccee175a43d6d79e93e465e4f544e63d7e))
+* improve module not found debugging ([ee99490](https://github.com/devthefuture-org/modjo/commit/ee9949009e6fbb3094639d23e7439ba1be9daad3))
+
 ### [1.9.6](https://github.com/devthefuture-org/modjo/compare/v1.9.5...v1.9.6) (2025-02-08)
 
 
