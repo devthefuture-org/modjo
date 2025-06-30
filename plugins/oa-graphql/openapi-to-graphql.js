@@ -1,5 +1,4 @@
 const cloneDeep = require("lodash.clonedeep")
-const omit = require("lodash.omit")
 const { createGraphQLSchema } = require("openapi-to-graphql")
 const { execute, subscribe } = require("graphql")
 // const { printSchema } = require("graphql")
@@ -14,7 +13,6 @@ const {
 } = require("@apollo/server-plugin-landing-page-graphql-playground")
 
 const { GraphQLError } = require("graphql")
-const { reqCtx } = require("@modjo/express/ctx")
 const restHttpMethodsList = require("@modjo/oa/utils/rest-methods-list")
 const expressMiddleware = require("./express-middleware")
 const ctx = require("./ctx")
@@ -49,7 +47,6 @@ module.exports = async function createOpenApiToGraphqlServer({
   }
 
   // let OpenAPI-to-GraphQL create the schema
-  const omitHeaders = ["content-type"]
   const { host = "0.0.0.0", port = 3000 } = config.httpServer || {}
   const { schema } = await createGraphQLSchema(apiSpec, {
     // https://github.com/IBM/openapi-to-graphql/blob/master/packages/openapi-to-graphql/README.md
@@ -63,9 +60,7 @@ module.exports = async function createOpenApiToGraphqlServer({
     provideErrorExtensions: true,
     // equivalentToMessages: false,
     headers: (_method, _operationPath, _title, _resolverParams) => {
-      const req = reqCtx.get("req")
       return {
-        ...omit(req.headers, omitHeaders),
         "x-origin": "GraphQL",
         connection: "close",
       }
