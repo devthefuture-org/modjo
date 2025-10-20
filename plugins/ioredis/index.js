@@ -38,20 +38,23 @@ module.exports = async () => {
           sentinels,
           name = "mymaster",
           sentinelPassword,
+          sentinelUsername,
         } = config.sentinel
 
         // Configure Redis with sentinel options
         const options = {
           sentinels,
           name,
-          password,
           db,
-          sentinelPassword: sentinelPassword || password,
         }
 
-        if (username) {
-          options.username = username
-        }
+        // Auth for data nodes (Valkey servers)
+        if (password) options.password = password
+        if (username) options.username = username
+
+        // Auth for Sentinel ONLY if explicitly configured
+        if (sentinelPassword) options.sentinelPassword = sentinelPassword
+        if (sentinelUsername) options.sentinelUsername = sentinelUsername
 
         return options
       })()
