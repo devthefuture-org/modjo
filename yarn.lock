@@ -5,17 +5,6 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@acuminous/bitsyntax@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "@acuminous/bitsyntax@npm:0.1.2"
-  dependencies:
-    buffer-more-ints: ~1.0.0
-    debug: ^4.3.4
-    safe-buffer: ~5.1.2
-  checksum: d2f9f30dfc8ddb10673e4780fa997fbe43fe3b6cd996b9930803d1b3c5db42fd964f9dab225f9e1cc06a2a22832b5a04e37076f2d283365768c7bd9718642db4
-  languageName: node
-  linkType: hard
-
 "@apidevtools/json-schema-ref-parser@npm:^11.7.0":
   version: 11.7.2
   resolution: "@apidevtools/json-schema-ref-parser@npm:11.7.2"
@@ -616,7 +605,7 @@ __metadata:
   dependencies:
     "@modjo/config": "*"
     "@modjo/logger": "*"
-    amqplib: ^0.10.5
+    amqplib: ^0.10.9
     nctx: ^2.2.0
     wait-on: ^6.0.1
     ya-retry: ^1.2.0
@@ -2456,14 +2445,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"amqplib@npm:^0.10.5":
-  version: 0.10.5
-  resolution: "amqplib@npm:0.10.5"
+"amqplib@npm:^0.10.9":
+  version: 0.10.9
+  resolution: "amqplib@npm:0.10.9"
   dependencies:
-    "@acuminous/bitsyntax": ^0.1.2
     buffer-more-ints: ~1.0.0
     url-parse: ~1.5.10
-  checksum: 473e2ab2e33c0d6dcc5b7470858deadc64f777e3005aa7b869f2f7e752e61407434c87058eb67ce137e3e5ddb9960e9e92e26bd67adb3c9873d16101b464c7de
+  checksum: ce9170f93ac99e921566158e7df2920fb4b97f25524c641590623535e2e3eb162fe77dbf2dac8743fb128bfd1843547564bdcbbdb4d88a3c502e62d190564faa
   languageName: node
   linkType: hard
 
@@ -9355,7 +9343,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"safe-buffer@npm:~5.1.0, safe-buffer@npm:~5.1.1, safe-buffer@npm:~5.1.2":
+"safe-buffer@npm:~5.1.0, safe-buffer@npm:~5.1.1":
   version: 5.1.2
   resolution: "safe-buffer@npm:5.1.2"
   checksum: f2f1f7943ca44a594893a852894055cf619c1fbcb611237fc39e461ae751187e7baf4dc391a72125e0ac4fb2d8c5c0b3c71529622e6a58f46b960211e704903c
