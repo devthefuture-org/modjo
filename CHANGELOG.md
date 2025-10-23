@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.4](https://github.com/devthefuture-org/modjo/compare/v1.10.3...v1.10.4) (2025-10-23)
+
+
+### Bug Fixes
+
+* **amqplib:** up ([a70e9fc](https://github.com/devthefuture-org/modjo/commit/a70e9fcb2c3c23055d1016bce7260eb00b1fa7bd))
+
 ### [1.10.3](https://github.com/devthefuture-org/modjo/compare/v1.10.2...v1.10.3) (2025-10-20)
 
 ### [1.10.2](https://github.com/devthefuture-org/modjo/compare/v1.10.1...v1.10.2) (2025-10-20)
