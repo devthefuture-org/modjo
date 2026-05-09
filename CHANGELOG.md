@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/devthefuture-org/modjo/compare/v1.10.4...v1.11.0) (2026-05-09)
+
+
+### Features
+
+* **core:** isolated Container, typed errors, dispose hook + multiple correctness fixes ([ef46cb9](https://github.com/devthefuture-org/modjo/commit/ef46cb98b50511255dce65e3e5c8eab9f5393f68))
+
 ### [1.10.4](https://github.com/devthefuture-org/modjo/compare/v1.10.3...v1.10.4) (2025-10-23)
 
 
