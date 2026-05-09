@@ -644,17 +644,7 @@ __metadata:
     commander: ^9.1.0
     fs-extra: ^11.1.1
     js-yaml: ^4.1.0
-    link-module-alias: ^1.2.0
     lodash: ^4.17.21
-    lodash.camelcase: ^4.3.0
-    lodash.capitalize: ^4.2.1
-    lodash.defaultsdeep: ^4.6.1
-    lodash.get: ^4.4.2
-    lodash.kebabcase: ^4.1.1
-    lodash.merge: ^4.6.2
-    lodash.mergewith: ^4.6.2
-    lodash.omit: ^4.5.0
-    lodash.set: ^4.3.2
     nctx: ^2.2.0
     pretty-ms: ^7.0.1
     yup: ^0.32.11
@@ -2170,6 +2160,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vercel/ncc@npm:^0.38.4":
+  version: 0.38.4
+  resolution: "@vercel/ncc@npm:0.38.4"
+  dependencies:
+    node-gyp: latest
+  bin:
+    ncc: dist/ncc/cli.js
+  checksum: 3d6b9997ad3fbcbb8f7548d640e724ea74db15b8dafec6a41e839b5c31b7f26e6977a8ca0e1510f6670d2a51a5f875b59b22fae4deca5ae40b6ce7a97129c3af
+  languageName: node
+  linkType: hard
+
 "@wry/context@npm:^0.6.0":
   version: 0.6.1
   resolution: "@wry/context@npm:0.6.1"
@@ -3149,7 +3150,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^2.0.0, chalk@npm:^2.4.1, chalk@npm:^2.4.2":
+"chalk@npm:^2.0.0, chalk@npm:^2.4.2":
   version: 2.4.2
   resolution: "chalk@npm:2.4.2"
   dependencies:
@@ -6821,17 +6822,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"link-module-alias@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "link-module-alias@npm:1.2.0"
-  dependencies:
-    chalk: ^2.4.1
-  bin:
-    link-module-alias: index.js
-  checksum: 827771edb78a28ab7c76c491a6f745ab718726ba507aaac4978f4876bf0666881743b4c5b6aa993df203b2d6ca5f3c64929d5f5e271c527d7ce3200aa181df20
-  languageName: node
-  linkType: hard
-
 "lint-staged@npm:^11.1.2":
   version: 11.2.6
   resolution: "lint-staged@npm:11.2.6"
@@ -7001,13 +6991,6 @@ __metadata:
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: ad580b4bdbb7ca1f7abf7e1bce63a9a0b98e370cf40194b03380a46b4ed799c9573029599caebc1b14e3f24b111aef72b96674a56cfa105e0f5ac70546cdc005
-  languageName: node
-  linkType: hard
-
-"lodash.mergewith@npm:^4.6.2":
-  version: 4.6.2
-  resolution: "lodash.mergewith@npm:4.6.2"
-  checksum: a6db2a9339752411f21b956908c404ec1e088e783a65c8b29e30ae5b3b6384f82517662d6f425cc97c2070b546cc2c7daaa8d33f78db7b6e9be06cd834abdeb8
   languageName: node
   linkType: hard
 
@@ -7473,6 +7456,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "modjo-dev@workspace:."
   dependencies:
+    "@vercel/ncc": ^0.38.4
     eslint: ^7.32.0
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-prettier: ^7

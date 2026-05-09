@@ -1,0 +1,13 @@
+{
+  "name": "ncc-fixture",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node src/index.js build && ncc build src/index.js -o dist --quiet",
+    "start": "node dist/index.js start"
+  },
+  "dependencies": {
+    "@modjo/core": "*",
+    "nctx": "*"
+  }
+}
