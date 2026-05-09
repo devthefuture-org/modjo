@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.1](https://github.com/devthefuture-org/modjo/compare/v1.11.0...v1.11.1) (2026-05-09)
+
+
+### Bug Fixes
+
+* **core:** keep dynamicFilename inline so NCC can statically inline the require ([808b87b](https://github.com/devthefuture-org/modjo/commit/808b87bb5ecd1eb73074efb46fcea8beb81ec56a))
+
 ## [1.11.0](https://github.com/devthefuture-org/modjo/compare/v1.10.4...v1.11.0) (2026-05-09)
 
 
