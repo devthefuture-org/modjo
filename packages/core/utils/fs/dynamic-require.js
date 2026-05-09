@@ -2,12 +2,14 @@ const path = require("path")
 const fs = require("fs")
 
 // see https://github.com/vercel/ncc/issues/74#issuecomment-1085719145
+//
+// IMPORTANT: the `${process.cwd()}/build/requires.js` template literal must
+// stay inline so @vercel/ncc can statically detect and inline the require().
+// Wrapping the path in a function (or path.join, etc.) defeats the inlining
+// and breaks plugin resolution in NCC-bundled builds (alerte-secours and
+// other consumers ship as ncc bundles in production). Caught in v1.11.0.
 
-// Lazy filename so a chdir() after module load (tests, embedded usage) still
-// resolves the correct build directory.
-const getDynamicFilename = () =>
-  path.join(process.cwd(), "build", "requires.js")
-
+const dynamicFilename = `${process.cwd()}/build/requires.js`
 const dynamicRequires = {}
 const dynamicRequireRegister = (src, key) => {
   if (dynamicRequires[key] === src) {
@@ -19,15 +21,14 @@ const dynamicRequireRegister = (src, key) => {
     acc.push(`${JSON.stringify(k)}: require(${JSON.stringify(target)})`)
     return acc
   }, [])
-  const dynamicFilename = getDynamicFilename()
   fs.mkdirSync(path.dirname(dynamicFilename), { recursive: true })
   fs.writeFileSync(dynamicFilename, `module.exports={${exports.join(",")}}`)
   delete require.cache[require.resolve(dynamicFilename)]
 }
 
-// Treat both MODULE_NOT_FOUND and ENOENT as "no plugin here, keep looking".
-// The ENOENT case happens when require() reuses a cached _resolveFilename
-// path whose underlying file has been deleted (test fixtures, hot reloads).
+// Treat MODULE_NOT_FOUND with the relevant key, and ENOENT (file deleted
+// after path-resolve cached) as "no plugin here, keep looking down the
+// resolver chain".
 const isExpectedMiss = (err, key) => {
   if (err.code === "MODULE_NOT_FOUND") {
     return (
@@ -66,13 +67,14 @@ const dynamicRequire = (r, key = r) => {
     dynamicRequireRegister(r, key)
   }
   try {
-    const requireRegistry = require(getDynamicFilename())
+    // keep the literal `${process.cwd()}/build/requires.js` shape so NCC
+    // can statically inline the bundle target — see top-of-file note
+    const requireRegistry = require(`${process.cwd()}/build/requires.js`)
     return requireRegistry[key]
   } catch (err) {
     if (!isExpectedMiss(err, key)) {
       throw err
     }
-    // expected miss: caller will try the next resolver in the chain
     return undefined
   }
 }
