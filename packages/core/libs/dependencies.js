@@ -1,12 +1,16 @@
 const nctx = require("nctx")
-const defaultsDeep = require("lodash.defaultsdeep")
-const { getPlugin } = require("~/libs/plugins")
+const defaultsDeep = require("lodash/defaultsDeep")
+const { getPlugin } = require("./plugins")
+const {
+  DependencyCycleError,
+  InvalidDependencyError,
+} = require("./errors")
 
-const promiseObject = require("~/utils/async/promise-object")
+const promiseObject = require("../utils/async/promise-object")
 
-const ctx = require("~/ctx")
-const promisePublic = require("~/utils/async/promise-public")
-const isPromise = require("~/utils/async/is-promise")
+const ctx = require("../ctx")
+const promisePublic = require("../utils/async/promise-public")
+const isPromise = require("../utils/async/is-promise")
 
 const castDependency = (dependency, key) => {
   if (typeof dependency === "function") {
@@ -20,6 +24,10 @@ const castDependency = (dependency, key) => {
     }
   } else if (typeof dependency === "string") {
     dependency = { pluginName: dependency }
+  } else {
+    // shallow clone so make() does not leak mutations (ctx, recursive, ...)
+    // back to the caller's tree
+    dependency = { ...dependency }
   }
 
   if (dependency.key === undefined && key) {
@@ -36,7 +44,7 @@ const castDependency = (dependency, key) => {
 
 const castDependencies = (dependencies = {}) => {
   if (Array.isArray(dependencies)) {
-    dependencies = dependencies.reduce((acc, item) => {
+    return dependencies.reduce((acc, item) => {
       if (Array.isArray(item)) {
         const [key, val] = item
         if (typeof val === "string") {
@@ -49,14 +57,14 @@ const castDependencies = (dependencies = {}) => {
       } else if (typeof item.pluginName === "string") {
         acc[item.pluginName] = item
       } else {
-        throw new Error(
-          `Unexpected type of dependency item: ${item}, expected string or array[string, object] or object{pluginName: string}`
-        )
+        throw new InvalidDependencyError(item)
       }
       return acc
     }, {})
   }
-  return dependencies
+  // shallow clone the dependencies map so make() can rewrite entries
+  // without mutating the caller's tree
+  return { ...dependencies }
 }
 
 const mergePluginToDependency = (dependency, plugin = {}) => {
@@ -65,205 +73,242 @@ const mergePluginToDependency = (dependency, plugin = {}) => {
   defaultsDeep(dependency, plugin)
 }
 
-const make = async (
-  dependency,
-  scope = ["root"],
-  branchPlugins = new Map(),
-  key = null
-) => {
-  dependency = castDependency(dependency, key)
-  if (
-    dependency.key &&
-    !dependency.create &&
-    branchPlugins.has(dependency.key)
-  ) {
-    const plugin = branchPlugins.get(dependency.key)
-    mergePluginToDependency(dependency, plugin)
-  }
+// Each call returns an isolated lifecycle container. Two concurrent
+// entrypoint() invocations no longer share state (singletons, build/ready
+// markers). The previous module-level Maps caused cross-run pollution and
+// made tests impossible without cache hacks.
+function createContainer() {
+  const flatInstancesRegistry = new Map()
+  const treeRegistry = new Map()
+  const builtRegistry = new Set()
+  const readyRegistry = new Set()
+  const disposeRegistry = new Set()
 
-  dependency.dependencies = castDependencies(dependency.dependencies)
-
-  if (dependency.pluginName && !dependency.plugin && !dependency.create) {
-    dependency.plugin = getPlugin(dependency.pluginName)
-  }
-
-  mergePluginToDependency(dependency, dependency.plugin)
-
-  if (!dependency.ctx) {
-    dependency.ctx =
-      (dependency.plugin && dependency.plugin.ctx) ||
-      nctx.create(Symbol(dependency.pluginName || scope.join(".")))
-  }
-  dependency.ctx.fallback(ctx)
-
-  dependency.recursiveSequential = (callback, desc = false) => {
-    let trunk
-    if (desc) {
-      trunk = callback(dependency)
-    }
-    const branches = Object.values(dependency.dependencies).map((d) => {
-      return d.recursiveSequential(callback, desc)
-    })
-    if (!desc) {
-      trunk = callback(dependency)
-    }
-    return { trunk, branches }
-  }
-
-  dependency.recursive = async (
-    callback,
-    desc = false,
-    parent = null,
-    key = null
+  const make = async (
+    dependency,
+    scope = ["root"],
+    branchPlugins = new Map(),
+    key = null,
+    ancestorPath = new Set()
   ) => {
-    let trunk
-    if (desc) {
-      trunk = await callback(dependency, parent, key)
+    if (
+      dependency !== null &&
+      typeof dependency === "object" &&
+      !Array.isArray(dependency) &&
+      ancestorPath.has(dependency)
+    ) {
+      throw new DependencyCycleError([...scope].join(" > "))
     }
-    const branches = await promiseObject(
-      Object.entries(dependency.dependencies).reduce((acc, [k, d]) => {
-        acc[k] = d.recursive(callback, desc, dependency, k)
-        return acc
-      }, {})
-    )
-    if (!desc) {
-      trunk = await callback(dependency, parent, key, branches)
+    const nextPath = new Set(ancestorPath)
+    if (
+      dependency !== null &&
+      typeof dependency === "object" &&
+      !Array.isArray(dependency)
+    ) {
+      nextPath.add(dependency)
     }
-    return { trunk, branches }
-  }
-
-  const newBranchPlugins = new Map(branchPlugins)
-  for (const k of Object.keys(dependency.plugins || {})) {
-    newBranchPlugins.set(k, dependency.plugins[k])
-  }
-
-  await Promise.all(
-    Object.keys(dependency.dependencies).map(async (k) => {
-      const childScope = [...scope, k]
-      dependency.dependencies[k] = await make(
-        dependency.dependencies[k],
-        childScope,
-        newBranchPlugins,
-        k
-      )
-    })
-  )
-
-  return dependency
-}
-
-const flatInstancesRegistry = new Map()
-const treeRegistry = new Map()
-
-const registerSyncFlatInstanceRegistry = (dep) => {
-  let instancePromise
-  let registerPromise
-  if (dep.key !== undefined && flatInstancesRegistry.has(dep.key)) {
-    instancePromise = flatInstancesRegistry.get(dep.key)
-  } else {
-    const publicPromise = promisePublic()
-    instancePromise = publicPromise.promise
-    if (dep.key !== undefined) {
-      flatInstancesRegistry.set(dep.key, instancePromise)
-    }
-    registerPromise = (factoryPromise) => {
-      factoryPromise
-        .then(publicPromise.resolve.bind(factoryPromise))
-        .catch(publicPromise.reject.bind(factoryPromise))
-    }
-  }
-  return { instancePromise, registerPromise }
-}
-
-const create = async (dep, _parent, _key, branches) => {
-  return nctx.fork([dep.ctx], async () => {
-    const treeCtx = { branches: {} }
-    for (const key of Object.keys(branches)) {
-      const instance = await branches[key].trunk
-      dep.ctx.set(key, instance)
-      treeCtx.branches[key] = instance
+    dependency = castDependency(dependency, key)
+    if (
+      dependency.key &&
+      !dependency.create &&
+      branchPlugins.has(dependency.key)
+    ) {
+      const plugin = branchPlugins.get(dependency.key)
+      mergePluginToDependency(dependency, plugin)
     }
 
-    const { instancePromise, registerPromise } =
-      registerSyncFlatInstanceRegistry(dep)
+    dependency.dependencies = castDependencies(dependency.dependencies)
 
-    if (registerPromise) {
-      if (dep.context) {
-        await dep.context(dep.ctx, ctx)
+    if (dependency.pluginName && !dependency.plugin && !dependency.create) {
+      dependency.plugin = getPlugin(dependency.pluginName)
+    }
+
+    mergePluginToDependency(dependency, dependency.plugin)
+
+    if (!dependency.ctx) {
+      dependency.ctx =
+        (dependency.plugin && dependency.plugin.ctx) ||
+        nctx.create(Symbol(dependency.pluginName || scope.join(".")))
+    }
+    dependency.ctx.fallback(ctx)
+
+    dependency.recursiveSequential = (callback, desc = false) => {
+      let trunk
+      if (desc) {
+        trunk = callback(dependency)
       }
-      let params = []
-      if (dep.params) {
-        if (typeof dep.params === "function") {
+      const branches = Object.values(dependency.dependencies).map((d) => {
+        return d.recursiveSequential(callback, desc)
+      })
+      if (!desc) {
+        trunk = callback(dependency)
+      }
+      return { trunk, branches }
+    }
+
+    dependency.recursive = async (
+      callback,
+      desc = false,
+      parent = null,
+      cbKey = null
+    ) => {
+      let trunk
+      if (desc) {
+        trunk = await callback(dependency, parent, cbKey)
+      }
+      const branches = await promiseObject(
+        Object.entries(dependency.dependencies).reduce((acc, [k, d]) => {
+          acc[k] = d.recursive(callback, desc, dependency, k)
+          return acc
+        }, {})
+      )
+      if (!desc) {
+        trunk = await callback(dependency, parent, cbKey, branches)
+      }
+      return { trunk, branches }
+    }
+
+    const newBranchPlugins = new Map(branchPlugins)
+    for (const k of Object.keys(dependency.plugins || {})) {
+      newBranchPlugins.set(k, dependency.plugins[k])
+    }
+
+    await Promise.all(
+      Object.keys(dependency.dependencies).map(async (k) => {
+        const childScope = [...scope, k]
+        dependency.dependencies[k] = await make(
+          dependency.dependencies[k],
+          childScope,
+          newBranchPlugins,
+          k,
+          nextPath
+        )
+      })
+    )
+
+    return dependency
+  }
+
+  const registerSyncFlatInstanceRegistry = (dep) => {
+    let instancePromise
+    let registerPromise
+    if (dep.key !== undefined && flatInstancesRegistry.has(dep.key)) {
+      instancePromise = flatInstancesRegistry.get(dep.key)
+    } else {
+      const publicPromise = promisePublic()
+      instancePromise = publicPromise.promise
+      if (dep.key !== undefined) {
+        flatInstancesRegistry.set(dep.key, instancePromise)
+      }
+      registerPromise = (factoryPromise) => {
+        factoryPromise
+          .then(publicPromise.resolve.bind(factoryPromise))
+          .catch(publicPromise.reject.bind(factoryPromise))
+      }
+    }
+    return { instancePromise, registerPromise }
+  }
+
+  const create = async (dep, _parent, _key, branches) => {
+    return nctx.fork([dep.ctx], async () => {
+      const treeCtx = { branches: {} }
+      for (const key of Object.keys(branches)) {
+        const instance = await branches[key].trunk
+        dep.ctx.set(key, instance)
+        treeCtx.branches[key] = instance
+      }
+
+      const { instancePromise, registerPromise } =
+        registerSyncFlatInstanceRegistry(dep)
+
+      if (registerPromise) {
+        if (dep.context) {
+          await dep.context(dep.ctx, ctx)
+        }
+        let params = dep.params || []
+        if (typeof params === "function") {
           params = await params()
         }
-        if (!Array.isArray(dep.params)) {
+        if (!Array.isArray(params)) {
           params = [params]
         }
+        const factoryResult = dep.create ? dep.create(...params) : null
+
+        const factoryPromise = isPromise(factoryResult)
+          ? factoryResult
+          : Promise.resolve(factoryResult)
+
+        registerPromise(factoryPromise)
       }
-      const factoryResult = dep.create ? dep.create(...params) : null
 
-      const factoryPromise = isPromise(factoryResult)
-        ? factoryResult
-        : Promise.resolve(factoryResult)
-
-      registerPromise(factoryPromise)
-    }
-
-    const trunk = (async () => {
-      try {
+      const trunk = (async () => {
         const instance = await instancePromise
         if (dep.key) {
           ctx.set(dep.key, instance)
         }
         return instance
-      } catch (err) {
-        process.stderr.write("modjo error dependency rejection")
-        console.error(err)
-        process.exit(1)
+      })()
+      treeCtx.trunk = trunk
+      treeRegistry.set(dep, treeCtx)
+      return trunk
+    })
+  }
+
+  const build = async (dep) => {
+    if (builtRegistry.has(dep.key || dep) || !dep.build) {
+      return
+    }
+    builtRegistry.add(dep.key || dep)
+    let params = dep.buildParams || []
+    if (typeof params === "function") {
+      params = await params()
+    }
+    if (!Array.isArray(params)) {
+      params = [params]
+    }
+    await dep.build(...params)
+  }
+
+  const ready = async (dep) => {
+    if (readyRegistry.has(dep.key || dep) || !dep.ready) {
+      return
+    }
+    readyRegistry.add(dep.key || dep)
+    const treeCtx = treeRegistry.get(dep)
+    return nctx.fork([dep.ctx], async () => {
+      for (const key of Object.keys(treeCtx.branches)) {
+        dep.ctx.set(key, treeCtx.branches[key])
       }
-    })()
-    treeCtx.trunk = trunk
-    treeRegistry.set(dep, treeCtx)
-    return trunk
-  })
+      if (dep.ready) {
+        await dep.ready(await treeCtx.trunk)
+      }
+    })
+  }
+
+  // Symmetric teardown hook. Walks in reverse-post-order (root → leaves
+  // when called via root.recursive(dispose, true)). dep.dispose receives the
+  // resolved instance, mirroring dep.ready.
+  const dispose = async (dep) => {
+    if (disposeRegistry.has(dep.key || dep) || !dep.dispose) {
+      return
+    }
+    disposeRegistry.add(dep.key || dep)
+    const treeCtx = treeRegistry.get(dep)
+    return nctx.fork([dep.ctx], async () => {
+      const instance = treeCtx ? await treeCtx.trunk : undefined
+      await dep.dispose(instance)
+    })
+  }
+
+  return { make, create, build, ready, dispose }
 }
 
-const builtRegistry = new Set()
-const build = async (dep) => {
-  if (builtRegistry.has(dep.key || dep) || !dep.build) {
-    return
-  }
-  builtRegistry.add(dep.key || dep)
-  let params = dep.buildParams || []
-  if (typeof params === "function") {
-    params = await params()
-  }
-  if (!Array.isArray(params)) {
-    params = [params]
-  }
-  await dep.build(...params)
-}
-
-const readyRegistry = new Set()
-const ready = async (dep) => {
-  if (readyRegistry.has(dep.key || dep) || !dep.ready) {
-    return
-  }
-  readyRegistry.add(dep.key || dep)
-  const treeCtx = treeRegistry.get(dep)
-  nctx.fork([dep.ctx], async () => {
-    for (const key of Object.keys(treeCtx.branches)) {
-      dep.ctx.set(key, treeCtx.branches[key])
-    }
-    if (dep.ready) {
-      await dep.ready(await treeCtx.trunk)
-    }
-  })
-}
+// Default container preserved for backward compatibility with anyone
+// importing make/create/build/ready directly. New code should call
+// createContainer() to get an isolated lifecycle.
+const defaultContainer = createContainer()
 
 module.exports = {
-  build,
-  create,
-  make,
-  ready,
+  ...defaultContainer,
+  createContainer,
 }

@@ -1,6 +1,6 @@
-const timeLogger = require("~/utils/debug/time-logger")
+const timeLogger = require("../utils/debug/time-logger")
 
-const displayMemoryUsage = require("~/utils/debug/memory-usage")
+const displayMemoryUsage = require("../utils/debug/memory-usage")
 
 const elapsedTotal = timeLogger()
 

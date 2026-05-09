@@ -1,7 +1,7 @@
 const util = require("util")
-const get = require("lodash.get")
-const set = require("lodash.set")
-const defaultsDeep = require("lodash.defaultsdeep")
+const get = require("lodash/get")
+const set = require("lodash/set")
+const defaultsDeep = require("lodash/defaultsDeep")
 
 const yup = require("yup")
 
@@ -100,7 +100,7 @@ module.exports = function createOptions(
       validator.validateSync(opts)
     } catch (e) {
       if (funcName) {
-        e.message += ` calling function "${funcName}"`
+        e.message += ` calling function "${funcName.toString()}"`
       }
       if (!errorFull) {
         e.value = util.inspect(e.value, { depth: errorDepth })

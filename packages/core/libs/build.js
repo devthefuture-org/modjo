@@ -1,8 +1,8 @@
 const path = require("path")
 const fs = require("fs-extra")
 const yaml = require("js-yaml")
-const dirtree2static = require("~/utils/fs/dirtree2static")
-const getDirsSync = require("~/utils/fs/get-dirs-sync")
+const dirtree2static = require("../utils/fs/dirtree2static")
+const getDirsSync = require("../utils/fs/get-dirs-sync")
 
 const srcDir = `${process.cwd()}/src`
 const buildDir = `${process.cwd()}/build`

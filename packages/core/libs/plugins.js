@@ -1,7 +1,8 @@
 const path = require("path")
-const kebabcase = require("lodash.kebabcase")
+const kebabcase = require("lodash/kebabCase")
 
-const dynamicRequire = require("~/utils/fs/dynamic-require")
+const dynamicRequire = require("../utils/fs/dynamic-require")
+const { PluginNotFoundError } = require("./errors")
 
 const plugins = {}
 
@@ -21,31 +22,29 @@ const getPluginLocal = (name) => {
   }
 }
 
+// MODULE_NOT_FOUND is the expected miss when a name is not present in the
+// scope being probed. Every other error bubbles up to the caller (avoids
+// silently swallowing real load failures like syntax errors in a plugin).
+const isExpectedMiss = (err) => err.code === "MODULE_NOT_FOUND"
+
 const getPluginOfficial = (name) => {
   try {
-    const req = `@modjo/${kebabcase(name)}`
-    return dynamicRequire(req)
+    return dynamicRequire(`@modjo/${kebabcase(name)}`)
   } catch (err) {
-    console.log(err)
-    if (err.code !== "MODULE_NOT_FOUND") {
-      throw err
-    }
+    if (!isExpectedMiss(err)) throw err
   }
 }
 
 const getPluginContrib = (name) => {
   try {
-    const req = `modjo-plugins-${kebabcase(name)}`
-    return dynamicRequire(req)
-  } catch (_e) {
-    // do nothing
+    return dynamicRequire(`modjo-plugins-${kebabcase(name)}`)
+  } catch (err) {
+    if (!isExpectedMiss(err)) throw err
   }
 }
 
 const getPluginFail = (name) => {
-  throw new Error(
-    `required plugin not found (or missing required file during plugin load): "${name}"`
-  )
+  throw new PluginNotFoundError(name)
 }
 
 const getPluginMethods = [
